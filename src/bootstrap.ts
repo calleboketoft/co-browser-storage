@@ -1,10 +1,18 @@
 import {bootstrap} from 'angular2/platform/browser'
 import {provideStore} from '@ngrx/store'
 import {AppCmp} from './app-cmp'
-import {kvpHandler} from './services/kvp-handler'
+import {kvps} from './services/kvps'
 
-var initialState = 5
+var initialState = [
+  {
+    id: 1,
+    key: 'debugz',
+    value: 'true',
+    type: 'boolean'
+  }
+]
+
 bootstrap(AppCmp, [
   // initial state is handled when store is initialized
-  provideStore({kvpHandler}, {kvpHandler: initialState})
+  provideStore({kvps}, {kvps: initialState})
 ])
