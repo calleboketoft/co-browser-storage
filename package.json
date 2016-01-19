@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "build": "npm run tsc",
+    "build": "npm run tsc && npm run sass",
     "prepublish": "npm run build",
     "tsc": "tsc -p src",
-    "watch": "tsc -p src -w"
+    "watch": "tsc -p src -w",
+    "sass": "gulp sass"
   },
   "config": {
     "ghooks": {
@@ -19,7 +20,9 @@
     "type": "git",
     "url": "git+https://github.com/calleboketoft/co-debug-manager.git"
   },
-  "keywords": ["angular2"],
+  "keywords": [
+    "angular2"
+  ],
   "author": "Carl-Ola Boketoft",
   "license": "ISC",
   "bugs": {
@@ -36,8 +39,11 @@
     "zone.js": "^0.5.10"
   },
   "devDependencies": {
+    "bootstrap": "git+https://git@github.com/twbs/bootstrap.git#v4-dev",
     "express": "^4.13.3",
     "ghooks": "^1.0.3",
+    "gulp": "^3.9.0",
+    "gulp-sass": "^2.1.1",
     "typescript": "^1.7.5"
   }
 }
