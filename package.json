@@ -8,7 +8,7 @@
     "build": "npm run tsc && npm run sass",
     "prepublish": "npm run build",
     "tsc": "tsc -p src",
-    "watch": "tsc -p src -w",
+    "tsc:watch": "tsc -p src -w",
     "sass": "gulp sass"
   },
   "config": {
@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/calleboketoft/co-debug-manager#readme",
   "dependencies": {
+    "@ngrx/store": "^1.2.1",
     "angular2": "^2.0.0-beta.1",
     "es6-promise": "^3.0.2",
     "es6-shim": "^0.34.1",
