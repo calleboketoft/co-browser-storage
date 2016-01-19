@@ -21,7 +21,7 @@ import {StorageListCmp} from './components/storage-list-cmp'
 })
 export class AppCmp {
   public kvps
-  constructor (private store: Store) {
+  constructor (private store: Store<any>) {
     this.kvps = store.select('kvps')
   }
   addKvp () {
