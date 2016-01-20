@@ -15,11 +15,18 @@ export const kvps = (state = [], {type, payload}) => {
       return state.concat([Object.assign({}, payload, {id: state.length + 1})])
 
     case UPDATE_KVP:
+      // if it's not the interesting kvp, just return it,
+      // otherwise create a new kvp for it
+      return state.map(kvp => {
+        return kvp.id !== payload.id ?
+          kvp :
+          Object.assign({}, kvp, payload) // create copy of it
+      });
       return
 
     case REMOVE_KVP:
       // return filtered kvp:s
-      return state.map((kvp) => {
+      return state.filter((kvp) => {
         return kvp.id !== payload.id
       })
 
