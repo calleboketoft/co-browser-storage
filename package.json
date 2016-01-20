@@ -8,7 +8,7 @@
     "build": "npm run tsc && npm run sass",
     "prepublish": "npm run build",
     "tsc": "tsc -p src",
-    "tsc:watch": "tsc -p src -w",
+    "tsc:watch": "gulp typescript:watch",
     "sass": "gulp sass"
   },
   "config": {
@@ -45,6 +45,8 @@
     "ghooks": "^1.0.3",
     "gulp": "^3.9.0",
     "gulp-sass": "^2.1.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-typescript": "^2.10.0",
     "typescript": "^1.7.5"
   }
 }
