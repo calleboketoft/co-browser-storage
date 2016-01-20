@@ -12,14 +12,14 @@ var ts = require('gulp-typescript')
 var sourcemaps = require('gulp-sourcemaps')
 var tsProject = ts.createProject('src/tsconfig.json')
 gulp.task('typescript', function () {
-  var tsResult = gulp.src('./src/**/*.ts')
+  var tsResult = gulp.src('src/**/*.ts')
     .pipe(sourcemaps.init())
     .pipe(ts(tsProject))
 
   return tsResult.js
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./src'))
+    .pipe(gulp.dest('src'))
 })
 gulp.task('typescript:watch', ['typescript'], function () {
-  gulp.watch('./src/**/*.ts', ['typescript'])
+  gulp.watch('src/**/*.ts', ['typescript'])
 })
