@@ -15,7 +15,7 @@ import {NewItemCmp} from './components/new-item-cmp'
       <h3>List <button type="button" (click)="logState()">State</button></h3>
       <storage-list-cmp
         [kvps]="kvps | async"
-        (remove)="removeKvp($event)"
+        (removeEventFromItemList)="removeKvp($event)"
         (update)="updateKvp($event)">
       </storage-list-cmp>
     </div>
