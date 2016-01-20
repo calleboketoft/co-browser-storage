@@ -17,7 +17,7 @@ gulp.task('typescript', function () {
     .pipe(ts(tsProject))
 
   return tsResult.js
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./src'))
 })
 gulp.task('typescript:watch', ['typescript'], function () {

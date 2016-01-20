@@ -8,7 +8,7 @@ export const REMOVE_KVP = 'REMOVE_KVP'
 // Send in initial state here, defaults to an empty array of kvp:s
 // Actions come with a type and payload (destructuring second arg to 'type' and 'payload')
 export const kvps = (state = [], {type, payload}) => {
-  console.log('ACTION:', type, payload) 
+  console.log('ACTION:', type, payload)
   switch (type) {
     case ADD_KVP:
       // create a new array with the previous and new kvp:s

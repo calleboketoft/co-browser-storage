@@ -11,7 +11,7 @@ import {Component, EventEmitter, Output} from 'angular2/core'
 })
 export class NewItemCmp {
   @Output() create = new EventEmitter()
-  
+
   saveItem (key, value, type) {
     this.create.emit({
       key: key.value,
