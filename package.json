@@ -8,7 +8,8 @@
     "build": "npm run tsc && npm run sass",
     "prepublish": "npm run build",
     "tsc": "tsc -p src",
-    "tsc:watch": "gulp typescript:watch",
+    "tsc:watch": "tsc -p src -w",
+    "gulp-ts:watch": "gulp typescript:watch",
     "sass": "gulp sass"
   },
   "config": {
