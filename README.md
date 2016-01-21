@@ -13,7 +13,7 @@ let options = {
   initialState: [
     {
       key: 'debugMode', // unique identifier
-      default: 'true', // default value
+      default: 'true', // default value, sessionStorage falls back to this
       type: 'boolean', // boolean / string / number (for GUI purpose)
       storageType: 'localStorage' // localStorage / sessionStorage
     }
@@ -23,23 +23,21 @@ let options = {
 let coBrowserDb = new CoBrowserDb(options)
 ```
 
-After initializing the options, the schema is stored like this
+After initializing the options, the state is stored like this
 
 ```javascript
-localStorage[namespace + '.' + DB_CONFIG] = "{
-  SCHEMA: [
-    {
-      key: 'debugMode',
-      default: 'false', // modifications to the schema are persisted
-      type: 'boolean',
-      storage: 'localStorage'
-    },
-    {
-      key: 'soundType', // additions are saved
-      default: 'frog',
-      type: 'string',
-      storage: 'sessionStorage'
-    }
-  ]
-}"
+localStorage[namespace + '.' + DB_MEMORY] = "[
+  {
+    key: 'debugMode',
+    value: 'false', // modifications to the schema are persisted
+    type: 'boolean',
+    storageType: 'localStorage'
+  },
+  {
+    key: 'soundType', // additions are saved
+    value: 'frog',
+    type: 'string',
+    storageType: 'sessionStorage'
+  }
+]"
 ```

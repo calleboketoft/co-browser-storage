@@ -35,7 +35,10 @@ export class AppCmp {
 
     // Initialize stuff
     let initialState = persistanceService.initialize(coBrowserDbConfig)
-    // TODO set the kvps from the initialState
+    this.store.dispatch({
+      type: KvpActions.INIT_KVPS,
+      payload: initialState
+    })
   }
 
   addKvp (newKvp) {

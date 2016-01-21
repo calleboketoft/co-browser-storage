@@ -2,48 +2,72 @@ import {Injectable} from 'angular2/core'
 
 @Injectable()
 export class PersistanceService {
-  private DB_CONFIG_NAME = 'CO_BROWSER_DB_CONFIG';
+  private DB_MEMORY = 'CO_BROWSER_DB_MEMORY';
   private options;
 
   // Initialize
   // ----------
   initialize (options) {
     this.options = options
-    var currStateStr = localStorage[options.namespace]
-    if (typeof currStateStr === 'undefined') {
+    var memoryState = localStorage[options.namespace + '.' + this.DB_MEMORY]
+    if (typeof memoryState === 'undefined') {
       // there is no current state stored, initialize from scratch
       this.initFromScratch (options)
     } else {
       // a current state is existing, validate against schema
-      this.initExisting (options.namespace, currStateStr)
+      this.initExisting (options.namespace, memoryState)
     }
 
     // Initialization will set defaults for missing keys etc, so the state
     // might have been updated
-    var stateAfterInitStr = localStorage[options.namespace + '.' + this.DB_CONFIG_NAME]
+    var stateAfterInitStr = localStorage[options.namespace + '.' + this.DB_MEMORY]
     var stateAfterInitJson = JSON.parse(stateAfterInitStr)
     return stateAfterInitJson
   }
 
   // Validate each existing item from storage against the schema
-  initExisting (namespace, currStateStr) {
-    var currStateJson = JSON.parse(currStateStr)
-    currStateJson.DB_CONFIG.SCHEMA.forEach((schemaItem) => {
-      var storageItem = window[schemaItem.storageType][namespace][schemaItem.key]
+  initExisting (namespace, memoryState) {
+    var memoryStateJson = JSON.parse(memoryState)
+    let actualMemory = memoryStateJson.map((memoryItem) => {
+      var storageItem = window[memoryItem.storageType][namespace + '.' + memoryItem.key]
       if (typeof storageItem === 'undefined') {
         // the item doesn't exist at all, set it
-        window[schemaItem.storageType][namespace][schemaItem.key] = schemaItem.default
+        window[memoryItem.storageType][namespace + '.' + memoryItem.key] = memoryItem.value
+        return memoryItem
+      } else {
+        let actualValue = window[memoryItem.storageType][namespace + '.' + memoryItem.key]
+        if (actualValue === memoryItem.value) {
+          // the value has not been touched outside of this GUI
+          return memoryItem
+        } else {
+          // the value has been manually modified by a user
+          return {
+            key: memoryItem.key,
+            value: actualValue,
+            type: memoryItem.value, // TODO: If someone manually modified the value, the type
+                                    // might no longer match... 
+            storageType: memoryItem.storageType
+          }
+        }
       }
     })
+    let actualMemoryStr = JSON.stringify(actualMemory)
+    window.localStorage[this.options.namespace + '.' + this.DB_MEMORY] = actualMemoryStr
   }
 
   // Initialize the storage from scratch
   initFromScratch (options) {
-    options.initialState.forEach((schemaItem) => {
+    let stateForMemory = options.initialState.map((schemaItem) => {
       window[schemaItem.storageType][options.namespace + '.' + schemaItem.key] = schemaItem.default
+      return {
+        key: schemaItem.key,
+        value: schemaItem.default,
+        type: schemaItem.type,
+        storageType: schemaItem.storageType
+      }
     })
-    let initialStateStr = JSON.stringify(options.initialState)
-    window.localStorage[this.options.namespace + '.' + this.DB_CONFIG_NAME] = initialStateStr
+    let stateForMemoryStr = JSON.stringify(stateForMemory)
+    window.localStorage[this.options.namespace + '.' + this.DB_MEMORY] = stateForMemoryStr
   }
 
   // Save state
@@ -51,10 +75,10 @@ export class PersistanceService {
   saveState (stateArr) {
     // Save all items like window.localStorage['coBrowserNamespace.myKey'] = 'my value'
     stateArr.forEach((stateItem) => {
-      window[stateItem.storageType][this.options.namespace + '.' + stateItem.key] = stateItem.default
+      window[stateItem.storageType][this.options.namespace + '.' + stateItem.key] = stateItem.value
     })
 
-    // serialize the whole state
-    window.localStorage[this.options.namespace + '.' + this.DB_CONFIG_NAME] = JSON.stringify(stateArr)
+    // serialize the whole state and save under localStorage[DB_MEMORY]
+    window.localStorage[this.options.namespace + '.' + this.DB_MEMORY] = JSON.stringify(stateArr)
   }
 }
