@@ -3,11 +3,14 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core'
 @Component({
   selector: 'storage-list-item-cmp',
   template: `
-    <li>
+    <div>
+      <input type="text" disabled [value]="kvp.key">
       <input type="text" #newValue [value]="kvp.value">
+      <input type="text" #newType [value]="kvp.type">
+      <input type="text" #newStorageType [value]="kvp.storageType">
       <button (click)="removeMe.emit(kvp)">Remove</button>
       <button (click)="updateKvp(kvp, newValue)">Update</button>
-    </li>
+    </div>
   `
 })
 export class StorageListItemCmp {

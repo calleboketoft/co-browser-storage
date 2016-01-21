@@ -1,4 +1,3 @@
-//counter.ts
 import {Reducer, Action} from '@ngrx/store'
 
 export const ADD_KVP = 'ADD_KVP'

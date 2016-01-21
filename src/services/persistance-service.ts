@@ -74,8 +74,9 @@ export class PersistanceService {
   // -------------
   saveState (stateArr) {
     // Save all items like window.localStorage['coBrowserNamespace.myKey'] = 'my value'
+    let that = this // how come this is needed?
     stateArr.forEach((stateItem) => {
-      window[stateItem.storageType][this.options.namespace + '.' + stateItem.key] = stateItem.value
+      window[stateItem.storageType][that.options.namespace + '.' + stateItem.key] = stateItem.value
     })
 
     // serialize the whole state and save under localStorage[DB_MEMORY]

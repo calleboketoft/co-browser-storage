@@ -12,9 +12,10 @@ import {NewItemCmp} from './components/new-item-cmp'
   selector: 'app',
   template: `
     <div class="container">
+      <h4>New</h4>
       <new-item-cmp (create)="addKvp($event)"></new-item-cmp>
-
-      <h3>List</h3>
+      <br><br>
+      <h4>Existing</h4>
       <storage-list-cmp
         [kvps]="kvps | async"
         (removeEventFromItemList)="removeKvp($event)"
