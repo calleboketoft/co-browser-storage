@@ -45,7 +45,7 @@ export class PersistanceService {
             key: memoryItem.key,
             value: actualValue,
             type: memoryItem.value, // TODO: If someone manually modified the value, the type
-                                    // might no longer match... 
+                                    // might no longer match...
             storageType: memoryItem.storageType
           }
         }

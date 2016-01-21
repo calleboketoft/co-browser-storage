@@ -28,10 +28,20 @@ import {NewItemCmp} from './components/new-item-cmp'
 })
 export class AppCmp {
   public kvps
+  private kvpsInited = false
 
   constructor (private store: Store<any>, persistanceService:PersistanceService) {
     this.kvps = store.select('kvps')
-    this.kvps.subscribe(state => console.log(state))
+
+    this.kvps.subscribe(state => {
+      // Whenever the state has been updated, save it
+      console.log(state)
+      if (this.kvpsInited) {
+        persistanceService.saveState(state)
+      } else {
+        this.kvpsInited = true
+      }
+    })
 
     // Initialize stuff
     let initialState = persistanceService.initialize(coBrowserDbConfig)

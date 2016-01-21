@@ -18,22 +18,21 @@ export const kvpReducer = (state = [], {type, payload}) => {
 
     case ADD_KVP:
       // create a new array with the previous and new kvp:s
-      return state.concat([Object.assign({}, payload, {id: state.length + 1})])
+      return state.concat([Object.assign({}, payload)])
 
     case UPDATE_KVP:
       // if it's not the interesting kvp, just return it,
       // otherwise create a new kvp for it
       return state.map(kvp => {
-        return kvp.id !== payload.id ?
+        return kvp.key !== payload.key ?
           kvp :
           Object.assign({}, kvp, payload) // create copy of it
-      });
-      return
+      })
 
     case REMOVE_KVP:
       // return filtered kvp:s
       return state.filter((kvp) => {
-        return kvp.id !== payload.id
+        return kvp.key !== payload.key
       })
 
     default:

@@ -6,7 +6,7 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core'
     <li>
       <input type="text" #newValue [value]="kvp.value">
       <button (click)="removeMe.emit(kvp)">Remove</button>
-      <button (click)="updateKvp(kvp)">Update</button>
+      <button (click)="updateKvp(kvp, newValue)">Update</button>
     </li>
   `
 })
@@ -16,7 +16,8 @@ export class StorageListItemCmp {
   @Output('removeEventFromItem') removeMe = new EventEmitter() // Send the remove event updwards
   @Output('update') update = new EventEmitter()
 
-  updateKvp (kvp) {
+  updateKvp (kvp, newValue) {
+    kvp.value = newValue.value
     this.update.emit(kvp)
   }
 }
