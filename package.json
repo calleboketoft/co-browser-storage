@@ -9,7 +9,7 @@
     "prepublish": "npm run build",
     "tsc": "tsc -p src",
     "tsc:watch": "tsc -p src -w",
-    "gulp-ts:watch": "gulp typescript:watch",
+    "watch": "gulp typescript:watch",
     "sass": "gulp sass"
   },
   "config": {

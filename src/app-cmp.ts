@@ -1,8 +1,10 @@
 import {Component, ChangeDetectionStrategy} from 'angular2/core'
 import {Store} from '@ngrx/store'
 
-import * as KvpActions from './services/kvps'
+import * as KvpActions from './services/kvp-reducer'
 
+import {PersistanceService} from './services/persistance-service'
+import {coBrowserDbConfig} from './co-browser-db.config'
 import {StorageListCmp} from './components/storage-list-cmp'
 import {NewItemCmp} from './components/new-item-cmp'
 
@@ -12,7 +14,7 @@ import {NewItemCmp} from './components/new-item-cmp'
     <div class="container">
       <new-item-cmp (create)="addKvp($event)"></new-item-cmp>
 
-      <h3>List <button type="button" (click)="logState()">State</button></h3>
+      <h3>List</h3>
       <storage-list-cmp
         [kvps]="kvps | async"
         (removeEventFromItemList)="removeKvp($event)"
@@ -21,17 +23,19 @@ import {NewItemCmp} from './components/new-item-cmp'
     </div>
   `,
   directives: [StorageListCmp, NewItemCmp],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [PersistanceService]
 })
 export class AppCmp {
   public kvps
 
-  constructor (private store: Store<any>) {
+  constructor (private store: Store<any>, persistanceService:PersistanceService) {
     this.kvps = store.select('kvps')
-  }
+    this.kvps.subscribe(state => console.log(state))
 
-  logState () {
-    console.log(this.store.dispatch({type:''}))
+    // Initialize stuff
+    let initialState = persistanceService.initialize(coBrowserDbConfig)
+    // TODO set the kvps from the initialState
   }
 
   addKvp (newKvp) {
@@ -42,7 +46,7 @@ export class AppCmp {
   }
 
   updateKvp (kvp) {
-    this.store.dispatch({
+    var test = this.store.dispatch({
       type: KvpActions.UPDATE_KVP,
       payload: kvp
     })
