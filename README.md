@@ -26,7 +26,7 @@ let coBrowserDb = new CoBrowserDb(options)
 After initializing the options, the state is stored like this
 
 ```javascript
-localStorage[namespace + '.' + DB_MEMORY] = "[
+localStorage[namespace + '.' + DB_MEMORY] = JSON.stringify([
   {
     key: 'debugMode',
     value: 'false', // modifications to the schema are persisted
@@ -39,5 +39,5 @@ localStorage[namespace + '.' + DB_MEMORY] = "[
     type: 'string',
     storageType: 'sessionStorage'
   }
-]"
+])
 ```
