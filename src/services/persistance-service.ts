@@ -2,33 +2,51 @@ import {Injectable} from 'angular2/core'
 
 @Injectable()
 export class PersistanceService {
-  private DB_MEMORY = 'CO_BROWSER_DB_MEMORY';
+  /**
+   * in localStorage, the config is saved like this
+   * DB_CONFIG = {
+   *   MEMORY_STATE: [], // current state from app
+   *   INITIAL_SCHEMA: [] // initial state from when initializing app
+   * }
+   */
+  private DB_CONFIG_KEY = 'CO_BROWSER_DB';
+  private DB_MEMORY_KEY = 'MEMORY_STATE';
+  private DB_INITIAL_KEY = 'INITIAL_SCHEMA';
   private options;
+
+  setConfigToLS (configObj) {
+    let configStr = JSON.stringify(configObj)
+    window.localStorage[this.DB_CONFIG_KEY] = configStr
+  }
+
+  getConfigFromLS () {
+    let configStr = localStorage[this.DB_CONFIG_KEY]
+    if (typeof configStr === 'undefined') {
+      return null
+    } else {
+      return JSON.parse(configStr)
+    }
+  }
 
   // Initialize
   // ----------
   initialize (options) {
     this.options = options
-    var memoryState = localStorage[options.namespace + '.' + this.DB_MEMORY]
-    if (typeof memoryState === 'undefined') {
+    var dbConfig = this.getConfigFromLS()
+    let updatedConfig
+    if (!dbConfig) {
       // there is no current state stored, initialize from scratch
-      this.initFromScratch (options)
+      updatedConfig = this.initFromScratch (options)
     } else {
       // a current state is existing, validate against schema
-      this.initExisting (options.namespace, memoryState)
+      updatedConfig = this.initExisting (options.namespace, dbConfig)
     }
-
-    // Initialization will set defaults for missing keys etc, so the state
-    // might have been updated
-    var stateAfterInitStr = localStorage[options.namespace + '.' + this.DB_MEMORY]
-    var stateAfterInitJson = JSON.parse(stateAfterInitStr)
-    return stateAfterInitJson
+    return updatedConfig[this.DB_MEMORY_KEY]
   }
 
   // Validate each existing item from storage against the schema
-  initExisting (namespace, memoryState) {
-    var memoryStateJson = JSON.parse(memoryState)
-    let actualMemory = memoryStateJson.map((memoryItem) => {
+  initExisting (namespace, dbConfig) {
+    let actualMemory = dbConfig[this.DB_MEMORY_KEY].map((memoryItem) => {
       var storageItem = window[memoryItem.storageType][namespace + '.' + memoryItem.key]
       if (typeof storageItem === 'undefined') {
         // the item doesn't exist at all, set it
@@ -51,8 +69,9 @@ export class PersistanceService {
         }
       }
     })
-    let actualMemoryStr = JSON.stringify(actualMemory)
-    window.localStorage[this.options.namespace + '.' + this.DB_MEMORY] = actualMemoryStr
+    dbConfig[this.DB_MEMORY_KEY] = actualMemory
+    this.setConfigToLS(dbConfig)
+    return dbConfig
   }
 
   // Initialize the storage from scratch
@@ -66,12 +85,15 @@ export class PersistanceService {
         storageType: schemaItem.storageType
       }
     })
-    let stateForMemoryStr = JSON.stringify(stateForMemory)
-    window.localStorage[this.options.namespace + '.' + this.DB_MEMORY] = stateForMemoryStr
+    let dbConfig = {}
+    dbConfig[this.DB_INITIAL_KEY] = options.initialState
+    dbConfig[this.DB_MEMORY_KEY] = stateForMemory
+    this.setConfigToLS(dbConfig)
+    return dbConfig
   }
 
   // Save state
-  // -------------
+  // ----------
   saveState (stateArr) {
     // Save all items like window.localStorage['coBrowserNamespace.myKey'] = 'my value'
     let that = this // how come this is needed?
@@ -79,7 +101,8 @@ export class PersistanceService {
       window[stateItem.storageType][that.options.namespace + '.' + stateItem.key] = stateItem.value
     })
 
-    // serialize the whole state and save under localStorage[DB_MEMORY]
-    window.localStorage[this.options.namespace + '.' + this.DB_MEMORY] = JSON.stringify(stateArr)
+    let dbConfig = this.getConfigFromLS()
+    dbConfig[this.DB_MEMORY_KEY] = stateArr
+    this.setConfigToLS(dbConfig)
   }
 }
