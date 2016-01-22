@@ -71,12 +71,14 @@ export class PersistanceService {
           return memoryItem
         } else {
           // the value has been manually modified by a user
-          return {
+          let updatedMemoryItem = {
             key: memoryItem.key,
             value: actualValue,
             type: 'string', // Tampered item defaults to type 'string'
-            storageType: memoryItem.storageType
+            storageType: memoryItem.storageType,
+            inConfigFile: !!memoryItem.inConfigFile
           }
+          return updatedMemoryItem
         }
       }
     })
