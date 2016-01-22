@@ -28,6 +28,18 @@ export class PersistanceService {
     }
   }
 
+  removeItem (kvp) {
+    // Note: TS complained about window[storageType].removeItem(key)
+    switch (kvp.storageType) {
+      case 'localStorage':
+        window.localStorage.removeItem(this.options.namespace + '.' + kvp.key)
+        break;
+      case 'sessionStorage':
+        window.sessionStorage.removeItem(this.options.namespace + '.' + kvp.key)
+        break;
+    }
+  }
+
   // Initialize
   // ----------
   initialize (options) {
@@ -44,7 +56,7 @@ export class PersistanceService {
     return updatedConfig[this.DB_MEMORY_KEY]
   }
 
-  // Validate each existing item from storage against the schema
+  // Validate each existing item from storage against the memory
   initExisting (namespace, dbConfig) {
     let actualMemory = dbConfig[this.DB_MEMORY_KEY].map((memoryItem) => {
       var storageItem = window[memoryItem.storageType][namespace + '.' + memoryItem.key]
@@ -62,8 +74,7 @@ export class PersistanceService {
           return {
             key: memoryItem.key,
             value: actualValue,
-            type: memoryItem.value, // TODO: If someone manually modified the value, the type
-                                    // might no longer match...
+            type: 'string', // Tampered item defaults to type 'string'
             storageType: memoryItem.storageType
           }
         }
@@ -77,6 +88,7 @@ export class PersistanceService {
   // Initialize the storage from scratch
   initFromScratch (options) {
     let stateForMemory = options.initialState.map((schemaItem) => {
+      // format the schema to the memory type, simply set the memory value to the default form schema
       window[schemaItem.storageType][options.namespace + '.' + schemaItem.key] = schemaItem.default
       return {
         key: schemaItem.key,

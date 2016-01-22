@@ -31,7 +31,7 @@ export class AppCmp {
   public kvps
   private kvpsInited = false
 
-  constructor (private store: Store<any>, persistanceService:PersistanceService) {
+  constructor (private store: Store<any>, private persistanceService:PersistanceService) {
     this.kvps = store.select('kvps')
 
     this.kvps.subscribe(state => {
@@ -67,6 +67,8 @@ export class AppCmp {
   }
 
   removeKvp (kvp) {
+    // Note: this is a bit of hack but it works
+    this.persistanceService.removeItem(kvp)
     this.store.dispatch({
       type: KvpActions.REMOVE_KVP,
       payload: kvp
