@@ -11,6 +11,7 @@ import {StorageListItemCmp} from './storage-list-item-cmp'
         [kvp]="kvp"
         (removeEventFromItem)="removeMyItem.emit($event)"
         (update)="updateKvp.emit($event)"
+        (reset)="resetKvp.emit($event)"
       ></storage-list-item-cmp>
     </div>
   `,
@@ -20,4 +21,5 @@ export class StorageListCmp {
   @Input() kvps
   @Output('removeEventFromItemList') removeMyItem = new EventEmitter() // when calling .emit() the message is passed upwards
   @Output('update') updateKvp = new EventEmitter() // send upwards
+  @Output('reset') resetKvp = new EventEmitter()
 }

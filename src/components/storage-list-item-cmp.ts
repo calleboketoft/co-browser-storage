@@ -9,7 +9,8 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core'
       <input type="text" #newType [value]="kvp.type">
       <input type="text" #newStorageType [value]="kvp.storageType">
       <button (click)="removeMe.emit(kvp)">Remove</button>
-      <button (click)="updateKvp(kvp, newValue)">Update</button>
+      <button (click)="updateKvp(kvp, newValue)">Save</button>
+      <button *ngIf="kvp.inConfigFile" (click)="resetKvp.emit(kvp)">Reset</button>
     </div>
   `
 })
@@ -18,6 +19,7 @@ export class StorageListItemCmp {
   //       event:                local function:
   @Output('removeEventFromItem') removeMe = new EventEmitter() // Send the remove event updwards
   @Output('update') update = new EventEmitter()
+  @Output('reset') resetKvp = new EventEmitter()
 
   updateKvp (kvp, newValue) {
     kvp.value = newValue.value

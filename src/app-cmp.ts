@@ -19,7 +19,8 @@ import {NewItemCmp} from './components/new-item-cmp'
       <storage-list-cmp
         [kvps]="kvps | async"
         (removeEventFromItemList)="removeKvp($event)"
-        (update)="updateKvp($event)">
+        (update)="updateKvp($event)"
+        (reset)="resetKvp($event)">
       </storage-list-cmp>
     </div>
   `,
@@ -64,6 +65,10 @@ export class AppCmp {
       type: KvpActions.UPDATE_KVP,
       payload: kvp
     })
+  }
+
+  resetKvp (kvp) {
+    alert('implement me')
   }
 
   removeKvp (kvp) {

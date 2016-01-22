@@ -33,10 +33,10 @@ export class PersistanceService {
     switch (kvp.storageType) {
       case 'localStorage':
         window.localStorage.removeItem(this.options.namespace + '.' + kvp.key)
-        break;
+        break
       case 'sessionStorage':
         window.sessionStorage.removeItem(this.options.namespace + '.' + kvp.key)
-        break;
+        break
     }
   }
 
@@ -94,7 +94,8 @@ export class PersistanceService {
         key: schemaItem.key,
         value: schemaItem.default,
         type: schemaItem.type,
-        storageType: schemaItem.storageType
+        storageType: schemaItem.storageType,
+        inConfigFile: true // only the ones from the config file are here
       }
     })
     let dbConfig = {}
