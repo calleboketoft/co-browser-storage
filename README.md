@@ -6,7 +6,7 @@ developing:
 ## Usage
 
 ```javascript
-import {CoBrowserDb} from 'co-browser-db'
+import {CoDebugManagerCmp} from 'co-browser-db'
 
 let options = {
   namespace: 'debugDb', // variables will be stored under localStorage['debugDb' + '.' + 'myKey']

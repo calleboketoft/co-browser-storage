@@ -29,15 +29,7 @@ export class PersistanceService {
   }
 
   removeItem (kvp) {
-    // Note: TS complained about window[storageType].removeItem(key)
-    switch (kvp.storageType) {
-      case 'localStorage':
-        window.localStorage.removeItem(this.options.namespace + '.' + kvp.key)
-        break
-      case 'sessionStorage':
-        window.sessionStorage.removeItem(this.options.namespace + '.' + kvp.key)
-        break
-    }
+    window[kvp.storageType]['removeItem'](kvp.key)
   }
 
   // Initialize
@@ -90,14 +82,14 @@ export class PersistanceService {
   // Initialize the storage from scratch
   initFromScratch (options) {
     let stateForMemory = options.initialState.map((schemaItem) => {
-      // format the schema to the memory type, simply set the memory value to the default form schema
+      // transform the schema to the memory type
       window[schemaItem.storageType][options.namespace + '.' + schemaItem.key] = schemaItem.default
       return {
         key: schemaItem.key,
-        value: schemaItem.default,
+        value: schemaItem.default, // from scratch, the default is the value
         type: schemaItem.type,
         storageType: schemaItem.storageType,
-        inConfigFile: true // only the ones from the config file are here
+        inConfigFile: true // only the ones from the config file are here, used for 'reset' functionality
       }
     })
     let dbConfig = {}
@@ -117,6 +109,7 @@ export class PersistanceService {
     })
 
     let dbConfig = this.getConfigFromLS()
+    // Save the whole memory object
     dbConfig[this.DB_MEMORY_KEY] = stateArr
     this.setConfigToLS(dbConfig)
   }

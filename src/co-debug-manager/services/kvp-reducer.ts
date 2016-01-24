@@ -29,7 +29,7 @@ export const kvpReducer = (state = [], {type, payload}) => {
       })
 
     case REMOVE_KVP:
-      // return filtered kvp:s
+      // filter out the kvp to remove
       return state.filter((kvp) => {
         return kvp.key !== payload.key
       })
