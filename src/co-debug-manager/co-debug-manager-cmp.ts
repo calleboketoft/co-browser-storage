@@ -1,17 +1,14 @@
-import {Component, ChangeDetectionStrategy} from 'angular2/core'
+import {Component, Input, ChangeDetectionStrategy} from 'angular2/core'
 import {Store} from '@ngrx/store'
-
 import * as KvpActions from './services/kvp-reducer'
-
 import {PersistanceService} from './services/persistance-service'
-import {coBrowserDbConfig} from './co-browser-db.config'
 import {StorageListCmp} from './components/storage-list-cmp'
 import {NewItemCmp} from './components/new-item-cmp'
 
 @Component({
-  selector: 'app',
+  selector: 'co-debug-manager-cmp',
   template: `
-    <div class="container">
+    <div>
       <h4>New</h4>
       <new-item-cmp (create)="addKvp($event)"></new-item-cmp>
       <br><br>
@@ -28,9 +25,10 @@ import {NewItemCmp} from './components/new-item-cmp'
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [PersistanceService]
 })
-export class AppCmp {
-  public kvps
-  private kvpsInited = false
+export class CoDebugManagerCmp {
+  @Input() coDebugManagerConfig;
+  public kvps;
+  private kvpsInited = false;
 
   constructor (private store: Store<any>, private persistanceService:PersistanceService) {
     this.kvps = store.select('kvps')
@@ -44,9 +42,11 @@ export class AppCmp {
         this.kvpsInited = true
       }
     })
+  }
 
+  ngOnInit () {
     // Initialize stuff
-    let initialState = persistanceService.initialize(coBrowserDbConfig)
+    let initialState = this.persistanceService.initialize(this.coDebugManagerConfig)
     this.store.dispatch({
       type: KvpActions.INIT_KVPS,
       payload: initialState
