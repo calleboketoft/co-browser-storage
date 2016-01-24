@@ -16,8 +16,8 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core'
 })
 export class StorageListItemCmp {
   @Input() kvp
-  //       event:                local function:
-  @Output('removeEventFromItem') removeMe = new EventEmitter() // Send the remove event updwards
+  //       event:   local event emitter that will fire event:
+  @Output('remove') removeMe = new EventEmitter() // Send the remove event updwards
   @Output('update') update = new EventEmitter()
   @Output('reset') resetKvp = new EventEmitter()
 

@@ -5,10 +5,21 @@ developing:
 
 ## Usage
 
-```javascript
-import {CoDebugManagerCmp} from 'co-browser-db'
+- When bootstrapping app, provide the store for the kvps
 
-let options = {
+```javascript
+bootstrap(AppCmp, [
+  // initial state is handled when store is initialized
+  provideStore({kvps: kvpReducer}, {kvps: []})
+])
+```
+
+- Import the component and send in initial state to it to get started.
+
+```javascript
+import {CoDebugManagerCmp} from 'co-debug-manager'
+
+let exmapleDbConfig = {
   namespace: 'debugDb', // variables will be stored under localStorage['debugDb' + '.' + 'myKey']
   initialState: [
     {
@@ -20,24 +31,7 @@ let options = {
   ]
 }
 
-let coBrowserDb = new CoBrowserDb(options)
-```
-
-After initializing the options, the state is stored like this
-
-```javascript
-localStorage[namespace + '.' + DB_MEMORY] = JSON.stringify([
-  {
-    key: 'debugMode',
-    value: 'false', // modifications to the schema are persisted
-    type: 'boolean',
-    storageType: 'localStorage'
-  },
-  {
-    key: 'soundType', // additions are saved
-    value: 'frog',
-    type: 'string',
-    storageType: 'sessionStorage'
-  }
-])
+...
+template: `<co-debug-manager-cmp [coDebugManagerConfig]="exampleDbConfig"></co-debug-manager-cmp>`
+...
 ```

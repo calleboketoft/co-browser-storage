@@ -15,7 +15,7 @@ import {NewItemCmp} from './components/new-item-cmp'
       <h4>Existing</h4>
       <storage-list-cmp
         [kvps]="kvps | async"
-        (removeEventFromItemList)="removeKvp($event)"
+        (remove)="removeKvp($event)"
         (update)="updateKvp($event)"
         (reset)="resetKvp($event)">
       </storage-list-cmp>

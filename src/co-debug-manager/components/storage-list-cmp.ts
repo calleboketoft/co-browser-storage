@@ -9,7 +9,7 @@ import {StorageListItemCmp} from './storage-list-item-cmp'
       <storage-list-item-cmp
         *ngFor="#kvp of kvps"
         [kvp]="kvp"
-        (removeEventFromItem)="removeMyItem.emit($event)"
+        (remove)="removeMyItem.emit($event)"
         (update)="updateKvp.emit($event)"
         (reset)="resetKvp.emit($event)"
       ></storage-list-item-cmp>
@@ -19,7 +19,7 @@ import {StorageListItemCmp} from './storage-list-item-cmp'
 })
 export class StorageListCmp {
   @Input() kvps
-  @Output('removeEventFromItemList') removeMyItem = new EventEmitter() // when calling .emit() the message is passed upwards
+  @Output('remove') removeMyItem = new EventEmitter()
   @Output('update') updateKvp = new EventEmitter() // send upwards
   @Output('reset') resetKvp = new EventEmitter()
 }
