@@ -1,7 +1,7 @@
 import {Injectable} from 'angular2/core'
 
 @Injectable()
-export class PersistanceService {
+export class PersistenceService {
   /**
    * in localStorage, the config is saved like this
    * DB_CONFIG = {
@@ -46,6 +46,16 @@ export class PersistanceService {
       updatedConfig = this.initExisting (options.namespace, dbConfig)
     }
     return updatedConfig[this.DB_MEMORY_KEY]
+  }
+
+  resetItem (itemKey) {
+    // TODO go through schema, find key there -> update item in memory -> update storage item
+    let schemaItem = this.options[this.DB_INITIAL_KEY].filter((item) => {
+      return itemKey === item.key
+    })[0]
+    if (schemaItem) {
+      window[schemaItem.storageType][this.options.namespace + '.' + schemaItem.key] = schemaItem.value
+    }
   }
 
   // Validate each existing item from storage against the memory
