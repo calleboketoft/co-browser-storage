@@ -49,7 +49,6 @@ export class PersistenceService {
   }
 
   resetItem (itemKey) {
-    // TODO go through schema, find key there -> update item in memory -> update storage item
     let schemaItem = this.options[this.DB_INITIAL_KEY].filter((item) => {
       return itemKey === item.key
     })[0]
@@ -76,7 +75,6 @@ export class PersistenceService {
           let updatedMemoryItem = {
             key: memoryItem.key,
             value: actualValue,
-            type: 'string', // Tampered item defaults to type 'string'
             storageType: memoryItem.storageType,
             inConfigFile: !!memoryItem.inConfigFile
           }
@@ -97,7 +95,6 @@ export class PersistenceService {
       return {
         key: schemaItem.key,
         value: schemaItem.default, // from scratch, the default is the value
-        type: schemaItem.type,
         storageType: schemaItem.storageType,
         inConfigFile: true // only the ones from the config file are here, used for 'reset' functionality
       }

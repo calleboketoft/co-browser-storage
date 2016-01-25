@@ -20,6 +20,6 @@ import {StorageListItemCmp} from './storage-list-item-cmp'
 export class StorageListCmp {
   @Input() kvps
   @Output('remove') removeMyItem = new EventEmitter()
-  @Output('update') updateKvp = new EventEmitter() // send upwards
+  @Output('update') updateKvp = new EventEmitter()
   @Output('reset') resetKvp = new EventEmitter()
 }
