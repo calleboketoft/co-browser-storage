@@ -68,7 +68,13 @@ export class CoDebugManagerCmp {
   }
 
   resetKvp (kvp) {
-    alert('implement me')
+    let resettedItem = this.persistenceService.getItemFromSchema(kvp.key)
+    if (resettedItem) {
+      this.store.dispatch({
+        type: KvpActions.UPDATE_KVP,
+        payload: resettedItem
+      })
+    }
   }
 
   removeKvp (kvp) {

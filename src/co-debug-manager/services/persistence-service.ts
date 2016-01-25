@@ -48,13 +48,20 @@ export class PersistenceService {
     return updatedConfig[this.DB_MEMORY_KEY]
   }
 
-  resetItem (itemKey) {
-    let schemaItem = this.options[this.DB_INITIAL_KEY].filter((item) => {
+  // this function works on items that are in the schema
+  getItemFromSchema (itemKey) {
+    let schemaItem = this.options['initialState'].filter((item) => {
       return itemKey === item.key
     })[0]
     if (schemaItem) {
-      window[schemaItem.storageType][this.options.namespace + '.' + schemaItem.key] = schemaItem.value
+      return {
+        key: itemKey,
+        value: schemaItem.default,
+        storageType: schemaItem.storageType,
+        inConfigFile: true
+      }
     }
+    return
   }
 
   // Validate each existing item from storage against the memory
