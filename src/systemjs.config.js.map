@@ -1,0 +1,1 @@
+{"version":3,"file":"systemjs.config.js","sourceRoot":"","sources":["systemjs.config.ts"],"names":[],"mappings":"AAEA,MAAM,CAAC,MAAM,CAAC;IACZ,OAAO,EAAE,GAAG;IACZ,mBAAmB,EAAE,IAAI;IACzB,QAAQ,EAAE,IAAI;IACd,GAAG,EAAE;QACH,UAAU,EAAE,uBAAuB;QACnC,MAAM,EAAE,mBAAmB;QAC3B,OAAO,EAAE,+BAA+B;KACzC;CACF,CAAC,CAAA"}

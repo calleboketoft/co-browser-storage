@@ -1,6 +1,4 @@
 .DS_Store
 node_modules
 *.log
-src/**/*.js
-src/**/*.map
 src/example/css
