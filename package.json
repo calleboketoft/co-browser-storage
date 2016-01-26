@@ -1,5 +1,5 @@
 {
-  "name": "co-debug-manager",
+  "name": "co-browser-storage",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/calleboketoft/co-debug-manager.git"
+    "url": "git+https://github.com/calleboketoft/co-browser-storage.git"
   },
   "keywords": [
     "angular2"
@@ -27,9 +27,9 @@
   "author": "Carl-Ola Boketoft",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/calleboketoft/co-debug-manager/issues"
+    "url": "https://github.com/calleboketoft/co-browser-storage/issues"
   },
-  "homepage": "https://github.com/calleboketoft/co-debug-manager#readme",
+  "homepage": "https://github.com/calleboketoft/co-browser-storage#readme",
   "dependencies": {
     "@ngrx/store": "^1.2.1",
     "angular2": "^2.0.0-beta.1",

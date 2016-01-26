@@ -1,16 +1,16 @@
 import {Component} from 'angular2/core'
-import {CoDebugManagerCmp} from '../co-debug-manager/co-debug-manager-cmp'
+import {CoBrowserStorageCmp} from '../co-browser-storage/co-browser-storage-cmp'
 import {exampleDbConfig} from './example-db-config'
 
 @Component({
   selector: 'app-cmp',
   template: `
     <div class="container">
-      <h2>co-debug-manager example app</h2>
-      <co-debug-manager-cmp [coDebugManagerConfig]="exampleDbConfig"></co-debug-manager-cmp>
+      <h2>co-browser-storage example app</h2>
+      <co-browser-storage-cmp [coBrowserStorageConfig]="exampleDbConfig"></co-browser-storage-cmp>
     </div>
   `,
-  directives: [CoDebugManagerCmp]
+  directives: [CoBrowserStorageCmp]
 })
 export class AppCmp {
   private exampleDbConfig = exampleDbConfig

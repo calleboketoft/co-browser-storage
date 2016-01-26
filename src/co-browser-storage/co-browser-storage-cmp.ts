@@ -6,7 +6,7 @@ import {StorageListCmp} from './components/storage-list-cmp'
 import {NewItemCmp} from './components/new-item-cmp'
 
 @Component({
-  selector: 'co-debug-manager-cmp',
+  selector: 'co-browser-storage-cmp',
   template: `
     <div>
       <h4>New</h4>
@@ -25,8 +25,8 @@ import {NewItemCmp} from './components/new-item-cmp'
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [PersistenceService]
 })
-export class CoDebugManagerCmp {
-  @Input() coDebugManagerConfig;
+export class CoBrowserStorageCmp {
+  @Input() coBrowserStorageConfig;
   public kvps;
   private kvpsInited = false;
 
@@ -46,7 +46,7 @@ export class CoDebugManagerCmp {
 
   ngOnInit () {
     // Initialize stuff
-    let initialState = this.persistenceService.initialize(this.coDebugManagerConfig)
+    let initialState = this.persistenceService.initialize(this.coBrowserStorageConfig)
     this.store.dispatch({
       type: KvpActions.INIT_KVPS,
       payload: initialState
