@@ -43,5 +43,4 @@ var StorageListCmp = (function () {
     return StorageListCmp;
 })();
 exports.StorageListCmp = StorageListCmp;
-
 //# sourceMappingURL=storage-list-cmp.js.map

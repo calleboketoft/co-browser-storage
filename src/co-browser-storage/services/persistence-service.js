@@ -140,5 +140,4 @@ var PersistenceService = (function () {
     return PersistenceService;
 })();
 exports.PersistenceService = PersistenceService;
-
 //# sourceMappingURL=persistence-service.js.map
