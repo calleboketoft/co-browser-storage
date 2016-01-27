@@ -4,15 +4,22 @@ exports.exampleDbConfig = {
         {
             key: 'debugMode',
             default: 'true',
-            type: 'boolean',
-            storageType: 'localStorage'
+            storageType: 'localStorage',
+            valueType: 'text'
         },
         {
             key: 'food',
             default: 'banana',
-            type: 'string',
-            storageType: 'sessionStorage'
+            storageType: 'sessionStorage',
+            valueType: 'text'
+        },
+        {
+            key: 'myPass',
+            default: 'secret',
+            storageType: 'localStorage',
+            valueType: 'password'
         }
     ]
 };
+
 //# sourceMappingURL=example-db-config.js.map

@@ -12,14 +12,15 @@ var NewItemCmp = (function () {
     function NewItemCmp() {
         this.create = new core_1.EventEmitter();
     }
-    NewItemCmp.prototype.saveItem = function (key, value, storageType) {
+    NewItemCmp.prototype.saveItem = function (storageType, valueType, key, value) {
         if (!key) {
             throw 'key please';
         }
         this.create.emit({
             key: key,
             value: value || '',
-            storageType: storageType || 'localStorage'
+            storageType: storageType || 'localStorage',
+            valueType: valueType || 'text'
         });
     };
     __decorate([
@@ -29,11 +30,12 @@ var NewItemCmp = (function () {
     NewItemCmp = __decorate([
         core_1.Component({
             selector: 'new-item-cmp',
-            template: "\n    <input type=\"text\" #storageType placeholder=\"Storage Type\">\n    <input type=\"text\" #key placeholder=\"Key\">\n    <input type=\"text\" #value placeholder=\"Value\">\n    <button type=\"button\" (click)=\"saveItem(key.value, value.value, storageType.value)\">Add</button>\n  "
+            template: "\n    <input type=\"text\" #storageType placeholder=\"Storage Type\">\n    <input type=\"text\" #valueType placeholder=\"Value Type\">\n    <input type=\"text\" #key placeholder=\"Key\">\n    <input type=\"text\" #value placeholder=\"Value\">\n    <button type=\"button\" (click)=\"saveItem(storageType.value, valueType.value, key.value, value.value)\">Add</button>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], NewItemCmp);
     return NewItemCmp;
 })();
 exports.NewItemCmp = NewItemCmp;
+
 //# sourceMappingURL=new-item-cmp.js.map

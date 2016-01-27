@@ -38,11 +38,12 @@ var StorageListItemCmp = (function () {
     StorageListItemCmp = __decorate([
         core_1.Component({
             selector: 'storage-list-item-cmp',
-            template: "\n    <div>\n      <input type=\"text\" disabled [value]=\"kvp.storageType\">\n      <input type=\"text\" disabled [value]=\"kvp.key\">\n      <input type=\"text\" #newValue [value]=\"kvp.value\">\n      <button (click)=\"removeMe.emit(kvp)\">Remove</button>\n      <button (click)=\"updateKvp(kvp, newValue)\">Save</button>\n      <button *ngIf=\"kvp.inConfigFile\" (click)=\"resetKvp.emit(kvp)\">Reset</button>\n    </div>\n  "
+            template: "\n    <div>\n      <input type=\"text\" disabled [value]=\"kvp.storageType\">\n      <input type=\"text\" disabled [value]=\"kvp.valueType\">\n      <input type=\"text\" disabled [value]=\"kvp.key\">\n      <input [type]=\"kvp.valueType\" #newValue [value]=\"kvp.value\">\n      <button (click)=\"removeMe.emit(kvp)\">Remove</button>\n      <button (click)=\"updateKvp(kvp, newValue)\">Save</button>\n      <button *ngIf=\"kvp.inConfigFile\" (click)=\"resetKvp.emit(kvp)\">Reset</button>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], StorageListItemCmp);
     return StorageListItemCmp;
 })();
 exports.StorageListItemCmp = StorageListItemCmp;
+
 //# sourceMappingURL=storage-list-item-cmp.js.map

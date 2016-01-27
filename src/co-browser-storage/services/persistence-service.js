@@ -63,6 +63,7 @@ var PersistenceService = (function () {
                 key: itemKey,
                 value: schemaItem.default,
                 storageType: schemaItem.storageType,
+                valueType: schemaItem.valueType,
                 inConfigFile: true
             };
         }
@@ -89,6 +90,7 @@ var PersistenceService = (function () {
                         key: memoryItem.key,
                         value: actualValue,
                         storageType: memoryItem.storageType,
+                        valueType: memoryItem.valueType,
                         inConfigFile: !!memoryItem.inConfigFile
                     };
                     return updatedMemoryItem;
@@ -108,6 +110,7 @@ var PersistenceService = (function () {
                 key: schemaItem.key,
                 value: schemaItem.default,
                 storageType: schemaItem.storageType,
+                valueType: schemaItem.valueType,
                 inConfigFile: true // only the ones from the config file are here, used for 'reset' functionality
             };
         });
@@ -137,4 +140,5 @@ var PersistenceService = (function () {
     return PersistenceService;
 })();
 exports.PersistenceService = PersistenceService;
+
 //# sourceMappingURL=persistence-service.js.map

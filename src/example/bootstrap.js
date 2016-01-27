@@ -6,4 +6,5 @@ browser_1.bootstrap(app_cmp_1.AppCmp, [
     // initial state is handled when store is initialized
     store_1.provideStore({ kvps: kvp_reducer_1.kvpReducer }, { kvps: [] })
 ]);
+
 //# sourceMappingURL=bootstrap.js.map

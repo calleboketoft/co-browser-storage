@@ -5,8 +5,9 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core'
   template: `
     <div>
       <input type="text" disabled [value]="kvp.storageType">
+      <input type="text" disabled [value]="kvp.valueType">
       <input type="text" disabled [value]="kvp.key">
-      <input type="text" #newValue [value]="kvp.value">
+      <input [type]="kvp.valueType" #newValue [value]="kvp.value">
       <button (click)="removeMe.emit(kvp)">Remove</button>
       <button (click)="updateKvp(kvp, newValue)">Save</button>
       <button *ngIf="kvp.inConfigFile" (click)="resetKvp.emit(kvp)">Reset</button>

@@ -58,6 +58,7 @@ export class PersistenceService {
         key: itemKey,
         value: schemaItem.default,
         storageType: schemaItem.storageType,
+        valueType: schemaItem.valueType,
         inConfigFile: true
       }
     }
@@ -83,6 +84,7 @@ export class PersistenceService {
             key: memoryItem.key,
             value: actualValue,
             storageType: memoryItem.storageType,
+            valueType: memoryItem.valueType,
             inConfigFile: !!memoryItem.inConfigFile
           }
           return updatedMemoryItem
@@ -103,6 +105,7 @@ export class PersistenceService {
         key: schemaItem.key,
         value: schemaItem.default, // from scratch, the default is the value
         storageType: schemaItem.storageType,
+        valueType: schemaItem.valueType,
         inConfigFile: true // only the ones from the config file are here, used for 'reset' functionality
       }
     })
