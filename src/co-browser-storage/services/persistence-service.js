@@ -35,7 +35,7 @@ var PersistenceService = (function () {
         }
     };
     PersistenceService.prototype.removeItem = function (kvp) {
-        window[kvp.storageType]['removeItem'](kvp.key);
+        window[kvp.storageType]['removeItem'](this.options.namespace + '.' + kvp.key);
     };
     // Initialize
     // ----------
@@ -140,4 +140,5 @@ var PersistenceService = (function () {
     return PersistenceService;
 })();
 exports.PersistenceService = PersistenceService;
+
 //# sourceMappingURL=persistence-service.js.map

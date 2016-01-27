@@ -21,4 +21,5 @@ exports.exampleDbConfig = {
         }
     ]
 };
+
 //# sourceMappingURL=example-db-config.js.map

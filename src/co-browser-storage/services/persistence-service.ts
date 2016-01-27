@@ -29,7 +29,7 @@ export class PersistenceService {
   }
 
   removeItem (kvp) {
-    window[kvp.storageType]['removeItem'](kvp.key)
+    window[kvp.storageType]['removeItem'](this.options.namespace + '.' + kvp.key)
   }
 
   // Initialize

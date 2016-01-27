@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "build": "npm run tsc && npm run sass",
+    "build": "npm run typescript && npm run sass",
     "prepublish": "npm run build",
     "tsc": "tsc -p src",
     "tsc:watch": "tsc -p src -w",
     "watch": "gulp typescript:watch",
+    "typescript": "gulp typescript",
     "sass": "gulp sass"
   },
   "config": {
