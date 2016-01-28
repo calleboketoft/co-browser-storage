@@ -9,16 +9,16 @@ import {NewItemCmp} from './components/new-item-cmp'
   selector: 'co-browser-storage-cmp',
   template: `
     <div>
-      <h4>New</h4>
-      <new-item-cmp (create)="addKvp($event)"></new-item-cmp>
-      <br><br>
-      <h4>Existing</h4>
+      <h4>co-browser-storage</h4>
       <storage-list-cmp
         [kvps]="kvps | async"
         (remove)="removeKvp($event)"
         (update)="updateKvp($event)"
         (reset)="resetKvp($event)">
       </storage-list-cmp>
+      <br>
+      Add temporary item<br>
+      <new-item-cmp (create)="addKvp($event)"></new-item-cmp>
     </div>
   `,
   directives: [StorageListCmp, NewItemCmp],

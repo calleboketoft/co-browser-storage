@@ -75,7 +75,7 @@ var CoBrowserStorageCmp = (function () {
     CoBrowserStorageCmp = __decorate([
         core_1.Component({
             selector: 'co-browser-storage-cmp',
-            template: "\n    <div>\n      <h4>New</h4>\n      <new-item-cmp (create)=\"addKvp($event)\"></new-item-cmp>\n      <br><br>\n      <h4>Existing</h4>\n      <storage-list-cmp\n        [kvps]=\"kvps | async\"\n        (remove)=\"removeKvp($event)\"\n        (update)=\"updateKvp($event)\"\n        (reset)=\"resetKvp($event)\">\n      </storage-list-cmp>\n    </div>\n  ",
+            template: "\n    <div>\n      <h4>co-browser-storage</h4>\n      <storage-list-cmp\n        [kvps]=\"kvps | async\"\n        (remove)=\"removeKvp($event)\"\n        (update)=\"updateKvp($event)\"\n        (reset)=\"resetKvp($event)\">\n      </storage-list-cmp>\n      <br>\n      Add temporary item<br>\n      <new-item-cmp (create)=\"addKvp($event)\"></new-item-cmp>\n    </div>\n  ",
             directives: [storage_list_cmp_1.StorageListCmp, new_item_cmp_1.NewItemCmp],
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             providers: [persistence_service_1.PersistenceService]
