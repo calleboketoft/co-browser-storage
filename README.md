@@ -25,7 +25,7 @@ let exmapleDbConfig = {
     {
       key: 'debugMode', // unique identifier
       default: 'true', // default value, sessionStorage falls back to this
-      type: 'boolean', // boolean / string / number (for GUI purpose)
+      valueType: 'boolean', // text / password (simply hides passwords from GUI)
       storageType: 'localStorage' // localStorage / sessionStorage
     }
   ]
