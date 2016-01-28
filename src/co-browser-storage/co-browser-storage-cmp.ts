@@ -8,7 +8,7 @@ import {NewItemCmp} from './components/new-item-cmp'
 @Component({
   selector: 'co-browser-storage-cmp',
   template: `
-    <div>
+    <div *ngIf="!noRender">
       <h4>co-browser-storage</h4>
       <storage-list-cmp
         [kvps]="kvps | async"
@@ -27,6 +27,7 @@ import {NewItemCmp} from './components/new-item-cmp'
 })
 export class CoBrowserStorageCmp {
   @Input() coBrowserStorageConfig;
+  @Input() noRender;
   public kvps;
   private kvpsInited = false;
 
