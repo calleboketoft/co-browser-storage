@@ -7,7 +7,6 @@ exports.INIT_KVPS = 'INIT_KVPS';
 exports.kvpReducer = function (state, _a) {
     if (state === void 0) { state = []; }
     var type = _a.type, payload = _a.payload;
-    console.log('ACTION:', type, payload);
     switch (type) {
         case exports.INIT_KVPS:
             // Set all at once

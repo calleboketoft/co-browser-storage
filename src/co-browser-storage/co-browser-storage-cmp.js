@@ -22,7 +22,6 @@ var CoBrowserStorageCmp = (function () {
         this.kvps = store.select('kvps');
         this.kvps.subscribe(function (state) {
             // Whenever the state has been updated, save it
-            console.log(state);
             if (_this.kvpsInited) {
                 _this.persistenceService.saveState(state);
             }

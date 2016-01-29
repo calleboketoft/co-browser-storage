@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('angular2/core');
 var StorageListItemCmp = (function () {
     function StorageListItemCmp() {
-        //       event:   local event emitter that will fire event:
         this.removeMe = new core_1.EventEmitter();
         this.update = new core_1.EventEmitter();
         this.resetKvp = new core_1.EventEmitter();
