@@ -36,7 +36,6 @@ export class CoBrowserStorageCmp {
 
     this.kvps.subscribe(state => {
       // Whenever the state has been updated, save it
-      console.log(state)
       if (this.kvpsInited) {
         this.persistenceService.saveState(state)
       } else {
