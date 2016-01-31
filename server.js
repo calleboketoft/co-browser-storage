@@ -1,4 +1,4 @@
-var port = 3000
+var port = 3010
 var staticDir = './'
 var express = require('express')
 var app = express()

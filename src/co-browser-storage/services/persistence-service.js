@@ -12,7 +12,7 @@ var PersistenceService = (function () {
     function PersistenceService() {
         /**
          * in localStorage, the config is saved like this
-         * DB_CONFIG = {
+         * CO_BROWSER_DB = {
          *   MEMORY_STATE: [], // current state from app
          *   INITIAL_SCHEMA: [] // initial state from when initializing app
          * }
@@ -23,10 +23,10 @@ var PersistenceService = (function () {
     }
     PersistenceService.prototype.setConfigToLS = function (configObj) {
         var configStr = JSON.stringify(configObj);
-        window.localStorage[this.DB_CONFIG_KEY] = configStr;
+        window.localStorage[this.options.namespace + '.' + this.DB_CONFIG_KEY] = configStr;
     };
     PersistenceService.prototype.getConfigFromLS = function () {
-        var configStr = localStorage[this.DB_CONFIG_KEY];
+        var configStr = localStorage[this.options.namespace + '.' + this.DB_CONFIG_KEY];
         if (typeof configStr === 'undefined') {
             return null;
         }

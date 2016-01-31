@@ -4,7 +4,7 @@ import {Injectable} from 'angular2/core'
 export class PersistenceService {
   /**
    * in localStorage, the config is saved like this
-   * DB_CONFIG = {
+   * CO_BROWSER_DB = {
    *   MEMORY_STATE: [], // current state from app
    *   INITIAL_SCHEMA: [] // initial state from when initializing app
    * }
@@ -16,11 +16,11 @@ export class PersistenceService {
 
   setConfigToLS (configObj) {
     let configStr = JSON.stringify(configObj)
-    window.localStorage[this.DB_CONFIG_KEY] = configStr
+    window.localStorage[this.options.namespace + '.' + this.DB_CONFIG_KEY] = configStr
   }
 
   getConfigFromLS () {
-    let configStr = localStorage[this.DB_CONFIG_KEY]
+    let configStr = localStorage[this.options.namespace + '.' + this.DB_CONFIG_KEY]
     if (typeof configStr === 'undefined') {
       return null
     } else {
