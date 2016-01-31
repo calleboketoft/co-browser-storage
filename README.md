@@ -1,13 +1,15 @@
 developing:
 
 - npm start
-- npm run gulp-ts:watch (tsc -p src -w was simply way too slow)
+- npm run watch (typescript compilation watcher)
 
 ## Usage
 
 - When bootstrapping app, provide the store for the kvps
 
 ```javascript
+import {kvpReducer} from 'co-browser-storage/services/kvp-reducer'
+
 bootstrap(AppCmp, [
   // initial state is handled when store is initialized
   provideStore({kvps: kvpReducer}, {kvps: []})
@@ -17,21 +19,21 @@ bootstrap(AppCmp, [
 - Import the component and send in initial state to it to get started.
 
 ```javascript
-import {CoDebugManagerCmp} from 'co-debug-manager'
+import {CoBrowserStorageCmp} from 'co-browser-storage/co-browser-storage-cmp'
 
-let exmapleDbConfig = {
-  namespace: 'debugDb', // variables will be stored under localStorage['debugDb' + '.' + 'myKey']
+let exampleDbConfig = {
+  namespace: 'coBrowserDb', // variables will be stored under localStorage['coBrowserDb' + '.' + 'myUserName']
   initialState: [
     {
-      key: 'debugMode', // unique identifier
-      default: 'true', // default value, sessionStorage falls back to this
-      valueType: 'boolean', // text / password (simply hides passwords from GUI)
+      key: 'myUsername', // unique identifier
+      default: 'calleboketoft', // default value (used when reset)
+      valueType: 'text', // sets input type in the management GUI (for example text/password/number)
       storageType: 'localStorage' // localStorage / sessionStorage
     }
   ]
 }
 
 ...
-template: `<co-debug-manager-cmp [coDebugManagerConfig]="exampleDbConfig"></co-debug-manager-cmp>`
+template: `<co-browser-storage-cmp [coBrowserStorageConfig]="exampleDbConfig"></co-browser-storage-cmp>`
 ...
 ```
