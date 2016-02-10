@@ -4,7 +4,7 @@ exports.REMOVE_KVP = 'REMOVE_KVP';
 exports.INIT_KVPS = 'INIT_KVPS';
 // Send in initial state here, defaults to an empty array of kvp:s
 // Actions come with a type and payload (destructuring second arg to 'type' and 'payload')
-exports.kvpReducer = function (state, _a) {
+exports.coBrowserStorageReducer = function (state, _a) {
     if (state === void 0) { state = []; }
     var type = _a.type, payload = _a.payload;
     switch (type) {
@@ -32,4 +32,4 @@ exports.kvpReducer = function (state, _a) {
     }
 };
 
-//# sourceMappingURL=kvp-reducer.js.map
+//# sourceMappingURL=co-browser-storage-reducer.js.map

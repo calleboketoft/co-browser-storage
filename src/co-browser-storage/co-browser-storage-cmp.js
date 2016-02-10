@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('angular2/core');
 var store_1 = require('@ngrx/store');
-var KvpActions = require('./services/kvp-reducer');
+var CoBrowserStorageActions = require('./services/co-browser-storage-reducer');
 var persistence_service_1 = require('./services/persistence-service');
 var storage_list_cmp_1 = require('./components/storage-list-cmp');
 var new_item_cmp_1 = require('./components/new-item-cmp');
@@ -19,7 +19,7 @@ var CoBrowserStorageCmp = (function () {
         this.store = store;
         this.persistenceService = persistenceService;
         this.kvpsInited = false;
-        this.kvps = store.select('kvps');
+        this.kvps = store.select('coBrowserStorageReducer');
         this.kvps.subscribe(function (state) {
             // Whenever the state has been updated, save it
             if (_this.kvpsInited) {
@@ -34,19 +34,19 @@ var CoBrowserStorageCmp = (function () {
         // Initialize stuff
         var initialState = this.persistenceService.initialize(this.coBrowserStorageConfig);
         this.store.dispatch({
-            type: KvpActions.INIT_KVPS,
+            type: CoBrowserStorageActions.INIT_KVPS,
             payload: initialState
         });
     };
     CoBrowserStorageCmp.prototype.addKvp = function (newKvp) {
         this.store.dispatch({
-            type: KvpActions.ADD_KVP,
+            type: CoBrowserStorageActions.ADD_KVP,
             payload: newKvp
         });
     };
     CoBrowserStorageCmp.prototype.updateKvp = function (kvp) {
         var test = this.store.dispatch({
-            type: KvpActions.UPDATE_KVP,
+            type: CoBrowserStorageActions.UPDATE_KVP,
             payload: kvp
         });
     };
@@ -54,7 +54,7 @@ var CoBrowserStorageCmp = (function () {
         var resettedItem = this.persistenceService.getItemFromSchema(kvp.key);
         if (resettedItem) {
             this.store.dispatch({
-                type: KvpActions.UPDATE_KVP,
+                type: CoBrowserStorageActions.UPDATE_KVP,
                 payload: resettedItem
             });
         }
@@ -63,7 +63,7 @@ var CoBrowserStorageCmp = (function () {
         // Note: this is a bit of hack but it works
         this.persistenceService.removeItem(kvp);
         this.store.dispatch({
-            type: KvpActions.REMOVE_KVP,
+            type: CoBrowserStorageActions.REMOVE_KVP,
             payload: kvp
         });
     };

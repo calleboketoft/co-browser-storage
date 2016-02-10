@@ -7,7 +7,7 @@ export const INIT_KVPS = 'INIT_KVPS'
 
 // Send in initial state here, defaults to an empty array of kvp:s
 // Actions come with a type and payload (destructuring second arg to 'type' and 'payload')
-export const kvpReducer = (state = [], {type, payload}) => {
+export const coBrowserStorageReducer = (state = [], {type, payload}) => {
   switch (type) {
 
     case INIT_KVPS:
