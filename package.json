@@ -1,6 +1,6 @@
 {
   "name": "co-browser-storage",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -43,12 +43,12 @@
   },
   "devDependencies": {
     "bootstrap": "git+https://git@github.com/twbs/bootstrap.git#v4-dev",
-    "express": "^4.13.3",
-    "ghooks": "^1.0.3",
-    "gulp": "^3.9.0",
-    "gulp-sass": "^2.1.1",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-typescript": "^2.10.0",
-    "typescript": "^1.7.5"
+    "express": "4.13.3",
+    "ghooks": "1.0.3",
+    "gulp": "3.9.0",
+    "gulp-sass": "2.1.1",
+    "gulp-sourcemaps": "1.6.0",
+    "gulp-typescript": "2.11.0",
+    "typescript": "1.7.5"
   }
 }
