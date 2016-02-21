@@ -8,11 +8,11 @@ developing:
 - When bootstrapping app, provide the store for the kvps
 
 ```javascript
-import {kvpReducer} from 'co-browser-storage/services/kvp-reducer'
+import {coBrowserStorageReducer} from 'co-browser-storage/services/co-browser-storage-reducer'
 
 bootstrap(AppCmp, [
   // initial state is handled when store is initialized
-  provideStore({kvps: kvpReducer}, {kvps: []})
+  provideStore({coBrowserStorageReducer: kvpReducer}, {coBrowserStorageReducer: []})
 ])
 ```
 
