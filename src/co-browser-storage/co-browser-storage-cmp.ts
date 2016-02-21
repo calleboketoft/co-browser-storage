@@ -22,8 +22,7 @@ import {NewItemCmp} from './components/new-item-cmp'
     </div>
   `,
   directives: [StorageListCmp, NewItemCmp],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [CoBrowserStorageModel]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CoBrowserStorageCmp {
   @Input() coBrowserStorageConfig;

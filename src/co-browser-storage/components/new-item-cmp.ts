@@ -20,11 +20,6 @@ export class NewItemCmp {
     if (!key) {
       throw 'key please'
     }
-    this.create.emit({
-      key,
-      value: value || '',
-      storageType: storageType || 'localStorage',
-      valueType: valueType || 'text'
-    })
+    this.create.emit({key, value, storageType, valueType})
   }
 }

@@ -11,49 +11,62 @@ import {Store} from '@ngrx/store'
 
 import * as CoBrowserStorageActions from './co-browser-storage-reducer'
 
+interface IStorageItem {
+  key: string,
+  value?: any,
+  storageType?: string,
+  valueType?: string
+}
+
 @Injectable()
 export class CoBrowserStorageModel {
-  private DB_CONFIG_KEY = 'CO_BROWSER_DB';
-  private DB_MEMORY_KEY = 'MEMORY_STATE';
-  private DB_INITIAL_KEY = 'INITIAL_SCHEMA';
-  private options;
-  private coBrowserStorageReducer;
+  private _DB_CONFIG_KEY = 'CO_BROWSER_DB';
+  private _DB_MEMORY_KEY = 'MEMORY_STATE';
+  private _DB_INITIAL_KEY = 'INITIAL_SCHEMA';
+  private _options;
+  private _coBrowserStorageReducer;
 
-  constructor (private store: Store<any>) {
-    this.coBrowserStorageReducer = store.select('coBrowserStorageReducer')
+  constructor (private _store: Store<any>) {
+    this._coBrowserStorageReducer = this._store.select('coBrowserStorageReducer')
   }
 
-  saveItem (item) {
+  private _saveItem (item: IStorageItem) {
     // Save item to browser storage
-    window[item.storageType]['setItem'](this.options.namespace + '.' + item.key, item.value)
+    window[item.storageType]['setItem'](this._options.namespace + '.' + item.key, item.value)
     // Remove any existing item with the same key from memory object and add the new one
-    let dbConfig = this.getConfigFromLS()
-    dbConfig[this.DB_MEMORY_KEY] = dbConfig[this.DB_MEMORY_KEY].filter(memItem => item.key !== memItem.key)
-    dbConfig[this.DB_MEMORY_KEY].push(item)
-    this.setConfigToLS(dbConfig)
+    let dbConfig = this._getConfigFromLS()
+    dbConfig[this._DB_MEMORY_KEY] = dbConfig[this._DB_MEMORY_KEY].filter(memItem => item.key !== memItem.key)
+    dbConfig[this._DB_MEMORY_KEY].push(item)
+    this._setConfigToLS(dbConfig)
   }
 
   // CRUD
   // ----
-  createItem (item) {
-    this.saveItem(item)
-    this.store.dispatch({
+  public createItem (item: IStorageItem) {
+    let safeItem = {
+      key: item.key,
+      value: item.value || '',
+      storageType: item.storageType || 'localStorage',
+      valueType: item.valueType || 'text'
+    }
+    this._saveItem(safeItem)
+    this._store.dispatch({
       type: CoBrowserStorageActions.ADDED_CO_STORE_ITEM,
-      payload: item
+      payload: safeItem
     })
   }
 
-  updateItem (item) {
-    this.saveItem(item)
-    this.store.dispatch({
+  public updateItem (item: IStorageItem) {
+    this._saveItem(item)
+    this._store.dispatch({
       type: CoBrowserStorageActions.UPDATE_CO_STORE_ITEM,
       payload: item
     })
   }
 
-  resetItem (item) {
+  public resetItem (item: IStorageItem) {
     let resetdItem
-    let schemaItem = this.options['initialState'].filter((schemaItem) => {
+    let schemaItem = this._options['initialState'].filter((schemaItem) => {
       return item.key === schemaItem.key
     })[0]
     if (schemaItem) {
@@ -71,14 +84,14 @@ export class CoBrowserStorageModel {
     }
   }
 
-  removeItem (item) {
+  public removeItem (item: IStorageItem) {
     // Remove item from storage
-    window[item.storageType]['removeItem'](this.options.namespace + '.' + item.key)
+    window[item.storageType]['removeItem'](this._options.namespace + '.' + item.key)
     // Remove item from memory object
-    let dbConfig = this.getConfigFromLS()
-    dbConfig[this.DB_MEMORY_KEY] = dbConfig[this.DB_MEMORY_KEY].filter((memItem) => item.key !== memItem.key)
-    this.setConfigToLS(dbConfig)
-    this.store.dispatch({
+    let dbConfig = this._getConfigFromLS()
+    dbConfig[this._DB_MEMORY_KEY] = dbConfig[this._DB_MEMORY_KEY].filter((memItem) => item.key !== memItem.key)
+    this._setConfigToLS(dbConfig)
+    this._store.dispatch({
       type: CoBrowserStorageActions.REMOVED_CO_STORE_ITEM,
       payload: item
     })
@@ -86,8 +99,8 @@ export class CoBrowserStorageModel {
 
   // Serialize / deserialize and persist config to browser storage
   // -------------------------------------------------------------
-  getConfigFromLS () {
-    let configStr = localStorage[this.options.namespace + '.' + this.DB_CONFIG_KEY]
+  private _getConfigFromLS () {
+    let configStr = localStorage[this._options.namespace + '.' + this._DB_CONFIG_KEY]
     if (typeof configStr === 'undefined') {
       return null
     } else {
@@ -95,34 +108,34 @@ export class CoBrowserStorageModel {
     }
   }
 
-  setConfigToLS (configObj) {
+  private _setConfigToLS (configObj) {
     let configStr = JSON.stringify(configObj)
-    window.localStorage[this.options.namespace + '.' + this.DB_CONFIG_KEY] = configStr
+    window.localStorage[this._options.namespace + '.' + this._DB_CONFIG_KEY] = configStr
   }
 
   // Initialize component upon load
   // ------------------------------
-  initialize (options) {
-    this.options = options // save options to class
-    var dbConfig = this.getConfigFromLS()
+  public initialize (options) {
+    this._options = options // save options to class
+    var dbConfig = this._getConfigFromLS()
     let updatedConfig
     if (!dbConfig) {
       // there is no current state stored, initialize from scratch
-      updatedConfig = this.initFromScratch(options)
+      updatedConfig = this._initFromScratch(options)
     } else {
       // a current state is existing, validate against schema
-      updatedConfig = this.initExisting(options.namespace, dbConfig)
+      updatedConfig = this._initExisting(options.namespace, dbConfig)
     }
-    this.store.dispatch({
+    this._store.dispatch({
       type: CoBrowserStorageActions.ADDED_CO_STORE_ITEMS,
-      payload: updatedConfig[this.DB_MEMORY_KEY]
+      payload: updatedConfig[this._DB_MEMORY_KEY]
     })
     return
   }
 
   // Validate each existing item from storage against the memory object
-  initExisting (namespace, dbConfig) {
-    let actualMemory = dbConfig[this.DB_MEMORY_KEY].map((memoryItem) => {
+  private _initExisting (namespace, dbConfig) {
+    let actualMemory = dbConfig[this._DB_MEMORY_KEY].map((memoryItem) => {
       var storageItem = window[memoryItem.storageType][namespace + '.' + memoryItem.key]
       if (typeof storageItem === 'undefined') {
         // the item doesn't exist at all, set it
@@ -146,13 +159,13 @@ export class CoBrowserStorageModel {
         }
       }
     })
-    dbConfig[this.DB_MEMORY_KEY] = actualMemory
-    this.setConfigToLS(dbConfig)
+    dbConfig[this._DB_MEMORY_KEY] = actualMemory
+    this._setConfigToLS(dbConfig)
     return dbConfig
   }
 
   // Initialize the storage items from scratch
-  initFromScratch (options) {
+  private _initFromScratch (options) {
     let stateForMemory = options.initialState.map((schemaItem) => {
       // transform the schema to the memory type
       window[schemaItem.storageType][options.namespace + '.' + schemaItem.key] = schemaItem.default
@@ -165,9 +178,9 @@ export class CoBrowserStorageModel {
       }
     })
     let dbConfig = {}
-    dbConfig[this.DB_INITIAL_KEY] = options.initialState
-    dbConfig[this.DB_MEMORY_KEY] = stateForMemory
-    this.setConfigToLS(dbConfig)
+    dbConfig[this._DB_INITIAL_KEY] = options.initialState
+    dbConfig[this._DB_MEMORY_KEY] = stateForMemory
+    this._setConfigToLS(dbConfig)
     return dbConfig
   }
 }
