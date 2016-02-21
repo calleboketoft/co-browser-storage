@@ -37,3 +37,12 @@ let exampleDbConfig = {
 template: `<co-browser-storage-cmp [coBrowserStorageConfig]="exampleDbConfig"></co-browser-storage-cmp>`
 ...
 ```
+
+The best way to CRUD browser storage items from your app is to use the CoBrowserStorageModel functions
+
+```javascript
+import {CoBrowserStorageModel} from 'co-browser-storage/services/co-browser-storage-model'
+
+...
+coBrowserStorageModel.saveItem()
+```
