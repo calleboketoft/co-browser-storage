@@ -21,5 +21,5 @@ export class StorageListCmp {
   @Input() coBrowserStorageReducer
   @Output() remove = new EventEmitter()
   @Output() update = new EventEmitter()
-  @Output() resetKvp = new EventEmitter()
+  @Output() reset = new EventEmitter()
 }
