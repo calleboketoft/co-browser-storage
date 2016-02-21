@@ -30,10 +30,10 @@ export class CoBrowserStorageModel {
     // Update memory object
     let dbConfig = this.getConfigFromLS()
     // Remove item if its already in memory object
-    let updDbConfig = dbConfig[this.DB_MEMORY_KEY].filter((memItem) => item.key !== memItem.key)
+    dbConfig[this.DB_MEMORY_KEY] = dbConfig[this.DB_MEMORY_KEY].filter((memItem) => item.key !== memItem.key)
     // then add the updated item
-    updDbConfig.push(item)
-    this.setConfigToLS(updDbConfig)
+    dbConfig[this.DB_MEMORY_KEY].push(item)
+    this.setConfigToLS(dbConfig)
   }
 
   createItem (item) {
@@ -64,8 +64,8 @@ export class CoBrowserStorageModel {
     window[item.storageType]['removeItem'](this.options.namespace + '.' + item.key)
     // Remove item from memory object
     let dbConfig = this.getConfigFromLS()
-    let updDbConfig = dbConfig[this.DB_MEMORY_KEY].filter((memItem) => item.key !== memItem.key)
-    this.setConfigToLS(updDbConfig)
+    dbConfig[this.DB_MEMORY_KEY] = dbConfig[this.DB_MEMORY_KEY].filter((memItem) => item.key !== memItem.key)
+    this.setConfigToLS(dbConfig)
     this.store.dispatch({
       type: CoBrowserStorageActions.REMOVED_CO_STORE_ITEM,
       payload: item
