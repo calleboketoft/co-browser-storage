@@ -7,8 +7,6 @@
     "start": "node server",
     "build": "npm run typescript && npm run sass",
     "prepublish": "npm run build",
-    "tsc": "tsc -p src",
-    "tsc:watch": "tsc -p src -w",
     "watch": "gulp typescript:watch",
     "typescript": "gulp typescript",
     "sass": "gulp sass"
@@ -33,13 +31,13 @@
   "homepage": "https://github.com/calleboketoft/co-browser-storage#readme",
   "dependencies": {
     "@ngrx/store": "1.2.1",
-    "angular2": "2.0.0-beta.1",
+    "angular2": "2.0.0-beta.7",
     "es6-promise": "3.0.2",
     "es6-shim": "0.33.3",
     "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.0",
+    "rxjs": "5.0.0-beta.2",
     "systemjs": "0.19.16",
-    "zone.js": "0.5.10"
+    "zone.js": "0.5.15"
   },
   "devDependencies": {
     "bootstrap": "git+https://git@github.com/twbs/bootstrap.git#v4-dev",
@@ -49,6 +47,6 @@
     "gulp-sass": "2.1.1",
     "gulp-sourcemaps": "1.6.0",
     "gulp-typescript": "2.11.0",
-    "typescript": "1.7.5"
+    "typescript": "1.8.0"
   }
 }
