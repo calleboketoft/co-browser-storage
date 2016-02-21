@@ -4,24 +4,26 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core'
   selector: 'storage-list-item-cmp',
   template: `
     <div>
-      <input type="text" disabled [value]="kvp.storageType">
-      <input type="text" disabled [value]="kvp.valueType">
-      <input type="text" disabled [value]="kvp.key">
-      <input [type]="kvp.valueType" #newValue [value]="kvp.value">
-      <button (click)="removeMe.emit(kvp)">Remove</button>
-      <button (click)="updateKvp(kvp, newValue)">Save</button>
-      <button *ngIf="kvp.inConfigFile" (click)="resetKvp.emit(kvp)">Reset</button>
+      <input type='text' disabled [value]='storageItem.storageType'>
+      <input type='text' disabled [value]='storageItem.valueType'>
+      <input type='text' disabled [value]='storageItem.key'>
+      <input [type]='storageItem.valueType' #newValue [value]='storageItem.value'>
+      <button (click)='remove.emit(storageItem)'>Remove</button>
+      <button (click)='updateWrap(storageItem, newValue)'>Save</button>
+      <button *ngIf='storageItem.inConfigFile' (click)='reset.emit(storageItem)'>
+        Reset
+      </button>
     </div>
   `
 })
 export class StorageListItemCmp {
-  @Input() kvp
-  @Output('remove') removeMe = new EventEmitter()
-  @Output('update') update = new EventEmitter()
-  @Output('reset') resetKvp = new EventEmitter()
+  @Input() storageItem;
+  @Output() remove = new EventEmitter();
+  @Output() update = new EventEmitter();
+  @Output() reset = new EventEmitter();
 
-  updateKvp (kvp, newValue) {
-    kvp.value = newValue.value
-    this.update.emit(kvp)
+  updateWrap (storageItem, newValue) {
+    storageItem.value = newValue.value
+    this.update.emit(storageItem)
   }
 }

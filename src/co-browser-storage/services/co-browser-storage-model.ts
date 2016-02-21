@@ -1,7 +1,12 @@
+// Handles all actions towards localStorage and sessionStorage
+
 import {Injectable} from 'angular2/core'
+import {Store} from '@ngrx/store'
+
+import * as CoBrowserStorageActions from './co-browser-storage-reducer'
 
 @Injectable()
-export class PersistenceService {
+export class CoBrowserStorageModel {
   /**
    * in localStorage, the config is saved like this
    * CO_BROWSER_DB = {
@@ -13,7 +18,62 @@ export class PersistenceService {
   private DB_MEMORY_KEY = 'MEMORY_STATE';
   private DB_INITIAL_KEY = 'INITIAL_SCHEMA';
   private options;
+  private coBrowserStorageReducer;
 
+  constructor (private store: Store<any>) {
+    this.coBrowserStorageReducer = store.select('coBrowserStorageReducer')
+  }
+
+  saveItem (item) {
+    // First save individual storage item
+    window[item.storageType]['setItem'](this.options.namespace + '.' + item.key, item.value)
+    // Update memory object
+    let dbConfig = this.getConfigFromLS()
+    // Remove item if its already in memory object
+    let updDbConfig = dbConfig[this.DB_MEMORY_KEY].filter((memItem) => item.key !== memItem.key)
+    // then add the updated item
+    updDbConfig.push(item)
+    this.setConfigToLS(updDbConfig)
+  }
+
+  createItem (item) {
+    this.saveItem(item)
+    this.store.dispatch({
+      type: CoBrowserStorageActions.ADDED_CO_STORE_ITEM,
+      payload: item
+    })
+  }
+
+  updateItem (item) {
+    this.saveItem(item)
+    this.store.dispatch({
+      type: CoBrowserStorageActions.UPDATE_CO_STORE_ITEM,
+      payload: item
+    })
+  }
+
+  resetItem (item) {
+    let resettedItem = this.getItemFromSchema(item.key)
+    if (resettedItem) {
+      this.updateItem(item)
+    }
+  }
+
+  removeItem (item) {
+    // Remove item from storage
+    window[item.storageType]['removeItem'](this.options.namespace + '.' + item.key)
+    // Remove item from memory object
+    let dbConfig = this.getConfigFromLS()
+    let updDbConfig = dbConfig[this.DB_MEMORY_KEY].filter((memItem) => item.key !== memItem.key)
+    this.setConfigToLS(updDbConfig)
+    this.store.dispatch({
+      type: CoBrowserStorageActions.REMOVED_CO_STORE_ITEM,
+      payload: item
+    })
+  }
+
+  // Serialize / Deserialize storage data
+  // ------------------------------------
   setConfigToLS (configObj) {
     let configStr = JSON.stringify(configObj)
     window.localStorage[this.options.namespace + '.' + this.DB_CONFIG_KEY] = configStr
@@ -28,10 +88,6 @@ export class PersistenceService {
     }
   }
 
-  removeItem (kvp) {
-    window[kvp.storageType]['removeItem'](this.options.namespace + '.' + kvp.key)
-  }
-
   // Initialize
   // ----------
   initialize (options) {
@@ -40,12 +96,16 @@ export class PersistenceService {
     let updatedConfig
     if (!dbConfig) {
       // there is no current state stored, initialize from scratch
-      updatedConfig = this.initFromScratch (options)
+      updatedConfig = this.initFromScratch(options)
     } else {
       // a current state is existing, validate against schema
-      updatedConfig = this.initExisting (options.namespace, dbConfig)
+      updatedConfig = this.initExisting(options.namespace, dbConfig)
     }
-    return updatedConfig[this.DB_MEMORY_KEY]
+    this.store.dispatch({
+      type: CoBrowserStorageActions.INIT_CO_STORE_ITEMS,
+      payload: updatedConfig[this.DB_MEMORY_KEY]
+    })
+    return
   }
 
   // this function works on items that are in the schema
@@ -114,20 +174,5 @@ export class PersistenceService {
     dbConfig[this.DB_MEMORY_KEY] = stateForMemory
     this.setConfigToLS(dbConfig)
     return dbConfig
-  }
-
-  // Save state
-  // ----------
-  saveState (stateArr) {
-    // Save all items like window.localStorage['coBrowserNamespace.myKey'] = 'my value'
-    let that = this // how come this is needed?
-    stateArr.forEach((stateItem) => {
-      window[stateItem.storageType][that.options.namespace + '.' + stateItem.key] = stateItem.value
-    })
-
-    let dbConfig = this.getConfigFromLS()
-    // Save the whole memory object
-    dbConfig[this.DB_MEMORY_KEY] = stateArr
-    this.setConfigToLS(dbConfig)
   }
 }

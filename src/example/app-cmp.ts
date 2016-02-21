@@ -5,9 +5,11 @@ import {exampleDbConfig} from './example-db-config'
 @Component({
   selector: 'app-cmp',
   template: `
-    <div class="container">
+    <div class='container'>
       <h2>co-browser-storage example app</h2>
-      <co-browser-storage-cmp [coBrowserStorageConfig]="exampleDbConfig"></co-browser-storage-cmp>
+      <co-browser-storage-cmp
+        [coBrowserStorageConfig]='exampleDbConfig'>
+      </co-browser-storage-cmp>
     </div>
   `,
   directives: [CoBrowserStorageCmp]
