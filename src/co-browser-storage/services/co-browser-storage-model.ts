@@ -11,7 +11,7 @@ import {Store} from '@ngrx/store'
 
 import * as CoBrowserStorageActions from './co-browser-storage-reducer'
 
-interface IStorageItem {
+export interface IStorageItem {
   key: string,
   value?: any,
   storageType?: string,
