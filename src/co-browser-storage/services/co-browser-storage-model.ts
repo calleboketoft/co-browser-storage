@@ -9,7 +9,7 @@
 import {Injectable} from 'angular2/core'
 import {Store} from '@ngrx/store'
 
-import * as CoBrowserStorageActions from './co-browser-storage-reducer'
+import * as coBrowserStorageActions from './co-browser-storage-reducer'
 
 export interface IStorageItem {
   key: string,
@@ -32,7 +32,7 @@ export class CoBrowserStorageModel {
 
   private _saveItem (item: IStorageItem) {
     // Save item to browser storage
-    window[item.storageType]['setItem'](this._options.namespace + '.' + item.key, item.value)
+    window[item.storageType].setItem(this._options.namespace + '.' + item.key, item.value)
     // Remove any existing item with the same key from memory object and add the new one
     let dbConfig = this._getConfigFromLS()
     dbConfig[this._DB_MEMORY_KEY] = dbConfig[this._DB_MEMORY_KEY].filter(memItem => item.key !== memItem.key)
@@ -51,22 +51,26 @@ export class CoBrowserStorageModel {
     }
     this._saveItem(safeItem)
     this._store.dispatch({
-      type: CoBrowserStorageActions.ADDED_CO_STORE_ITEM,
+      type: coBrowserStorageActions.ADDED_CO_STORE_ITEM,
       payload: safeItem
     })
   }
 
   public updateItem (item: IStorageItem) {
-    this._saveItem(item)
+    // Get current item from LS to complete missing properties.
+    let dbConfig = this._getConfigFromLS()
+    let existingItem = dbConfig[this._DB_MEMORY_KEY].filter(memItem => item.key === memItem.key)[0]
+    let updatedItem = Object.assign({}, existingItem, item)
+    this._saveItem(updatedItem)
     this._store.dispatch({
-      type: CoBrowserStorageActions.UPDATE_CO_STORE_ITEM,
-      payload: item
+      type: coBrowserStorageActions.UPDATE_CO_STORE_ITEM,
+      payload: updatedItem
     })
   }
 
   public resetItem (item: IStorageItem) {
     let resetdItem
-    let schemaItem = this._options['initialState'].filter((schemaItem) => {
+    let schemaItem = this._options.initialState.filter((schemaItem) => {
       return item.key === schemaItem.key
     })[0]
     if (schemaItem) {
@@ -86,15 +90,23 @@ export class CoBrowserStorageModel {
 
   public removeItem (item: IStorageItem) {
     // Remove item from storage
-    window[item.storageType]['removeItem'](this._options.namespace + '.' + item.key)
+    window[item.storageType].removeItem(this._options.namespace + '.' + item.key)
     // Remove item from memory object
     let dbConfig = this._getConfigFromLS()
     dbConfig[this._DB_MEMORY_KEY] = dbConfig[this._DB_MEMORY_KEY].filter((memItem) => item.key !== memItem.key)
     this._setConfigToLS(dbConfig)
     this._store.dispatch({
-      type: CoBrowserStorageActions.REMOVED_CO_STORE_ITEM,
+      type: coBrowserStorageActions.REMOVED_CO_STORE_ITEM,
       payload: item
     })
+  }
+
+  // Get observable for one specific item
+  public getItemByKey (key) {
+    return this._coBrowserStorageReducer
+      .map((browserStorageItems) => {
+        return browserStorageItems.find(item => item.key === key)
+      })
   }
 
   // Serialize / deserialize and persist config to browser storage
@@ -127,7 +139,7 @@ export class CoBrowserStorageModel {
       updatedConfig = this._initExisting(options.namespace, dbConfig)
     }
     this._store.dispatch({
-      type: CoBrowserStorageActions.ADDED_CO_STORE_ITEMS,
+      type: coBrowserStorageActions.ADDED_CO_STORE_ITEMS,
       payload: updatedConfig[this._DB_MEMORY_KEY]
     })
     return
