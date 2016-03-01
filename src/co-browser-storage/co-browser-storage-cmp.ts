@@ -1,6 +1,5 @@
 import {Component, Input, ChangeDetectionStrategy} from 'angular2/core'
 import {Store} from '@ngrx/store'
-import * as CoBrowserStorageActions from './services/co-browser-storage-reducer'
 import {CoBrowserStorageModel} from './services/co-browser-storage-model'
 import {StorageListCmp} from './components/storage-list-cmp'
 import {NewItemCmp} from './components/new-item-cmp'
