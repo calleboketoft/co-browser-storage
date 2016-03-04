@@ -89,10 +89,11 @@ export class CoBrowserStorageModel {
   }
 
   public removeItem (item: IStorageItem) {
-    // Remove item from storage
-    window[item.storageType].removeItem(this._options.namespace + '.' + item.key)
-    // Remove item from memory object
     let dbConfig = this._getConfigFromLS()
+    let existingItem = dbConfig[this._DB_MEMORY_KEY].filter(memItem => item.key === memItem.key)[0]
+    // Remove item from storage
+    window[existingItem.storageType]['removeItem'](this._options.namespace + '.' + item.key)
+    // Remove item from memory object
     dbConfig[this._DB_MEMORY_KEY] = dbConfig[this._DB_MEMORY_KEY].filter((memItem) => item.key !== memItem.key)
     this._setConfigToLS(dbConfig)
     this._store.dispatch({
