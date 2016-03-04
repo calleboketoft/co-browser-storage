@@ -15,11 +15,17 @@ import {CoBrowserStorageModel} from '../co-browser-storage/services/co-browser-s
     </div>
     <hr>
     <br>
-    <third-party-usage-cmp></third-party-usage-cmp>
+    <third-party-usage-cmp
+      [thirdPartyItem]='_thirdPartyItem | async'>
+    </third-party-usage-cmp>
   `,
   directives: [CoBrowserStorageCmp, ThirdPartyUsageCmp],
   providers: [CoBrowserStorageModel]
 })
 export class AppCmp {
-  private exampleDbConfig = exampleDbConfig
+  private exampleDbConfig = exampleDbConfig;
+  private _thirdPartyItem;
+  constructor (private _coBrowserStorageModel: CoBrowserStorageModel) {
+    this._thirdPartyItem = _coBrowserStorageModel.getItemByKey('thirdPartyItem')
+  }
 }

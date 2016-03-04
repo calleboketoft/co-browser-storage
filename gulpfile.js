@@ -6,20 +6,3 @@ gulp.task('sass', function () {
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./src/example/css'))
 })
-
-// TypeScript
-var ts = require('gulp-typescript')
-var sourcemaps = require('gulp-sourcemaps')
-var tsProject = ts.createProject('src/tsconfig.json')
-gulp.task('typescript', function () {
-  var tsResult = gulp.src('src/**/*.ts')
-    .pipe(sourcemaps.init())
-    .pipe(ts(tsProject))
-
-  return tsResult.js
-    .pipe(sourcemaps.write({sourceRoot: '/node_modules'}))
-    .pipe(gulp.dest('src'))
-})
-gulp.task('typescript:watch', ['typescript'], function () {
-  gulp.watch('src/**/*.ts', ['typescript'])
-})
