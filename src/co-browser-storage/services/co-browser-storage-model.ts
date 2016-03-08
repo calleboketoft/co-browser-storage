@@ -8,6 +8,7 @@
 
 import {Injectable} from 'angular2/core'
 import {Store} from '@ngrx/store'
+import {Observable} from 'rxjs/Rx'
 
 import * as coBrowserStorageActions from './co-browser-storage-reducer'
 
@@ -107,6 +108,25 @@ export class CoBrowserStorageModel {
     return this._coBrowserStorageReducer
       .map((browserStorageItems) => {
         return browserStorageItems.find(item => item.key === key)
+      })
+  }
+
+  // NOTE experimental. Just a simple way of treating the array
+  // as separate observables
+  public getItemsAsObservables () {
+    return this._coBrowserStorageReducer.flatMap(is => Observable.from(is))
+  }
+
+  // NOTE experimental. See if the provided keys' values
+  // match the provided value. Useful for debug flags.
+  // Ex: allEquals(['DEBUG', 'DEBUG_XHR'])
+  public allTrue (keys: [string]) {
+    return this._coBrowserStorageReducer
+      .map(items => {
+        if (items.length === 0) return false
+        return items.every(item => {
+          return keys.indexOf(item.key) === -1 || item.value === 'true'
+        })
       })
   }
 

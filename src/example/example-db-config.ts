@@ -1,20 +1,25 @@
-export let exampleDbConfig = {
-  namespace: 'debugDb',
+export const NAMESPACE = 'debugDb'
+export const DEBUG_MODE = 'debugMode'
+export const DEBUG_XHR = 'debugXhr'
+export const MY_PASS = 'myPass'
+
+export const exampleDbConfig = {
+  namespace: NAMESPACE,
   initialState: [
     {
-      key: 'debugMode',
+      key: DEBUG_MODE,
       default: 'true',
       storageType: 'localStorage',
       valueType: 'text'
     },
     {
-      key: 'food',
-      default: 'banana',
-      storageType: 'sessionStorage',
+      key: DEBUG_XHR,
+      default: 'true',
+      storageType: 'localStorage',
       valueType: 'text'
     },
     {
-      key: 'myPass',
+      key: MY_PASS,
       default: 'secret',
       storageType: 'localStorage',
       valueType: 'password'
