@@ -111,15 +111,9 @@ export class CoBrowserStorageModel {
       })
   }
 
-  // NOTE experimental. Just a simple way of treating the array
-  // as separate observables
-  public getItemsAsObservables () {
-    return this._coBrowserStorageReducer.flatMap(is => Observable.from(is))
-  }
-
-  // NOTE experimental. See if the provided keys' values
-  // match the provided value. Useful for debug flags.
-  // Ex: allEquals(['DEBUG', 'DEBUG_XHR'])
+  // Assess if provided keys' values === 'true'
+  // Useful for debug flags.
+  // Ex: allTrue(['DEBUG', 'DEBUG_XHR'])
   public allTrue (keys: [string]) {
     return this._coBrowserStorageReducer
       .map(items => {
