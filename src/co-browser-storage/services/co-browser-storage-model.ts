@@ -61,6 +61,9 @@ export class CoBrowserStorageModel {
     // Get current item from LS to complete missing properties.
     let dbConfig = this._getConfigFromLS()
     let existingItem = dbConfig[this._DB_MEMORY_KEY].filter(memItem => item.key === memItem.key)[0]
+    if (!existingItem) {
+      console.error('item does not exist')
+    }
     let updatedItem = Object.assign({}, existingItem, item)
     this._saveItem(updatedItem)
     this._store.dispatch({
