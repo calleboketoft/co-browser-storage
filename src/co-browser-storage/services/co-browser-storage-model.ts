@@ -44,6 +44,11 @@ export class CoBrowserStorageModel {
   // CRUD
   // ----
   public createItem (item: IStorageItem) {
+    let dbConfig = this._getConfigFromLS()
+    let existingItem = dbConfig[this._DB_MEMORY_KEY].filter(memItem => item.key === memItem.key)[0]
+    if (existingItem) {
+      console.error('item already exists')
+    }
     let safeItem = {
       key: item.key,
       value: item.value || '',
