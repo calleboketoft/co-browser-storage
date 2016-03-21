@@ -69,7 +69,7 @@ export class CoBrowserStorageModel {
     if (!existingItem) {
       console.error('item does not exist')
     }
-    let updatedItem = (<any>Object).assign({}, existingItem, item)
+    let updatedItem = Object.assign({}, existingItem, item)
     this._saveItem(updatedItem)
     this._store.dispatch({
       type: coBrowserStorageActions.UPDATE_CO_STORE_ITEM,

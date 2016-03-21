@@ -1,3 +1,5 @@
+import '../polyfills'
+
 import {Component, Input, ChangeDetectionStrategy} from 'angular2/core'
 import {Store} from '@ngrx/store'
 import {CoBrowserStorageModel} from './services/co-browser-storage-model'
