@@ -14,7 +14,7 @@ export const coBrowserStorageReducer = (state = [], {type, payload}) => {
 
     case ADDED_CO_STORE_ITEM:
       // create a new array with the previous and new items
-      return state.concat([Object.assign({}, payload)])
+      return state.concat([(<any>Object).assign({}, payload)])
 
     case UPDATE_CO_STORE_ITEM:
       // if it's not the item being updated, just return it,
@@ -22,7 +22,7 @@ export const coBrowserStorageReducer = (state = [], {type, payload}) => {
       return state.map(item => {
         return item.key !== payload.key ?
           item :
-          Object.assign({}, item, payload) // create copy of it
+          (<any>Object).assign({}, item, payload) // create copy of it
       })
 
     case REMOVED_CO_STORE_ITEM:
