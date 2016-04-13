@@ -8,7 +8,7 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core'
       <input type='text' disabled [value]='storageItem.valueType'>
       <input type='text' disabled [value]='storageItem.key'>
       <input [type]='storageItem.valueType' #newValue [value]='storageItem.value'>
-      <button *ngIf='false' (click)='remove.emit(storageItem)'>Remove</button> <!-- skip for now -->
+      <!-- <button (click)='remove.emit(storageItem)'>Remove</button> -->
       <button (click)='updateWrap(storageItem, newValue)'>Save</button>
       <button *ngIf='storageItem.inConfigFile' (click)='reset.emit(storageItem)'>
         Reset

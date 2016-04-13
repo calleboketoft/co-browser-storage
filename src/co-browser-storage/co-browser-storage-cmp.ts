@@ -10,18 +10,16 @@ import {NewItemCmp} from './components/new-item-cmp'
   selector: 'co-browser-storage-cmp',
   template: `
     <div *ngIf='!noRender'>
-      <h4>co-browser-storage</h4>
       <storage-list-cmp
         [coBrowserStorageReducer]='coBrowserStorageReducer | async'
         (remove)='coStoreModel.removeItem($event)'
         (update)='coStoreModel.updateItem($event)'
         (reset)='coStoreModel.resetItem($event)'>
       </storage-list-cmp>
-      <br>
-      <div *ngIf='false'><!-- skip for now -->
+      <!-- <br>
         Add temporary item<br>
         <new-item-cmp (create)='coStoreModel.createItem($event)'></new-item-cmp>
-      </div>
+      </div> -->
     </div>
   `,
   directives: [StorageListCmp, NewItemCmp],
