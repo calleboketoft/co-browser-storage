@@ -18,8 +18,10 @@ import {NewItemCmp} from './components/new-item-cmp'
         (reset)='coStoreModel.resetItem($event)'>
       </storage-list-cmp>
       <br>
-      Add temporary item<br>
-      <new-item-cmp (create)='coStoreModel.createItem($event)'></new-item-cmp>
+      <div *ngIf='false'><!-- skip for now -->
+        Add temporary item<br>
+        <new-item-cmp *ngIf= (create)='coStoreModel.createItem($event)'></new-item-cmp>
+      </div>
     </div>
   `,
   directives: [StorageListCmp, NewItemCmp],
