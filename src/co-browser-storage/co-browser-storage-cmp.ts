@@ -20,7 +20,7 @@ import {NewItemCmp} from './components/new-item-cmp'
       <br>
       <div *ngIf='false'><!-- skip for now -->
         Add temporary item<br>
-        <new-item-cmp *ngIf= (create)='coStoreModel.createItem($event)'></new-item-cmp>
+        <new-item-cmp (create)='coStoreModel.createItem($event)'></new-item-cmp>
       </div>
     </div>
   `,
