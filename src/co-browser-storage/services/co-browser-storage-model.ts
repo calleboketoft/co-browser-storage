@@ -77,6 +77,10 @@ export class CoBrowserStorageModel {
     })
   }
 
+  public updateItems (items: Array<IStorageItem>) {
+    items.forEach(i => this.updateItem(i))
+  }
+
   public resetItem (item: IStorageItem) {
     let resetdItem
     let schemaItem = this._options.initialState.filter((schemaItem) => {
