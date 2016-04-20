@@ -2,17 +2,36 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core'
 
 @Component({
   selector: 'storage-list-item-cmp',
+  styles: [`
+    .row {
+      margin-bottom: 10px;
+    }
+    .tiny {
+      font-size: 0.8rem;
+    }
+  `],
   template: `
-    <div>
-      <input type='text' disabled [value]='storageItem.storageType'>
-      <input type='text' disabled [value]='storageItem.valueType'>
-      <input type='text' disabled [value]='storageItem.key'>
-      <input [type]='storageItem.valueType' #newValue [value]='storageItem.value'>
-      <!-- <button (click)='remove.emit(storageItem)'>Remove</button> -->
-      <button (click)='updateWrap(storageItem, newValue)'>Save</button>
-      <button *ngIf='storageItem.inConfigFile' (click)='reset.emit(storageItem)'>
-        Reset
-      </button>
+    <div class='row'>
+      <div class='col-lg-2 col-xs-4'>
+        <strong>{{storageItem.key}}</strong><br>
+        <span class='tiny'>{{storageItem.storageType}}</span>
+      </div>
+      <div class='col-lg-7 col-xs-4'>
+        <input [type]='storageItem.valueType'
+          class='form-control'
+          #newValue [value]='storageItem.value'>
+      </div>
+      <div class='col-lg-3 col-xs-4'>
+        <button class='btn btn-success'
+          (click)='updateWrap(storageItem, newValue)'>
+          Save
+        </button>
+        <button class='btn btn-info'
+          *ngIf='storageItem.inConfigFile'
+          (click)='reset.emit(storageItem)'>
+          Reset
+        </button>
+      </div>
     </div>
   `
 })

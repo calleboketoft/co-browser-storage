@@ -7,6 +7,7 @@
 When bootstrapping app, provide the store for the storage items
 
 ```javascript
+import {provideStore} from '@ngrx/store'
 import {cbsReducer} from 'co-browser-storage/co-browser-storage'
 
 bootstrap(AppCmp, [
