@@ -7,7 +7,7 @@ import {StorageListItemCmp} from './storage-list-item-cmp'
   template: `
     <div>
       <storage-list-item-cmp
-        *ngFor='#storageItem of coBrowserStorageReducer'
+        *ngFor='#storageItem of cbsReducer'
         [storageItem]='storageItem'
         (remove)='remove.emit($event)'
         (update)='update.emit($event)'
@@ -18,8 +18,8 @@ import {StorageListItemCmp} from './storage-list-item-cmp'
   directives: [StorageListItemCmp]
 })
 export class StorageListCmp {
-  @Input() coBrowserStorageReducer
-  @Output() remove = new EventEmitter()
-  @Output() update = new EventEmitter()
-  @Output() reset = new EventEmitter()
+  @Input() cbsReducer;
+  @Output() remove = new EventEmitter();
+  @Output() update = new EventEmitter();
+  @Output() reset = new EventEmitter();
 }

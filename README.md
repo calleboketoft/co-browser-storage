@@ -7,29 +7,28 @@
 When bootstrapping app, provide the store for the storage items
 
 ```javascript
-import {coBrowserStorageReducer} from 'co-browser-storage/services/co-browser-storage-reducer'
+import {cbsReducer} from 'co-browser-storage/co-browser-storage'
 
 bootstrap(AppCmp, [
   // initial state is handled when store is initialized
-  provideStore({coBrowserStorageReducer}, {coBrowserStorageReducer: []})
+  provideStore({cbsReducer}, {cbsReducer: []})
 ])
 ```
 
 Import the component, provide model, and send in initial configuration
 
 ```javascript
-import {CoBrowserStorageCmp} from 'co-browser-storage/co-browser-storage-cmp'
-import {CoBrowserStorageModel} from 'co-browser-storage/services/co-browser-storage-model'
+import {CbsCmp, CbsModel} from 'co-browser-storage/co-browser-storage'
 
 // Component providers need to provide the model
 @Component({
-  providers: [CoBrowserStorageModel],
-  directives: [CoBrowserStorageCmp],
+  providers: [CbsModel],
+  directives: [CbsCmp],
   template: `
-    <co-browser-storage-cmp
+    <cbs-cmp
       [noRender]='false'
-      [coBrowserStorageConfig]="exampleDbConfig">
-    </co-browser-storage-cmp>
+      [cbsConfig]="exampleDbConfig">
+    </cbs-cmp>
   ` // Set [noRender]='true' to just initialise the component (sure, it's a hack)
 })
 export class AppComponent {
@@ -52,15 +51,15 @@ export class AppComponent {
 The best way to use browser storage items from your app is to use the CoBrowserStorageModel functions
 
 ```javascript
-import {CoBrowserStorageModel} from 'co-browser-storage/services/co-browser-storage-model'
+import {CbsModel} from 'co-browser-storage/co-browser-storage'
 
 ...
-coBrowserStorageModel.getItemByKey()
-coBrowserStorageModel.createItem()
-coBrowserStorageModel.removeItem()
-coBrowserStorageModel.updateItem()
+cbsModel.getItemByKey()
+cbsModel.createItem()
+cbsModel.removeItem()
+cbsModel.updateItem()
 
-coBrowserStorageModel.allTrue(['key1', 'key2']) // find out if all are truthy
+cbsModel.allTrue(['key1', 'key2']) // find out if all are truthy
 ```
 
 ## Developing

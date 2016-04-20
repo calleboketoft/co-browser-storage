@@ -10,7 +10,7 @@ import {Injectable} from 'angular2/core'
 import {Store} from '@ngrx/store'
 import {Observable} from 'rxjs/Rx'
 
-import * as coBrowserStorageActions from './co-browser-storage-reducer'
+import * as cbsActions from './cbs-reducer'
 
 export interface IStorageItem {
   key: string,
@@ -20,15 +20,15 @@ export interface IStorageItem {
 }
 
 @Injectable()
-export class CoBrowserStorageModel {
+export class CbsModel {
   private _DB_CONFIG_KEY = 'CO_BROWSER_DB';
   private _DB_MEMORY_KEY = 'MEMORY_STATE';
   private _DB_INITIAL_KEY = 'INITIAL_SCHEMA';
   private _options;
-  private _coBrowserStorageReducer;
+  private _cbsReducer;
 
   constructor (private _store: Store<any>) {
-    this._coBrowserStorageReducer = this._store.select('coBrowserStorageReducer')
+    this._cbsReducer = this._store.select('cbsReducer')
   }
 
   private _saveItem (item: IStorageItem) {
@@ -57,7 +57,7 @@ export class CoBrowserStorageModel {
     }
     this._saveItem(safeItem)
     this._store.dispatch({
-      type: coBrowserStorageActions.ADDED_CO_STORE_ITEM,
+      type: cbsActions.ADDED_CBS_ITEM,
       payload: safeItem
     })
   }
@@ -72,7 +72,7 @@ export class CoBrowserStorageModel {
     let updatedItem = Object.assign({}, existingItem, item)
     this._saveItem(updatedItem)
     this._store.dispatch({
-      type: coBrowserStorageActions.UPDATE_CO_STORE_ITEM,
+      type: cbsActions.UPDATE_CBS_ITEM,
       payload: updatedItem
     })
   }
@@ -110,14 +110,14 @@ export class CoBrowserStorageModel {
     dbConfig[this._DB_MEMORY_KEY] = dbConfig[this._DB_MEMORY_KEY].filter((memItem) => item.key !== memItem.key)
     this._setConfigToLS(dbConfig)
     this._store.dispatch({
-      type: coBrowserStorageActions.REMOVED_CO_STORE_ITEM,
+      type: cbsActions.REMOVED_CBS_ITEM,
       payload: item
     })
   }
 
   // Get observable for one specific item
   public getItemByKey (key) {
-    return this._coBrowserStorageReducer
+    return this._cbsReducer
       .map((browserStorageItems) => {
         return browserStorageItems.find(item => item.key === key)
       })
@@ -127,7 +127,7 @@ export class CoBrowserStorageModel {
   // Useful for debug flags.
   // Ex: allTrue(['DEBUG', 'DEBUG_XHR'])
   public allTrue (keys: [string]) {
-    return this._coBrowserStorageReducer
+    return this._cbsReducer
       .map(items => {
         if (items.length === 0) return false
         return items.every(item => {
@@ -166,7 +166,7 @@ export class CoBrowserStorageModel {
       updatedConfig = this._initExisting(options.namespace, dbConfig)
     }
     this._store.dispatch({
-      type: coBrowserStorageActions.ADDED_CO_STORE_ITEMS,
+      type: cbsActions.ADDED_CBS_ITEMS,
       payload: updatedConfig[this._DB_MEMORY_KEY]
     })
     return

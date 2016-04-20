@@ -1,5 +1,5 @@
 import {Component, Input} from 'angular2/core'
-import {CoBrowserStorageModel} from '../co-browser-storage/services/co-browser-storage-model'
+import {CbsModel} from '../co-browser-storage/services/cbs-model'
 import {Store} from '@ngrx/store'
 import * as exampleDbConfig from './example-db-config'
 
@@ -15,9 +15,9 @@ export class ThirdPartyUsageCmp {
   @Input() thirdPartyItem;
   constructor (
     private _store: Store<any>,
-    private _coStoreModel: CoBrowserStorageModel
+    private _cbsModel: CbsModel
   ) {
-    this._coStoreModel.allTrue([
+    this._cbsModel.allTrue([
       exampleDbConfig.DEBUG_MODE,
       exampleDbConfig.DEBUG_XHR
     ]).subscribe(test => {
@@ -26,7 +26,7 @@ export class ThirdPartyUsageCmp {
   }
 
   private _createItem () {
-    this._coStoreModel.createItem({key: 'thirdPartyItem'})
+    this._cbsModel.createItem({key: 'thirdPartyItem'})
   }
 
   private _logItem () {
