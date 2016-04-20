@@ -12,11 +12,11 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core'
   `],
   template: `
     <div class='row'>
-      <div class='col-lg-2 col-xs-4'>
+      <div class='col-lg-3 col-xs-4'>
         <strong>{{storageItem.key}}</strong><br>
         <span class='tiny'>{{storageItem.storageType}}</span>
       </div>
-      <div class='col-lg-7 col-xs-4'>
+      <div class='col-lg-6 col-xs-4'>
         <input [type]='storageItem.valueType'
           class='form-control'
           #newValue [value]='storageItem.value'>
