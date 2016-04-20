@@ -1,11 +1,8 @@
 # co-browser-storage
 
-## Developing
-
-- npm start
-- npm run watch (typescript compilation watcher)
-
 ## Usage
+
+- `npm install --save co-browser-storage`
 
 When bootstrapping app, provide the store for the storage items
 
@@ -30,9 +27,10 @@ import {CoBrowserStorageModel} from 'co-browser-storage/services/co-browser-stor
   directives: [CoBrowserStorageCmp],
   template: `
     <co-browser-storage-cmp
+      [noRender]='false'
       [coBrowserStorageConfig]="exampleDbConfig">
     </co-browser-storage-cmp>
-  `
+  ` // Set [noRender]='true' to just initialise the component (sure, it's a hack)
 })
 export class AppComponent {
   exampleDbConfig = {
@@ -57,7 +55,15 @@ The best way to use browser storage items from your app is to use the CoBrowserS
 import {CoBrowserStorageModel} from 'co-browser-storage/services/co-browser-storage-model'
 
 ...
-coBrowserStorage.createItem()
-coBrowserStorage.removeItem()
-coBrowserStorage.updateItem()
+coBrowserStorageModel.getItemByKey()
+coBrowserStorageModel.createItem()
+coBrowserStorageModel.removeItem()
+coBrowserStorageModel.updateItem()
+
+coBrowserStorageModel.allTrue(['key1', 'key2']) // find out if all are truthy
 ```
+
+## Developing
+
+- npm start
+- npm run watch (typescript compilation watcher)
