@@ -32,12 +32,12 @@ export class CbsCmp {
 
   constructor (
     private store: Store<any>,
-    private coStoreModel:CbsModel
+    private cbsModel:CbsModel
   ) {
     this.cbsReducer = this.store.select('cbsReducer')
   }
 
   ngOnInit () {
-    this.coStoreModel.initialize(this.cbsConfig)
+    this.cbsModel.initialize(this.cbsConfig)
   }
 }

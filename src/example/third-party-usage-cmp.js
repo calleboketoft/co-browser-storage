@@ -9,14 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
-var co_browser_storage_model_1 = require('../co-browser-storage/services/co-browser-storage-model');
+var cbs_model_1 = require('../co-browser-storage/services/cbs-model');
 var store_1 = require('@ngrx/store');
 var exampleDbConfig = require('./example-db-config');
 var ThirdPartyUsageCmp = (function () {
-    function ThirdPartyUsageCmp(_store, _coStoreModel) {
+    function ThirdPartyUsageCmp(_store, _cbsModel) {
         this._store = _store;
-        this._coStoreModel = _coStoreModel;
-        this._coStoreModel.allTrue([
+        this._cbsModel = _cbsModel;
+        this._cbsModel.allTrue([
             exampleDbConfig.DEBUG_MODE,
             exampleDbConfig.DEBUG_XHR
         ]).subscribe(function (test) {
@@ -24,7 +24,7 @@ var ThirdPartyUsageCmp = (function () {
         });
     }
     ThirdPartyUsageCmp.prototype._createItem = function () {
-        this._coStoreModel.createItem({ key: 'thirdPartyItem' });
+        this._cbsModel.createItem({ key: 'thirdPartyItem' });
     };
     ThirdPartyUsageCmp.prototype._logItem = function () {
         console.log(this.thirdPartyItem);
@@ -38,9 +38,9 @@ var ThirdPartyUsageCmp = (function () {
             selector: 'third-party-usage-cmp',
             template: "\n    <p>Third party cmp</p>\n    <button (click)='_createItem()'>Create item 'thirdPartyItem'</button>\n    <span style='color: blue;' (click)='_logItem()'>{{thirdPartyItem ? thirdPartyItem.key : 'item missing'}}</span>\n  "
         }), 
-        __metadata('design:paramtypes', [store_1.Store, co_browser_storage_model_1.CoBrowserStorageModel])
+        __metadata('design:paramtypes', [store_1.Store, cbs_model_1.CbsModel])
     ], ThirdPartyUsageCmp);
     return ThirdPartyUsageCmp;
 }());
 exports.ThirdPartyUsageCmp = ThirdPartyUsageCmp;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhpcmQtcGFydHktdXNhZ2UtY21wLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGhpcmQtcGFydHktdXNhZ2UtY21wLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7QUFBQSxxQkFBK0IsZUFDL0IsQ0FBQyxDQUQ2QztBQUM5Qyx5Q0FBb0MseURBQ3BDLENBQUMsQ0FENEY7QUFDN0Ysc0JBQW9CLGFBQ3BCLENBQUMsQ0FEZ0M7QUFDakMsSUFBWSxlQUFlLFdBQU0scUJBRWpDLENBQUMsQ0FGcUQ7QUFVdEQ7SUFFRSw0QkFDVSxNQUFrQixFQUNsQixhQUFvQztRQURwQyxXQUFNLEdBQU4sTUFBTSxDQUFZO1FBQ2xCLGtCQUFhLEdBQWIsYUFBYSxDQUF1QjtRQUU1QyxJQUFJLENBQUMsYUFBYSxDQUFDLE9BQU8sQ0FBQztZQUN6QixlQUFlLENBQUMsVUFBVTtZQUMxQixlQUFlLENBQUMsU0FBUztTQUMxQixDQUFDLENBQUMsU0FBUyxDQUFDLFVBQUEsSUFBSTtZQUNmLE9BQU8sQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLENBQUE7UUFDbkIsQ0FBQyxDQUFDLENBQUE7SUFDSixDQUFDO0lBRU8sd0NBQVcsR0FBbkI7UUFDRSxJQUFJLENBQUMsYUFBYSxDQUFDLFVBQVUsQ0FBQyxFQUFDLEdBQUcsRUFBRSxnQkFBZ0IsRUFBQyxDQUFDLENBQUE7SUFDeEQsQ0FBQztJQUVPLHFDQUFRLEdBQWhCO1FBQ0UsT0FBTyxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsY0FBYyxDQUFDLENBQUE7SUFDbEMsQ0FBQztJQW5CRDtRQUFDLFlBQUssRUFBRTs7OERBQUE7SUFUVjtRQUFDLGdCQUFTLENBQUM7WUFDVCxRQUFRLEVBQUUsdUJBQXVCO1lBQ2pDLFFBQVEsRUFBRSxrT0FJVDtTQUNGLENBQUM7OzBCQUFBO0lBc0JGLHlCQUFDO0FBQUQsQ0FBQyxBQXJCRCxJQXFCQztBQXJCWSwwQkFBa0IscUJBcUI5QixDQUFBIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhpcmQtcGFydHktdXNhZ2UtY21wLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGhpcmQtcGFydHktdXNhZ2UtY21wLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7QUFBQSxxQkFBK0IsZUFDL0IsQ0FBQyxDQUQ2QztBQUM5QywwQkFBdUIsMENBQ3ZCLENBQUMsQ0FEZ0U7QUFDakUsc0JBQW9CLGFBQ3BCLENBQUMsQ0FEZ0M7QUFDakMsSUFBWSxlQUFlLFdBQU0scUJBRWpDLENBQUMsQ0FGcUQ7QUFVdEQ7SUFFRSw0QkFDVSxNQUFrQixFQUNsQixTQUFtQjtRQURuQixXQUFNLEdBQU4sTUFBTSxDQUFZO1FBQ2xCLGNBQVMsR0FBVCxTQUFTLENBQVU7UUFFM0IsSUFBSSxDQUFDLFNBQVMsQ0FBQyxPQUFPLENBQUM7WUFDckIsZUFBZSxDQUFDLFVBQVU7WUFDMUIsZUFBZSxDQUFDLFNBQVM7U0FDMUIsQ0FBQyxDQUFDLFNBQVMsQ0FBQyxVQUFBLElBQUk7WUFDZixPQUFPLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxDQUFBO1FBQ25CLENBQUMsQ0FBQyxDQUFBO0lBQ0osQ0FBQztJQUVPLHdDQUFXLEdBQW5CO1FBQ0UsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLENBQUMsRUFBQyxHQUFHLEVBQUUsZ0JBQWdCLEVBQUMsQ0FBQyxDQUFBO0lBQ3BELENBQUM7SUFFTyxxQ0FBUSxHQUFoQjtRQUNFLE9BQU8sQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLGNBQWMsQ0FBQyxDQUFBO0lBQ2xDLENBQUM7SUFuQkQ7UUFBQyxZQUFLLEVBQUU7OzhEQUFBO0lBVFY7UUFBQyxnQkFBUyxDQUFDO1lBQ1QsUUFBUSxFQUFFLHVCQUF1QjtZQUNqQyxRQUFRLEVBQUUsa09BSVQ7U0FDRixDQUFDOzswQkFBQTtJQXNCRix5QkFBQztBQUFELENBQUMsQUFyQkQsSUFxQkM7QUFyQlksMEJBQWtCLHFCQXFCOUIsQ0FBQSJ9

@@ -10,7 +10,7 @@ import {CbsModel} from '../co-browser-storage/services/cbs-model'
     <div class='container'>
       <h2>co-browser-storage example app</h2>
       <cbs-cmp
-        [ccbsConfig]='exampleDbConfig'>
+        [cbsConfig]='exampleDbConfig'>
       </cbs-cmp>
     </div>
     <hr>
