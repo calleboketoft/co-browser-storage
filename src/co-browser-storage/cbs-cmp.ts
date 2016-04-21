@@ -20,6 +20,17 @@ import {NewItemCmp} from './components/new-item-cmp'
         Add temporary item<br>
         <new-item-cmp (create)='cbsModel.createItem($event)'></new-item-cmp>
       </div> -->
+
+      <div class='row'>
+        <!-- match button position -->
+        <div class='col-lg-9 col-xs-8'>
+        </div>
+        <div class='col-lg-3 col-xs-4'>
+          <button class='btn btn-warning' (click)='resetAll()'>
+            Reset all
+          </button>
+        </div>
+      </div>
     </div>
   `,
   directives: [StorageListCmp, NewItemCmp],
@@ -39,5 +50,11 @@ export class CbsCmp {
 
   ngOnInit () {
     this.cbsModel.initialize(this.cbsConfig)
+  }
+
+  resetAll () {
+    if (confirm('are you sure you want to reset all values to default?')) {
+      this.cbsModel.resetAll()
+    }
   }
 }

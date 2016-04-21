@@ -101,6 +101,18 @@ export class CbsModel {
     }
   }
 
+  public resetAll () {
+    let initialItems = this._options.initialState.map((i) => {
+      return {
+        storageType: i.storageType,
+        value: i.default,
+        key: i.key,
+        valueType: i.valueType
+      }
+    })
+    this.updateItems(initialItems)
+  }
+
   public removeItem (item: IStorageItem) {
     let dbConfig = this._getConfigFromLS()
     let existingItem = dbConfig[this._DB_MEMORY_KEY].filter(memItem => item.key === memItem.key)[0]

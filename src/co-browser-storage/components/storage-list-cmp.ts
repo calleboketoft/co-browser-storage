@@ -13,6 +13,7 @@ import {StorageListItemCmp} from './storage-list-item-cmp'
         (update)='update.emit($event)'
         (reset)='reset.emit($event)'>
       </storage-list-item-cmp>
+      <br>
     </div>
   `,
   directives: [StorageListItemCmp]
