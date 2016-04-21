@@ -9,6 +9,10 @@ When bootstrapping app, provide the store for the storage items
 ```javascript
 import {provideStore} from '@ngrx/store'
 import {cbsReducer} from 'co-browser-storage/co-browser-storage'
+import {setCbsConfig} from 'co-browser-storage/co-browser-storage'
+import {browserStorageConfig} from './browser-storage-config'
+
+setCbsConfig(browserStorageConfig)
 
 bootstrap(AppCmp, [
   // initial state is handled when store is initialized
@@ -28,7 +32,7 @@ import {CbsCmp, CbsModel} from 'co-browser-storage/co-browser-storage'
   template: `
     <cbs-cmp
       [noRender]='false'
-      [cbsConfig]="exampleDbConfig">
+      [autosave]='false'>
     </cbs-cmp>
   ` // Set [noRender]='true' to just initialise the component (sure, it's a hack)
 })
