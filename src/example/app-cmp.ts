@@ -11,7 +11,8 @@ import {CbsModel} from '../co-browser-storage/services/cbs-model'
       <h2>co-browser-storage example app</h2>
       <br><br>
       <cbs-cmp
-        [cbsConfig]='exampleDbConfig'>
+        [cbsConfig]='exampleDbConfig'
+        [autosave]='true'>
       </cbs-cmp>
     </div>
     <hr>

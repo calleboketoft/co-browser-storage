@@ -18,6 +18,7 @@ var CbsCmp = (function () {
     function CbsCmp(store, cbsModel) {
         this.store = store;
         this.cbsModel = cbsModel;
+        this.autosave = false;
         this.cbsReducer = this.store.select('cbsReducer');
     }
     CbsCmp.prototype.ngOnInit = function () {
@@ -36,10 +37,14 @@ var CbsCmp = (function () {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], CbsCmp.prototype, "noRender", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], CbsCmp.prototype, "autosave", void 0);
     CbsCmp = __decorate([
         core_1.Component({
             selector: 'cbs-cmp',
-            template: "\n    <div *ngIf='!noRender'>\n      <storage-list-cmp\n        [cbsReducer]='cbsReducer | async'\n        (remove)='cbsModel.removeItem($event)'\n        (update)='cbsModel.updateItem($event)'\n        (reset)='cbsModel.resetItem($event)'>\n      </storage-list-cmp>\n      <!-- <br>\n        Add temporary item<br>\n        <new-item-cmp (create)='cbsModel.createItem($event)'></new-item-cmp>\n      </div> -->\n\n      <div class='row'>\n        <!-- match button position -->\n        <div class='col-lg-9 col-xs-8'>\n        </div>\n        <div class='col-lg-3 col-xs-4'>\n          <button class='btn btn-warning' (click)='resetAll()'>\n            Reset all\n          </button>\n        </div>\n      </div>\n    </div>\n  ",
+            template: "\n    <div *ngIf='!noRender'>\n      <storage-list-cmp\n        [cbsReducer]='cbsReducer | async'\n        [autosave]='autosave'\n        (remove)='cbsModel.removeItem($event)'\n        (update)='cbsModel.updateItem($event)'\n        (reset)='cbsModel.resetItem($event)'>\n      </storage-list-cmp>\n      <!-- <br>\n        Add temporary item<br>\n        <new-item-cmp (create)='cbsModel.createItem($event)'></new-item-cmp>\n      </div> -->\n\n      <div class='row'>\n        <!-- match button position -->\n        <div class='col-lg-9 col-xs-8'>\n        </div>\n        <div class='col-lg-3 col-xs-4'>\n          <button class='btn btn-warning' (click)='resetAll()'>\n            Reset all\n          </button>\n        </div>\n      </div>\n    </div>\n  ",
             directives: [storage_list_cmp_1.StorageListCmp, new_item_cmp_1.NewItemCmp],
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
@@ -48,4 +53,4 @@ var CbsCmp = (function () {
     return CbsCmp;
 }());
 exports.CbsCmp = CbsCmp;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2JzLWNtcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNicy1jbXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLFFBQU8sY0FFUCxDQUFDLENBRm9CO0FBRXJCLHFCQUF3RCxlQUN4RCxDQUFDLENBRHNFO0FBQ3ZFLHNCQUFvQixhQUNwQixDQUFDLENBRGdDO0FBQ2pDLDBCQUF1QixzQkFDdkIsQ0FBQyxDQUQ0QztBQUM3QyxpQ0FBNkIsK0JBQzdCLENBQUMsQ0FEMkQ7QUFDNUQsNkJBQXlCLDJCQUV6QixDQUFDLENBRm1EO0FBZ0NwRDtJQUtFLGdCQUNVLEtBQWlCLEVBQ2pCLFFBQWlCO1FBRGpCLFVBQUssR0FBTCxLQUFLLENBQVk7UUFDakIsYUFBUSxHQUFSLFFBQVEsQ0FBUztRQUV6QixJQUFJLENBQUMsVUFBVSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDLFlBQVksQ0FBQyxDQUFBO0lBQ25ELENBQUM7SUFFRCx5QkFBUSxHQUFSO1FBQ0UsSUFBSSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFBO0lBQzFDLENBQUM7SUFFRCx5QkFBUSxHQUFSO1FBQ0UsRUFBRSxDQUFDLENBQUMsT0FBTyxDQUFDLHVEQUF1RCxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQ3JFLElBQUksQ0FBQyxRQUFRLENBQUMsUUFBUSxFQUFFLENBQUE7UUFDMUIsQ0FBQztJQUNILENBQUM7SUFuQkQ7UUFBQyxZQUFLLEVBQUU7OzZDQUFBO0lBQ1I7UUFBQyxZQUFLLEVBQUU7OzRDQUFBO0lBaENWO1FBQUMsZ0JBQVMsQ0FBQztZQUNULFFBQVEsRUFBRSxTQUFTO1lBQ25CLFFBQVEsRUFBRSw4dEJBd0JUO1lBQ0QsVUFBVSxFQUFFLENBQUMsaUNBQWMsRUFBRSx5QkFBVSxDQUFDO1lBQ3hDLGVBQWUsRUFBRSw4QkFBdUIsQ0FBQyxNQUFNO1NBQ2hELENBQUM7O2NBQUE7SUFzQkYsYUFBQztBQUFELENBQUMsQUFyQkQsSUFxQkM7QUFyQlksY0FBTSxTQXFCbEIsQ0FBQSJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2JzLWNtcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNicy1jbXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLFFBQU8sY0FFUCxDQUFDLENBRm9CO0FBRXJCLHFCQUF3RCxlQUN4RCxDQUFDLENBRHNFO0FBQ3ZFLHNCQUFvQixhQUNwQixDQUFDLENBRGdDO0FBQ2pDLDBCQUF1QixzQkFDdkIsQ0FBQyxDQUQ0QztBQUM3QyxpQ0FBNkIsK0JBQzdCLENBQUMsQ0FEMkQ7QUFDNUQsNkJBQXlCLDJCQUV6QixDQUFDLENBRm1EO0FBaUNwRDtJQU1FLGdCQUNVLEtBQWlCLEVBQ2pCLFFBQWlCO1FBRGpCLFVBQUssR0FBTCxLQUFLLENBQVk7UUFDakIsYUFBUSxHQUFSLFFBQVEsQ0FBUztRQUxsQixhQUFRLEdBQUcsS0FBSyxDQUFDO1FBT3hCLElBQUksQ0FBQyxVQUFVLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUMsWUFBWSxDQUFDLENBQUE7SUFDbkQsQ0FBQztJQUVELHlCQUFRLEdBQVI7UUFDRSxJQUFJLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUE7SUFDMUMsQ0FBQztJQUVELHlCQUFRLEdBQVI7UUFDRSxFQUFFLENBQUMsQ0FBQyxPQUFPLENBQUMsdURBQXVELENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDckUsSUFBSSxDQUFDLFFBQVEsQ0FBQyxRQUFRLEVBQUUsQ0FBQTtRQUMxQixDQUFDO0lBQ0gsQ0FBQztJQXBCRDtRQUFDLFlBQUssRUFBRTs7NkNBQUE7SUFDUjtRQUFDLFlBQUssRUFBRTs7NENBQUE7SUFDUjtRQUFDLFlBQUssRUFBRTs7NENBQUE7SUFsQ1Y7UUFBQyxnQkFBUyxDQUFDO1lBQ1QsUUFBUSxFQUFFLFNBQVM7WUFDbkIsUUFBUSxFQUFFLDZ2QkF5QlQ7WUFDRCxVQUFVLEVBQUUsQ0FBQyxpQ0FBYyxFQUFFLHlCQUFVLENBQUM7WUFDeEMsZUFBZSxFQUFFLDhCQUF1QixDQUFDLE1BQU07U0FDaEQsQ0FBQzs7Y0FBQTtJQXVCRixhQUFDO0FBQUQsQ0FBQyxBQXRCRCxJQXNCQztBQXRCWSxjQUFNLFNBc0JsQixDQUFBIn0=

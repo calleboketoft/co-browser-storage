@@ -12,6 +12,7 @@ import {NewItemCmp} from './components/new-item-cmp'
     <div *ngIf='!noRender'>
       <storage-list-cmp
         [cbsReducer]='cbsReducer | async'
+        [autosave]='autosave'
         (remove)='cbsModel.removeItem($event)'
         (update)='cbsModel.updateItem($event)'
         (reset)='cbsModel.resetItem($event)'>
@@ -39,6 +40,7 @@ import {NewItemCmp} from './components/new-item-cmp'
 export class CbsCmp {
   @Input() cbsConfig;
   @Input() noRender;
+  @Input() autosave = false;
   cbsReducer;
 
   constructor (

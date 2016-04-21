@@ -9,6 +9,7 @@ import {StorageListItemCmp} from './storage-list-item-cmp'
       <storage-list-item-cmp
         *ngFor='#storageItem of cbsReducer'
         [storageItem]='storageItem'
+        [autosave]='autosave'
         (remove)='remove.emit($event)'
         (update)='update.emit($event)'
         (reset)='reset.emit($event)'>
@@ -20,6 +21,7 @@ import {StorageListItemCmp} from './storage-list-item-cmp'
 })
 export class StorageListCmp {
   @Input() cbsReducer;
+  @Input() autosave;
   @Output() remove = new EventEmitter();
   @Output() update = new EventEmitter();
   @Output() reset = new EventEmitter();

@@ -18,11 +18,13 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core'
       </div>
       <div class='col-lg-6 col-xs-4'>
         <input [type]='storageItem.valueType'
+          (change)='inputChanged(storageItem, newValue)'
           class='form-control'
           #newValue [value]='storageItem.value'>
       </div>
       <div class='col-lg-3 col-xs-4'>
         <button class='btn btn-success'
+          *ngIf='!autosave'
           (click)='updateWrap(storageItem, newValue)'>
           Save
         </button>
@@ -37,9 +39,16 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core'
 })
 export class StorageListItemCmp {
   @Input() storageItem;
+  @Input() autosave;
   @Output() remove = new EventEmitter();
   @Output() update = new EventEmitter();
   @Output() reset = new EventEmitter();
+
+  inputChanged (storageItem, newValue) {
+    if (this.autosave) {
+      this.updateWrap(storageItem, newValue)
+    }
+  }
 
   updateWrap (storageItem, newValue) {
     storageItem.value = newValue.value
