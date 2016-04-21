@@ -51,7 +51,7 @@ export class CbsCmp {
   }
 
   ngOnInit () {
-    this.cbsModel.initialize(this.cbsConfig)
+    this.cbsModel.initialize()
   }
 
   resetAll () {

@@ -24,7 +24,7 @@ export class CbsModel {
   private _DB_CONFIG_KEY = 'CO_BROWSER_DB';
   private _DB_MEMORY_KEY = 'MEMORY_STATE';
   private _DB_INITIAL_KEY = 'INITIAL_SCHEMA';
-  private _options;
+  static config;
   private _cbsReducer;
 
   constructor (private _store: Store<any>) {
@@ -83,7 +83,7 @@ export class CbsModel {
 
   public resetItem (item: IStorageItem) {
     let resetdItem
-    let schemaItem = this._options.initialState.filter((schemaItem) => {
+    let schemaItem = CbsModel.config.initialState.filter((schemaItem) => {
       return item.key === schemaItem.key
     })[0]
     if (schemaItem) {
@@ -102,7 +102,7 @@ export class CbsModel {
   }
 
   public resetAll () {
-    let initialItems = this._options.initialState.map((i) => {
+    let initialItems = CbsModel.config.initialState.map((i) => {
       return {
         storageType: i.storageType,
         value: i.default,
@@ -129,7 +129,7 @@ export class CbsModel {
 
   // Returns the key including the namespace
   public getFullKey (key) {
-    return this._options.namespace + '.' + key
+    return CbsModel.config.namespace + '.' + key
   }
 
   // Get observable for one specific item
@@ -171,16 +171,15 @@ export class CbsModel {
 
   // Initialize component upon load
   // ------------------------------
-  public initialize (options) {
-    this._options = options // save options to class
+  public initialize () {
     var dbConfig = this._getConfigFromLS()
     let updatedConfig
     if (!dbConfig) {
       // there is no current state stored, initialize from scratch
-      updatedConfig = this._initFromScratch(options)
+      updatedConfig = this._initFromScratch(CbsModel.config)
     } else {
       // a current state is existing, validate against schema
-      updatedConfig = this._initExisting(options.namespace, dbConfig)
+      updatedConfig = this._initExisting(CbsModel.config.namespace, dbConfig)
     }
     this._store.dispatch({
       type: cbsActions.ADDED_CBS_ITEMS,
@@ -239,4 +238,9 @@ export class CbsModel {
     this._setConfigToLS(dbConfig)
     return dbConfig
   }
+}
+
+export function setCbsConfig (config) {
+  CbsModel.config = config
+  return true
 }
