@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('angular2/core');
 var storage_list_item_cmp_1 = require('./storage-list-item-cmp');
+var array_sort_pipe_1 = require('../services/array-sort-pipe');
 var StorageListCmp = (function () {
     function StorageListCmp() {
         this.remove = new core_1.EventEmitter();
@@ -39,8 +40,8 @@ var StorageListCmp = (function () {
     StorageListCmp = __decorate([
         core_1.Component({
             selector: 'storage-list-cmp',
-            // when the remove event comes from the child, call the removeKvp function
-            template: "\n    <div>\n      <storage-list-item-cmp\n        *ngFor='#storageItem of cbsReducer'\n        [storageItem]='storageItem'\n        [autosave]='autosave'\n        (remove)='remove.emit($event)'\n        (update)='update.emit($event)'\n        (reset)='reset.emit($event)'>\n      </storage-list-item-cmp>\n      <br>\n    </div>\n  ",
+            pipes: [array_sort_pipe_1.ArraySortPipe],
+            template: "\n    <div>\n      <storage-list-item-cmp\n        *ngFor='#storageItem of cbsReducer | arraySort:\"key\"'\n        [storageItem]='storageItem'\n        [autosave]='autosave'\n        (remove)='remove.emit($event)'\n        (update)='update.emit($event)'\n        (reset)='reset.emit($event)'>\n      </storage-list-item-cmp>\n      <br>\n    </div>\n  ",
             directives: [storage_list_item_cmp_1.StorageListItemCmp]
         }), 
         __metadata('design:paramtypes', [])
@@ -48,4 +49,4 @@ var StorageListCmp = (function () {
     return StorageListCmp;
 }());
 exports.StorageListCmp = StorageListCmp;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RvcmFnZS1saXN0LWNtcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN0b3JhZ2UtbGlzdC1jbXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUFxRCxlQUNyRCxDQUFDLENBRG1FO0FBQ3BFLHNDQUFpQyx5QkFFakMsQ0FBQyxDQUZ5RDtBQW9CMUQ7SUFBQTtRQUdZLFdBQU0sR0FBRyxJQUFJLG1CQUFZLEVBQUUsQ0FBQztRQUM1QixXQUFNLEdBQUcsSUFBSSxtQkFBWSxFQUFFLENBQUM7UUFDNUIsVUFBSyxHQUFHLElBQUksbUJBQVksRUFBRSxDQUFDO0lBQ3ZDLENBQUM7SUFMQztRQUFDLFlBQUssRUFBRTs7c0RBQUE7SUFDUjtRQUFDLFlBQUssRUFBRTs7b0RBQUE7SUFDUjtRQUFDLGFBQU0sRUFBRTs7a0RBQUE7SUFDVDtRQUFDLGFBQU0sRUFBRTs7a0RBQUE7SUFDVDtRQUFDLGFBQU0sRUFBRTs7aURBQUE7SUF2Qlg7UUFBQyxnQkFBUyxDQUFDO1lBQ1QsUUFBUSxFQUFFLGtCQUFrQjtZQUM1QiwwRUFBMEU7WUFDMUUsUUFBUSxFQUFFLCtVQVlUO1lBQ0QsVUFBVSxFQUFFLENBQUMsMENBQWtCLENBQUM7U0FDakMsQ0FBQzs7c0JBQUE7SUFPRixxQkFBQztBQUFELENBQUMsQUFORCxJQU1DO0FBTlksc0JBQWMsaUJBTTFCLENBQUEifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RvcmFnZS1saXN0LWNtcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN0b3JhZ2UtbGlzdC1jbXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUFxRCxlQUNyRCxDQUFDLENBRG1FO0FBQ3BFLHNDQUFpQyx5QkFDakMsQ0FBQyxDQUR5RDtBQUMxRCxnQ0FBNEIsNkJBRTVCLENBQUMsQ0FGd0Q7QUFvQnpEO0lBQUE7UUFHWSxXQUFNLEdBQUcsSUFBSSxtQkFBWSxFQUFFLENBQUM7UUFDNUIsV0FBTSxHQUFHLElBQUksbUJBQVksRUFBRSxDQUFDO1FBQzVCLFVBQUssR0FBRyxJQUFJLG1CQUFZLEVBQUUsQ0FBQztJQUN2QyxDQUFDO0lBTEM7UUFBQyxZQUFLLEVBQUU7O3NEQUFBO0lBQ1I7UUFBQyxZQUFLLEVBQUU7O29EQUFBO0lBQ1I7UUFBQyxhQUFNLEVBQUU7O2tEQUFBO0lBQ1Q7UUFBQyxhQUFNLEVBQUU7O2tEQUFBO0lBQ1Q7UUFBQyxhQUFNLEVBQUU7O2lEQUFBO0lBdkJYO1FBQUMsZ0JBQVMsQ0FBQztZQUNULFFBQVEsRUFBRSxrQkFBa0I7WUFDNUIsS0FBSyxFQUFFLENBQUMsK0JBQWEsQ0FBQztZQUN0QixRQUFRLEVBQUUsbVdBWVQ7WUFDRCxVQUFVLEVBQUUsQ0FBQywwQ0FBa0IsQ0FBQztTQUNqQyxDQUFDOztzQkFBQTtJQU9GLHFCQUFDO0FBQUQsQ0FBQyxBQU5ELElBTUM7QUFOWSxzQkFBYyxpQkFNMUIsQ0FBQSJ9

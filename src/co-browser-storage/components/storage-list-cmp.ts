@@ -1,13 +1,14 @@
 import {Component, Input, Output, EventEmitter} from 'angular2/core'
 import {StorageListItemCmp} from './storage-list-item-cmp'
+import {ArraySortPipe} from '../services/array-sort-pipe'
 
 @Component({
   selector: 'storage-list-cmp',
-  // when the remove event comes from the child, call the removeKvp function
+  pipes: [ArraySortPipe],
   template: `
     <div>
       <storage-list-item-cmp
-        *ngFor='#storageItem of cbsReducer'
+        *ngFor='#storageItem of cbsReducer | arraySort:"key"'
         [storageItem]='storageItem'
         [autosave]='autosave'
         (remove)='remove.emit($event)'
