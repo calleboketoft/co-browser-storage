@@ -23,8 +23,8 @@ export class ArraySortPipe {
     }
 
     array.sort((a: any, b: any) => {
-      let left = a[column]
-      let right = b[column]
+      let left = (a[column] + '').toLowerCase()
+      let right = (b[column] + '').toLowerCase()
 
       if (direction === '-') {
         return left < right ? 1 : -1
