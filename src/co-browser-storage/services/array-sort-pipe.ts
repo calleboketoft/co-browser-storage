@@ -10,16 +10,16 @@ import {Pipe} from 'angular2/core'
 })
 export class ArraySortPipe {
   transform(array: Array<string>, args: string): Array<string> {
-    if (typeof args[0] === 'undefined') {
+    if (typeof args === 'undefined') {
       return array
     }
 
-    let direction = args[0][0]
+    let direction = args[0]
     let column
     if (direction === '-') {
-      column = args[0].slice(1)
+      column = args.slice(1)
     } else {
-      column = args[0]
+      column = args
     }
 
     array.sort((a: any, b: any) => {
