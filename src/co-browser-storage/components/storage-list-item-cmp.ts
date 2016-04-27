@@ -1,4 +1,5 @@
 import {Component, Input, Output, EventEmitter} from 'angular2/core'
+import 'rxjs/add/operator/debounceTime'
 
 @Component({
   selector: 'storage-list-item-cmp',
@@ -17,20 +18,19 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core'
         <span class='tiny'>{{storageItem.storageType}}</span>
       </div>
       <div class='col-lg-6 col-xs-4'>
-        <input [type]='storageItem.valueType'
-          (change)='inputChanged(storageItem, newValue)'
-          class='form-control'
-          #newValue [value]='storageItem.value'>
+        <input [type]='storageItem.valueType' class='form-control'
+          [value]='storageItem.value' #newValue
+          (keyup)='inputChanged.emit($event.target.value)'>
       </div>
       <div class='col-lg-3 col-xs-4'>
         <button class='btn btn-success'
           *ngIf='!autosave'
-          (click)='updateWrap(storageItem, newValue)'>
+          (click)='updateWrap(newValue.value)'>
           Save
         </button>
         <button class='btn btn-info'
           *ngIf='storageItem.inConfigFile'
-          (click)='reset.emit(storageItem)'>
+          (click)='resetItem.emit(storageItem)'>
           Reset
         </button>
       </div>
@@ -40,18 +40,24 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core'
 export class StorageListItemCmp {
   @Input() storageItem;
   @Input() autosave;
-  @Output() remove = new EventEmitter();
-  @Output() update = new EventEmitter();
-  @Output() reset = new EventEmitter();
+  @Output() removeItem = new EventEmitter();
+  @Output() updateItem = new EventEmitter();
+  @Output() resetItem = new EventEmitter();
 
-  inputChanged (storageItem, newValue) {
-    if (this.autosave) {
-      this.updateWrap(storageItem, newValue)
-    }
+  inputChanged = new EventEmitter();
+
+  constructor () {
+    this.inputChanged
+      .debounceTime(400)
+      .subscribe(value => {
+        if (this.autosave) {
+          this.updateWrap(value)
+        }
+      })
   }
 
-  updateWrap (storageItem, newValue) {
-    storageItem.value = newValue.value
-    this.update.emit(storageItem)
+  updateWrap (newValue) {
+    this.storageItem.value = newValue
+    this.updateItem.emit(this.storageItem)
   }
 }

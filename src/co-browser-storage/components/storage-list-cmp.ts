@@ -11,9 +11,9 @@ import {ArraySortPipe} from '../services/array-sort-pipe'
         *ngFor='#storageItem of cbsReducer | arraySort:"key"'
         [storageItem]='storageItem'
         [autosave]='autosave'
-        (remove)='remove.emit($event)'
-        (update)='update.emit($event)'
-        (reset)='reset.emit($event)'>
+        (removeItem)='removeItem.emit($event)'
+        (updateItem)='updateItem.emit($event)'
+        (resetItem)='resetItem.emit($event)'>
       </storage-list-item-cmp>
       <br>
     </div>
@@ -23,7 +23,7 @@ import {ArraySortPipe} from '../services/array-sort-pipe'
 export class StorageListCmp {
   @Input() cbsReducer;
   @Input() autosave;
-  @Output() remove = new EventEmitter();
-  @Output() update = new EventEmitter();
-  @Output() reset = new EventEmitter();
+  @Output() removeItem = new EventEmitter();
+  @Output() updateItem = new EventEmitter();
+  @Output() resetItem = new EventEmitter();
 }

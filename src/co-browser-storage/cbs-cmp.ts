@@ -13,9 +13,9 @@ import {NewItemCmp} from './components/new-item-cmp'
       <storage-list-cmp
         [cbsReducer]='cbsReducer | async'
         [autosave]='autosave'
-        (remove)='cbsModel.removeItem($event)'
-        (update)='cbsModel.updateItem($event)'
-        (reset)='cbsModel.resetItem($event)'>
+        (removeItem)='cbsModel.removeItem($event)'
+        (updateItem)='cbsModel.updateItem($event)'
+        (resetItem)='cbsModel.resetItem($event)'>
       </storage-list-cmp>
       <!-- <br>
         Add temporary item<br>

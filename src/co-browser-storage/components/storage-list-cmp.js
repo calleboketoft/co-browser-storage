@@ -13,9 +13,9 @@ var storage_list_item_cmp_1 = require('./storage-list-item-cmp');
 var array_sort_pipe_1 = require('../services/array-sort-pipe');
 var StorageListCmp = (function () {
     function StorageListCmp() {
-        this.remove = new core_1.EventEmitter();
-        this.update = new core_1.EventEmitter();
-        this.reset = new core_1.EventEmitter();
+        this.removeItem = new core_1.EventEmitter();
+        this.updateItem = new core_1.EventEmitter();
+        this.resetItem = new core_1.EventEmitter();
     }
     __decorate([
         core_1.Input(), 
@@ -28,20 +28,20 @@ var StorageListCmp = (function () {
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
-    ], StorageListCmp.prototype, "remove", void 0);
+    ], StorageListCmp.prototype, "removeItem", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
-    ], StorageListCmp.prototype, "update", void 0);
+    ], StorageListCmp.prototype, "updateItem", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
-    ], StorageListCmp.prototype, "reset", void 0);
+    ], StorageListCmp.prototype, "resetItem", void 0);
     StorageListCmp = __decorate([
         core_1.Component({
             selector: 'storage-list-cmp',
             pipes: [array_sort_pipe_1.ArraySortPipe],
-            template: "\n    <div>\n      <storage-list-item-cmp\n        *ngFor='#storageItem of cbsReducer | arraySort:\"key\"'\n        [storageItem]='storageItem'\n        [autosave]='autosave'\n        (remove)='remove.emit($event)'\n        (update)='update.emit($event)'\n        (reset)='reset.emit($event)'>\n      </storage-list-item-cmp>\n      <br>\n    </div>\n  ",
+            template: "\n    <div>\n      <storage-list-item-cmp\n        *ngFor='#storageItem of cbsReducer | arraySort:\"key\"'\n        [storageItem]='storageItem'\n        [autosave]='autosave'\n        (removeItem)='removeItem.emit($event)'\n        (updateItem)='updateItem.emit($event)'\n        (resetItem)='resetItem.emit($event)'>\n      </storage-list-item-cmp>\n      <br>\n    </div>\n  ",
             directives: [storage_list_item_cmp_1.StorageListItemCmp]
         }), 
         __metadata('design:paramtypes', [])
@@ -49,4 +49,4 @@ var StorageListCmp = (function () {
     return StorageListCmp;
 }());
 exports.StorageListCmp = StorageListCmp;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RvcmFnZS1saXN0LWNtcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN0b3JhZ2UtbGlzdC1jbXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUFxRCxlQUNyRCxDQUFDLENBRG1FO0FBQ3BFLHNDQUFpQyx5QkFDakMsQ0FBQyxDQUR5RDtBQUMxRCxnQ0FBNEIsNkJBRTVCLENBQUMsQ0FGd0Q7QUFvQnpEO0lBQUE7UUFHWSxXQUFNLEdBQUcsSUFBSSxtQkFBWSxFQUFFLENBQUM7UUFDNUIsV0FBTSxHQUFHLElBQUksbUJBQVksRUFBRSxDQUFDO1FBQzVCLFVBQUssR0FBRyxJQUFJLG1CQUFZLEVBQUUsQ0FBQztJQUN2QyxDQUFDO0lBTEM7UUFBQyxZQUFLLEVBQUU7O3NEQUFBO0lBQ1I7UUFBQyxZQUFLLEVBQUU7O29EQUFBO0lBQ1I7UUFBQyxhQUFNLEVBQUU7O2tEQUFBO0lBQ1Q7UUFBQyxhQUFNLEVBQUU7O2tEQUFBO0lBQ1Q7UUFBQyxhQUFNLEVBQUU7O2lEQUFBO0lBdkJYO1FBQUMsZ0JBQVMsQ0FBQztZQUNULFFBQVEsRUFBRSxrQkFBa0I7WUFDNUIsS0FBSyxFQUFFLENBQUMsK0JBQWEsQ0FBQztZQUN0QixRQUFRLEVBQUUsbVdBWVQ7WUFDRCxVQUFVLEVBQUUsQ0FBQywwQ0FBa0IsQ0FBQztTQUNqQyxDQUFDOztzQkFBQTtJQU9GLHFCQUFDO0FBQUQsQ0FBQyxBQU5ELElBTUM7QUFOWSxzQkFBYyxpQkFNMUIsQ0FBQSJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RvcmFnZS1saXN0LWNtcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN0b3JhZ2UtbGlzdC1jbXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUFxRCxlQUNyRCxDQUFDLENBRG1FO0FBQ3BFLHNDQUFpQyx5QkFDakMsQ0FBQyxDQUR5RDtBQUMxRCxnQ0FBNEIsNkJBRTVCLENBQUMsQ0FGd0Q7QUFvQnpEO0lBQUE7UUFHWSxlQUFVLEdBQUcsSUFBSSxtQkFBWSxFQUFFLENBQUM7UUFDaEMsZUFBVSxHQUFHLElBQUksbUJBQVksRUFBRSxDQUFDO1FBQ2hDLGNBQVMsR0FBRyxJQUFJLG1CQUFZLEVBQUUsQ0FBQztJQUMzQyxDQUFDO0lBTEM7UUFBQyxZQUFLLEVBQUU7O3NEQUFBO0lBQ1I7UUFBQyxZQUFLLEVBQUU7O29EQUFBO0lBQ1I7UUFBQyxhQUFNLEVBQUU7O3NEQUFBO0lBQ1Q7UUFBQyxhQUFNLEVBQUU7O3NEQUFBO0lBQ1Q7UUFBQyxhQUFNLEVBQUU7O3FEQUFBO0lBdkJYO1FBQUMsZ0JBQVMsQ0FBQztZQUNULFFBQVEsRUFBRSxrQkFBa0I7WUFDNUIsS0FBSyxFQUFFLENBQUMsK0JBQWEsQ0FBQztZQUN0QixRQUFRLEVBQUUsMlhBWVQ7WUFDRCxVQUFVLEVBQUUsQ0FBQywwQ0FBa0IsQ0FBQztTQUNqQyxDQUFDOztzQkFBQTtJQU9GLHFCQUFDO0FBQUQsQ0FBQyxBQU5ELElBTUM7QUFOWSxzQkFBYyxpQkFNMUIsQ0FBQSJ9
