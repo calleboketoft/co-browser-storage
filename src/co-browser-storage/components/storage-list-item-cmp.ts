@@ -40,7 +40,6 @@ import 'rxjs/add/operator/debounceTime'
 export class StorageListItemCmp {
   @Input() storageItem;
   @Input() autosave;
-  @Output() removeItem = new EventEmitter();
   @Output() updateItem = new EventEmitter();
   @Output() resetItem = new EventEmitter();
 

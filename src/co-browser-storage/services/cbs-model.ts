@@ -77,6 +77,9 @@ export class CbsModel {
     })
   }
 
+  // Convenience functions
+  // ---------------------
+
   public updateItems (items: Array<IStorageItem>) {
     items.forEach(i => this.updateItem(i))
   }
@@ -111,20 +114,6 @@ export class CbsModel {
       }
     })
     this.updateItems(initialItems)
-  }
-
-  public removeItem (item: IStorageItem) {
-    let dbConfig = this._getConfigFromLS()
-    let existingItem = dbConfig[this._DB_MEMORY_KEY].filter(memItem => item.key === memItem.key)[0]
-    // Remove item from storage
-    window[existingItem.storageType]['removeItem'](this.getFullKey(item.key))
-    // Remove item from memory object
-    dbConfig[this._DB_MEMORY_KEY] = dbConfig[this._DB_MEMORY_KEY].filter((memItem) => item.key !== memItem.key)
-    this._setConfigToLS(dbConfig)
-    this._store.dispatch({
-      type: cbsActions.REMOVED_CBS_ITEM,
-      payload: item
-    })
   }
 
   // Returns the key including the namespace
