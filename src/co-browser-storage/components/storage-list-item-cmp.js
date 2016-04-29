@@ -23,7 +23,7 @@ var StorageListItemCmp = (function () {
         this.storageItemValue.updateValue(this.storageItem.value);
         if (this.autosave) {
             this.storageItemValue.valueChanges
-                .debounceTime(500)
+                .debounceTime(300)
                 .subscribe(function (val) {
                 _this.updateWrap(val);
             });

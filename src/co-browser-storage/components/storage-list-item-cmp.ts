@@ -51,7 +51,7 @@ export class StorageListItemCmp {
 
     if (this.autosave) {
       this.storageItemValue.valueChanges
-        .debounceTime(500)
+        .debounceTime(300)
         .subscribe((val) => {
           this.updateWrap(val)
         })
