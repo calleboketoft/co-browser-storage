@@ -20,16 +20,15 @@ import 'rxjs/add/operator/debounceTime'
       </div>
       <div class='col-lg-6 col-xs-4'>
         <input [type]='storageItem.valueType' class='form-control'
-          [ngFormControl]='storageItemValue' #newValue>
+          [ngFormControl]='storageItemInput'>
       </div>
       <div class='col-lg-3 col-xs-4'>
         <button class='btn btn-success'
           *ngIf='!autosave'
-          (click)='updateWrap(newValue.value)'>
+          (click)='updateWrap(storageItemInput.value)'>
           Save
         </button>
         <button class='btn btn-info'
-          *ngIf='storageItem.inConfigFile'
           (click)='resetItem.emit(storageItem)'>
           Reset
         </button>
@@ -43,13 +42,13 @@ export class StorageListItemCmp {
   @Output() updateItem = new EventEmitter();
   @Output() resetItem = new EventEmitter();
 
-  storageItemValue = new Control();
+  storageItemInput = new Control();
 
   ngOnInit () {
-    this.storageItemValue.updateValue(this.storageItem.value)
+    this.storageItemInput.updateValue(this.storageItem.value)
 
     if (this.autosave) {
-      this.storageItemValue.valueChanges
+      this.storageItemInput.valueChanges
         .debounceTime(300)
         .subscribe((val) => {
           this.updateWrap(val)

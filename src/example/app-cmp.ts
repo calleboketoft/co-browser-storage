@@ -13,11 +13,9 @@ import {CbsModel} from '../co-browser-storage/services/cbs-model'
       <div class='col-xs-12 col-xl-6'>
         <h3>Manual save</h3>
         <br>
-        <!--
         <cbs-cmp
           [cbsConfig]='exampleDbConfig'>
         </cbs-cmp>
-        -->
       </div>
       <div class='col-xs-12 col-xl-6' style='border-left: 1px solid #E0E0E0;'>
         <h3>Auto save</h3>

@@ -19,7 +19,7 @@ var AppCmp = (function () {
     AppCmp = __decorate([
         core_1.Component({
             selector: 'app-cmp',
-            template: "\n    <h2>co-browser-storage example app</h2>\n    <br>\n\n    <div class='row'>\n      <div class='col-xs-12 col-xl-6'>\n        <h3>Manual save</h3>\n        <br>\n        <!--\n        <cbs-cmp\n          [cbsConfig]='exampleDbConfig'>\n        </cbs-cmp>\n        -->\n      </div>\n      <div class='col-xs-12 col-xl-6' style='border-left: 1px solid #E0E0E0;'>\n        <h3>Auto save</h3>\n        <br>\n        <cbs-cmp\n          [cbsConfig]='exampleDbConfig'\n          [autosave]='true'>\n        </cbs-cmp>\n      </div>\n    </div>\n    <br><br>\n  ",
+            template: "\n    <h2>co-browser-storage example app</h2>\n    <br>\n\n    <div class='row'>\n      <div class='col-xs-12 col-xl-6'>\n        <h3>Manual save</h3>\n        <br>\n        <cbs-cmp\n          [cbsConfig]='exampleDbConfig'>\n        </cbs-cmp>\n      </div>\n      <div class='col-xs-12 col-xl-6' style='border-left: 1px solid #E0E0E0;'>\n        <h3>Auto save</h3>\n        <br>\n        <cbs-cmp\n          [cbsConfig]='exampleDbConfig'\n          [autosave]='true'>\n        </cbs-cmp>\n      </div>\n    </div>\n    <br><br>\n  ",
             directives: [cbs_cmp_1.CbsCmp],
             providers: [cbs_model_1.CbsModel]
         }), 
@@ -28,4 +28,4 @@ var AppCmp = (function () {
     return AppCmp;
 }());
 exports.AppCmp = AppCmp;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLWNtcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImFwcC1jbXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUF3QixlQUN4QixDQUFDLENBRHNDO0FBQ3ZDLHdCQUFxQiwrQkFDckIsQ0FBQyxDQURtRDtBQUNwRCxrQ0FBOEIscUJBQzlCLENBQUMsQ0FEa0Q7QUFDbkQsMEJBQXVCLDBDQUV2QixDQUFDLENBRmdFO0FBZ0NqRTtJQUFBO1FBQ1Usb0JBQWUsR0FBRyxtQ0FBZSxDQUFDO0lBQzVDLENBQUM7SUFoQ0Q7UUFBQyxnQkFBUyxDQUFDO1lBQ1QsUUFBUSxFQUFFLFNBQVM7WUFDbkIsUUFBUSxFQUFFLGtqQkF3QlQ7WUFDRCxVQUFVLEVBQUUsQ0FBQyxnQkFBTSxDQUFDO1lBQ3BCLFNBQVMsRUFBRSxDQUFDLG9CQUFRLENBQUM7U0FDdEIsQ0FBQzs7Y0FBQTtJQUdGLGFBQUM7QUFBRCxDQUFDLEFBRkQsSUFFQztBQUZZLGNBQU0sU0FFbEIsQ0FBQSJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLWNtcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImFwcC1jbXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUF3QixlQUN4QixDQUFDLENBRHNDO0FBQ3ZDLHdCQUFxQiwrQkFDckIsQ0FBQyxDQURtRDtBQUNwRCxrQ0FBOEIscUJBQzlCLENBQUMsQ0FEa0Q7QUFDbkQsMEJBQXVCLDBDQUV2QixDQUFDLENBRmdFO0FBOEJqRTtJQUFBO1FBQ1Usb0JBQWUsR0FBRyxtQ0FBZSxDQUFDO0lBQzVDLENBQUM7SUE5QkQ7UUFBQyxnQkFBUyxDQUFDO1lBQ1QsUUFBUSxFQUFFLFNBQVM7WUFDbkIsUUFBUSxFQUFFLHVoQkFzQlQ7WUFDRCxVQUFVLEVBQUUsQ0FBQyxnQkFBTSxDQUFDO1lBQ3BCLFNBQVMsRUFBRSxDQUFDLG9CQUFRLENBQUM7U0FDdEIsQ0FBQzs7Y0FBQTtJQUdGLGFBQUM7QUFBRCxDQUFDLEFBRkQsSUFFQztBQUZZLGNBQU0sU0FFbEIsQ0FBQSJ9

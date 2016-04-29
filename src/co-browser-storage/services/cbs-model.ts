@@ -10,7 +10,7 @@ import {Injectable} from 'angular2/core'
 import {Store} from '@ngrx/store'
 import {Observable} from 'rxjs/Rx'
 
-import * as cbsActions from './cbs-reducer'
+import {UPDATE_CBS_ITEM, ADDED_CBS_ITEMS} from './cbs-reducer'
 
 export interface IStorageItem {
   key: string,
@@ -41,27 +41,8 @@ export class CbsModel {
     this._setConfigToLS(dbConfig)
   }
 
-  // CRUD
-  // ----
-  public createItem (item: IStorageItem) {
-    let dbConfig = this._getConfigFromLS()
-    let existingItem = dbConfig[this._DB_MEMORY_KEY].filter(memItem => item.key === memItem.key)[0]
-    if (existingItem) {
-      console.error('item already exists')
-    }
-    let safeItem = {
-      key: item.key,
-      value: item.value || '',
-      storageType: item.storageType || 'localStorage',
-      valueType: item.valueType || 'text'
-    }
-    this._saveItem(safeItem)
-    this._store.dispatch({
-      type: cbsActions.ADDED_CBS_ITEM,
-      payload: safeItem
-    })
-  }
-
+  // Update
+  // ------
   public updateItem (item: IStorageItem) {
     // Get current item from LS to complete missing properties.
     let dbConfig = this._getConfigFromLS()
@@ -72,7 +53,7 @@ export class CbsModel {
     let updatedItem = Object.assign({}, existingItem, item)
     this._saveItem(updatedItem)
     this._store.dispatch({
-      type: cbsActions.UPDATE_CBS_ITEM,
+      type: UPDATE_CBS_ITEM,
       payload: updatedItem
     })
   }
@@ -94,8 +75,7 @@ export class CbsModel {
         key: item.key,
         value: schemaItem.default,
         storageType: schemaItem.storageType,
-        valueType: schemaItem.valueType,
-        inConfigFile: true
+        valueType: schemaItem.valueType
       }
     }
 
@@ -171,7 +151,7 @@ export class CbsModel {
       updatedConfig = this._initExisting(CbsModel.config.namespace, dbConfig)
     }
     this._store.dispatch({
-      type: cbsActions.ADDED_CBS_ITEMS,
+      type: ADDED_CBS_ITEMS,
       payload: updatedConfig[this._DB_MEMORY_KEY]
     })
     return
@@ -196,8 +176,7 @@ export class CbsModel {
             key: memoryItem.key,
             value: actualValue,
             storageType: memoryItem.storageType,
-            valueType: memoryItem.valueType,
-            inConfigFile: !!memoryItem.inConfigFile
+            valueType: memoryItem.valueType
           }
           return updatedMemoryItem
         }
@@ -217,8 +196,7 @@ export class CbsModel {
         key: schemaItem.key,
         value: schemaItem.default, // from scratch, the default is the value
         storageType: schemaItem.storageType,
-        valueType: schemaItem.valueType,
-        inConfigFile: true // only the ones from the config file are here, used for 'reset' functionality
+        valueType: schemaItem.valueType
       }
     })
     let dbConfig = {}

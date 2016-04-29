@@ -15,13 +15,13 @@ var StorageListItemCmp = (function () {
     function StorageListItemCmp() {
         this.updateItem = new core_1.EventEmitter();
         this.resetItem = new core_1.EventEmitter();
-        this.storageItemValue = new common_1.Control();
+        this.storageItemInput = new common_1.Control();
     }
     StorageListItemCmp.prototype.ngOnInit = function () {
         var _this = this;
-        this.storageItemValue.updateValue(this.storageItem.value);
+        this.storageItemInput.updateValue(this.storageItem.value);
         if (this.autosave) {
-            this.storageItemValue.valueChanges
+            this.storageItemInput.valueChanges
                 .debounceTime(300)
                 .subscribe(function (val) {
                 _this.updateWrap(val);
@@ -52,11 +52,11 @@ var StorageListItemCmp = (function () {
         core_1.Component({
             selector: 'storage-list-item-cmp',
             styles: ["\n    .row {\n      margin-bottom: 10px;\n    }\n    .tiny {\n      font-size: 0.8rem;\n    }\n  "],
-            template: "\n    <div class='row'>\n      <div class='col-lg-3 col-xs-4'>\n        <strong>{{storageItem.key}}</strong><br>\n        <span class='tiny'>{{storageItem.storageType}}</span>\n      </div>\n      <div class='col-lg-6 col-xs-4'>\n        <input [type]='storageItem.valueType' class='form-control'\n          [ngFormControl]='storageItemValue' #newValue>\n      </div>\n      <div class='col-lg-3 col-xs-4'>\n        <button class='btn btn-success'\n          *ngIf='!autosave'\n          (click)='updateWrap(newValue.value)'>\n          Save\n        </button>\n        <button class='btn btn-info'\n          *ngIf='storageItem.inConfigFile'\n          (click)='resetItem.emit(storageItem)'>\n          Reset\n        </button>\n      </div>\n    </div>\n  "
+            template: "\n    <div class='row'>\n      <div class='col-lg-3 col-xs-4'>\n        <strong>{{storageItem.key}}</strong><br>\n        <span class='tiny'>{{storageItem.storageType}}</span>\n      </div>\n      <div class='col-lg-6 col-xs-4'>\n        <input [type]='storageItem.valueType' class='form-control'\n          [ngFormControl]='storageItemInput'>\n      </div>\n      <div class='col-lg-3 col-xs-4'>\n        <button class='btn btn-success'\n          *ngIf='!autosave'\n          (click)='updateWrap(storageItemInput.value)'>\n          Save\n        </button>\n        <button class='btn btn-info'\n          (click)='resetItem.emit(storageItem)'>\n          Reset\n        </button>\n      </div>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], StorageListItemCmp);
     return StorageListItemCmp;
 }());
 exports.StorageListItemCmp = StorageListItemCmp;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RvcmFnZS1saXN0LWl0ZW0tY21wLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3RvcmFnZS1saXN0LWl0ZW0tY21wLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7QUFBQSxxQkFBcUQsZUFDckQsQ0FBQyxDQURtRTtBQUNwRSx1QkFBc0IsaUJBQ3RCLENBQUMsQ0FEc0M7QUFDdkMsUUFBTyxnQ0FFUCxDQUFDLENBRnNDO0FBcUN2QztJQUFBO1FBR1ksZUFBVSxHQUFHLElBQUksbUJBQVksRUFBRSxDQUFDO1FBQ2hDLGNBQVMsR0FBRyxJQUFJLG1CQUFZLEVBQUUsQ0FBQztRQUV6QyxxQkFBZ0IsR0FBRyxJQUFJLGdCQUFPLEVBQUUsQ0FBQztJQWtCbkMsQ0FBQztJQWhCQyxxQ0FBUSxHQUFSO1FBQUEsaUJBVUM7UUFUQyxJQUFJLENBQUMsZ0JBQWdCLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsS0FBSyxDQUFDLENBQUE7UUFFekQsRUFBRSxDQUFDLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUM7WUFDbEIsSUFBSSxDQUFDLGdCQUFnQixDQUFDLFlBQVk7aUJBQy9CLFlBQVksQ0FBQyxHQUFHLENBQUM7aUJBQ2pCLFNBQVMsQ0FBQyxVQUFDLEdBQUc7Z0JBQ2IsS0FBSSxDQUFDLFVBQVUsQ0FBQyxHQUFHLENBQUMsQ0FBQTtZQUN0QixDQUFDLENBQUMsQ0FBQTtRQUNOLENBQUM7SUFDSCxDQUFDO0lBRUQsdUNBQVUsR0FBVixVQUFZLFFBQVE7UUFDbEIsSUFBSSxDQUFDLFdBQVcsQ0FBQyxLQUFLLEdBQUcsUUFBUSxDQUFBO1FBQ2pDLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsQ0FBQTtJQUN4QyxDQUFDO0lBdEJEO1FBQUMsWUFBSyxFQUFFOzsyREFBQTtJQUNSO1FBQUMsWUFBSyxFQUFFOzt3REFBQTtJQUNSO1FBQUMsYUFBTSxFQUFFOzswREFBQTtJQUNUO1FBQUMsYUFBTSxFQUFFOzt5REFBQTtJQXZDWDtRQUFDLGdCQUFTLENBQUM7WUFDVCxRQUFRLEVBQUUsdUJBQXVCO1lBQ2pDLE1BQU0sRUFBRSxDQUFDLG1HQU9SLENBQUM7WUFDRixRQUFRLEVBQUUsd3ZCQXVCVDtTQUNGLENBQUM7OzBCQUFBO0lBeUJGLHlCQUFDO0FBQUQsQ0FBQyxBQXhCRCxJQXdCQztBQXhCWSwwQkFBa0IscUJBd0I5QixDQUFBIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RvcmFnZS1saXN0LWl0ZW0tY21wLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3RvcmFnZS1saXN0LWl0ZW0tY21wLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7QUFBQSxxQkFBcUQsZUFDckQsQ0FBQyxDQURtRTtBQUNwRSx1QkFBc0IsaUJBQ3RCLENBQUMsQ0FEc0M7QUFDdkMsUUFBTyxnQ0FFUCxDQUFDLENBRnNDO0FBb0N2QztJQUFBO1FBR1ksZUFBVSxHQUFHLElBQUksbUJBQVksRUFBRSxDQUFDO1FBQ2hDLGNBQVMsR0FBRyxJQUFJLG1CQUFZLEVBQUUsQ0FBQztRQUV6QyxxQkFBZ0IsR0FBRyxJQUFJLGdCQUFPLEVBQUUsQ0FBQztJQWtCbkMsQ0FBQztJQWhCQyxxQ0FBUSxHQUFSO1FBQUEsaUJBVUM7UUFUQyxJQUFJLENBQUMsZ0JBQWdCLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsS0FBSyxDQUFDLENBQUE7UUFFekQsRUFBRSxDQUFDLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUM7WUFDbEIsSUFBSSxDQUFDLGdCQUFnQixDQUFDLFlBQVk7aUJBQy9CLFlBQVksQ0FBQyxHQUFHLENBQUM7aUJBQ2pCLFNBQVMsQ0FBQyxVQUFDLEdBQUc7Z0JBQ2IsS0FBSSxDQUFDLFVBQVUsQ0FBQyxHQUFHLENBQUMsQ0FBQTtZQUN0QixDQUFDLENBQUMsQ0FBQTtRQUNOLENBQUM7SUFDSCxDQUFDO0lBRUQsdUNBQVUsR0FBVixVQUFZLFFBQVE7UUFDbEIsSUFBSSxDQUFDLFdBQVcsQ0FBQyxLQUFLLEdBQUcsUUFBUSxDQUFBO1FBQ2pDLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsQ0FBQTtJQUN4QyxDQUFDO0lBdEJEO1FBQUMsWUFBSyxFQUFFOzsyREFBQTtJQUNSO1FBQUMsWUFBSyxFQUFFOzt3REFBQTtJQUNSO1FBQUMsYUFBTSxFQUFFOzswREFBQTtJQUNUO1FBQUMsYUFBTSxFQUFFOzt5REFBQTtJQXRDWDtRQUFDLGdCQUFTLENBQUM7WUFDVCxRQUFRLEVBQUUsdUJBQXVCO1lBQ2pDLE1BQU0sRUFBRSxDQUFDLG1HQU9SLENBQUM7WUFDRixRQUFRLEVBQUUsMHNCQXNCVDtTQUNGLENBQUM7OzBCQUFBO0lBeUJGLHlCQUFDO0FBQUQsQ0FBQyxBQXhCRCxJQXdCQztBQXhCWSwwQkFBa0IscUJBd0I5QixDQUFBIn0=
