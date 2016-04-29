@@ -1,4 +1,5 @@
 import {Component, Input, Output, EventEmitter} from 'angular2/core'
+import {Control} from 'angular2/common'
 import 'rxjs/add/operator/debounceTime'
 
 @Component({
@@ -19,8 +20,7 @@ import 'rxjs/add/operator/debounceTime'
       </div>
       <div class='col-lg-6 col-xs-4'>
         <input [type]='storageItem.valueType' class='form-control'
-          [value]='storageItem.value' #newValue
-          (keyup)='inputChanged.emit($event.target.value)'>
+          [ngFormControl]='storageItemValue' #newValue>
       </div>
       <div class='col-lg-3 col-xs-4'>
         <button class='btn btn-success'
@@ -44,16 +44,18 @@ export class StorageListItemCmp {
   @Output() updateItem = new EventEmitter();
   @Output() resetItem = new EventEmitter();
 
-  inputChanged = new EventEmitter();
+  storageItemValue = new Control();
 
-  constructor () {
-    this.inputChanged
-      .debounceTime(400)
-      .subscribe(value => {
-        if (this.autosave) {
-          this.updateWrap(value)
-        }
-      })
+  ngOnInit () {
+    this.storageItemValue.updateValue(this.storageItem.value)
+
+    if (this.autosave) {
+      this.storageItemValue.valueChanges
+        .debounceTime(500)
+        .subscribe((val) => {
+          this.updateWrap(val)
+        })
+    }
   }
 
   updateWrap (newValue) {

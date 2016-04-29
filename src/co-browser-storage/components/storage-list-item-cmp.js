@@ -9,22 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
+var common_1 = require('angular2/common');
 require('rxjs/add/operator/debounceTime');
 var StorageListItemCmp = (function () {
     function StorageListItemCmp() {
-        var _this = this;
         this.removeItem = new core_1.EventEmitter();
         this.updateItem = new core_1.EventEmitter();
         this.resetItem = new core_1.EventEmitter();
-        this.inputChanged = new core_1.EventEmitter();
-        this.inputChanged
-            .debounceTime(400)
-            .subscribe(function (value) {
-            if (_this.autosave) {
-                _this.updateWrap(value);
-            }
-        });
+        this.storageItemValue = new common_1.Control();
     }
+    StorageListItemCmp.prototype.ngOnInit = function () {
+        var _this = this;
+        this.storageItemValue.updateValue(this.storageItem.value);
+        if (this.autosave) {
+            this.storageItemValue.valueChanges
+                .debounceTime(500)
+                .subscribe(function (val) {
+                _this.updateWrap(val);
+            });
+        }
+    };
     StorageListItemCmp.prototype.updateWrap = function (newValue) {
         this.storageItem.value = newValue;
         this.updateItem.emit(this.storageItem);
@@ -53,11 +57,11 @@ var StorageListItemCmp = (function () {
         core_1.Component({
             selector: 'storage-list-item-cmp',
             styles: ["\n    .row {\n      margin-bottom: 10px;\n    }\n    .tiny {\n      font-size: 0.8rem;\n    }\n  "],
-            template: "\n    <div class='row'>\n      <div class='col-lg-3 col-xs-4'>\n        <strong>{{storageItem.key}}</strong><br>\n        <span class='tiny'>{{storageItem.storageType}}</span>\n      </div>\n      <div class='col-lg-6 col-xs-4'>\n        <input [type]='storageItem.valueType' class='form-control'\n          [value]='storageItem.value' #newValue\n          (keyup)='inputChanged.emit($event.target.value)'>\n      </div>\n      <div class='col-lg-3 col-xs-4'>\n        <button class='btn btn-success'\n          *ngIf='!autosave'\n          (click)='updateWrap(newValue.value)'>\n          Save\n        </button>\n        <button class='btn btn-info'\n          *ngIf='storageItem.inConfigFile'\n          (click)='resetItem.emit(storageItem)'>\n          Reset\n        </button>\n      </div>\n    </div>\n  "
+            template: "\n    <div class='row'>\n      <div class='col-lg-3 col-xs-4'>\n        <strong>{{storageItem.key}}</strong><br>\n        <span class='tiny'>{{storageItem.storageType}}</span>\n      </div>\n      <div class='col-lg-6 col-xs-4'>\n        <input [type]='storageItem.valueType' class='form-control'\n          [ngFormControl]='storageItemValue' #newValue>\n      </div>\n      <div class='col-lg-3 col-xs-4'>\n        <button class='btn btn-success'\n          *ngIf='!autosave'\n          (click)='updateWrap(newValue.value)'>\n          Save\n        </button>\n        <button class='btn btn-info'\n          *ngIf='storageItem.inConfigFile'\n          (click)='resetItem.emit(storageItem)'>\n          Reset\n        </button>\n      </div>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], StorageListItemCmp);
     return StorageListItemCmp;
 }());
 exports.StorageListItemCmp = StorageListItemCmp;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RvcmFnZS1saXN0LWl0ZW0tY21wLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3RvcmFnZS1saXN0LWl0ZW0tY21wLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7QUFBQSxxQkFBcUQsZUFDckQsQ0FBQyxDQURtRTtBQUNwRSxRQUFPLGdDQUVQLENBQUMsQ0FGc0M7QUFzQ3ZDO0lBU0U7UUFURixpQkF1QkM7UUFwQlcsZUFBVSxHQUFHLElBQUksbUJBQVksRUFBRSxDQUFDO1FBQ2hDLGVBQVUsR0FBRyxJQUFJLG1CQUFZLEVBQUUsQ0FBQztRQUNoQyxjQUFTLEdBQUcsSUFBSSxtQkFBWSxFQUFFLENBQUM7UUFFekMsaUJBQVksR0FBRyxJQUFJLG1CQUFZLEVBQUUsQ0FBQztRQUdoQyxJQUFJLENBQUMsWUFBWTthQUNkLFlBQVksQ0FBQyxHQUFHLENBQUM7YUFDakIsU0FBUyxDQUFDLFVBQUEsS0FBSztZQUNkLEVBQUUsQ0FBQyxDQUFDLEtBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDO2dCQUNsQixLQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxDQUFBO1lBQ3hCLENBQUM7UUFDSCxDQUFDLENBQUMsQ0FBQTtJQUNOLENBQUM7SUFFRCx1Q0FBVSxHQUFWLFVBQVksUUFBUTtRQUNsQixJQUFJLENBQUMsV0FBVyxDQUFDLEtBQUssR0FBRyxRQUFRLENBQUE7UUFDakMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxDQUFBO0lBQ3hDLENBQUM7SUFyQkQ7UUFBQyxZQUFLLEVBQUU7OzJEQUFBO0lBQ1I7UUFBQyxZQUFLLEVBQUU7O3dEQUFBO0lBQ1I7UUFBQyxhQUFNLEVBQUU7OzBEQUFBO0lBQ1Q7UUFBQyxhQUFNLEVBQUU7OzBEQUFBO0lBQ1Q7UUFBQyxhQUFNLEVBQUU7O3lEQUFBO0lBekNYO1FBQUMsZ0JBQVMsQ0FBQztZQUNULFFBQVEsRUFBRSx1QkFBdUI7WUFDakMsTUFBTSxFQUFFLENBQUMsbUdBT1IsQ0FBQztZQUNGLFFBQVEsRUFBRSw2eUJBd0JUO1NBQ0YsQ0FBQzs7MEJBQUE7SUF3QkYseUJBQUM7QUFBRCxDQUFDLEFBdkJELElBdUJDO0FBdkJZLDBCQUFrQixxQkF1QjlCLENBQUEifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RvcmFnZS1saXN0LWl0ZW0tY21wLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3RvcmFnZS1saXN0LWl0ZW0tY21wLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7QUFBQSxxQkFBcUQsZUFDckQsQ0FBQyxDQURtRTtBQUNwRSx1QkFBc0IsaUJBQ3RCLENBQUMsQ0FEc0M7QUFDdkMsUUFBTyxnQ0FFUCxDQUFDLENBRnNDO0FBcUN2QztJQUFBO1FBR1ksZUFBVSxHQUFHLElBQUksbUJBQVksRUFBRSxDQUFDO1FBQ2hDLGVBQVUsR0FBRyxJQUFJLG1CQUFZLEVBQUUsQ0FBQztRQUNoQyxjQUFTLEdBQUcsSUFBSSxtQkFBWSxFQUFFLENBQUM7UUFFekMscUJBQWdCLEdBQUcsSUFBSSxnQkFBTyxFQUFFLENBQUM7SUFrQm5DLENBQUM7SUFoQkMscUNBQVEsR0FBUjtRQUFBLGlCQVVDO1FBVEMsSUFBSSxDQUFDLGdCQUFnQixDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLEtBQUssQ0FBQyxDQUFBO1FBRXpELEVBQUUsQ0FBQyxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDO1lBQ2xCLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxZQUFZO2lCQUMvQixZQUFZLENBQUMsR0FBRyxDQUFDO2lCQUNqQixTQUFTLENBQUMsVUFBQyxHQUFHO2dCQUNiLEtBQUksQ0FBQyxVQUFVLENBQUMsR0FBRyxDQUFDLENBQUE7WUFDdEIsQ0FBQyxDQUFDLENBQUE7UUFDTixDQUFDO0lBQ0gsQ0FBQztJQUVELHVDQUFVLEdBQVYsVUFBWSxRQUFRO1FBQ2xCLElBQUksQ0FBQyxXQUFXLENBQUMsS0FBSyxHQUFHLFFBQVEsQ0FBQTtRQUNqQyxJQUFJLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLENBQUE7SUFDeEMsQ0FBQztJQXZCRDtRQUFDLFlBQUssRUFBRTs7MkRBQUE7SUFDUjtRQUFDLFlBQUssRUFBRTs7d0RBQUE7SUFDUjtRQUFDLGFBQU0sRUFBRTs7MERBQUE7SUFDVDtRQUFDLGFBQU0sRUFBRTs7MERBQUE7SUFDVDtRQUFDLGFBQU0sRUFBRTs7eURBQUE7SUF4Q1g7UUFBQyxnQkFBUyxDQUFDO1lBQ1QsUUFBUSxFQUFFLHVCQUF1QjtZQUNqQyxNQUFNLEVBQUUsQ0FBQyxtR0FPUixDQUFDO1lBQ0YsUUFBUSxFQUFFLHd2QkF1QlQ7U0FDRixDQUFDOzswQkFBQTtJQTBCRix5QkFBQztBQUFELENBQUMsQUF6QkQsSUF5QkM7QUF6QlksMEJBQWtCLHFCQXlCOUIsQ0FBQSJ9
