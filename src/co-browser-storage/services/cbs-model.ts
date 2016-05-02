@@ -33,7 +33,7 @@ export class CbsModel {
 
   private _saveItem (item: IStorageItem) {
     // Save item to browser storage
-    window[item.storageType].setItem(this.getFullKey(item.key), item.value)
+    window[item.storageType].setItem(CbsModel.getFullKey(item.key), item.value)
     // Remove any existing item with the same key from memory object and add the new one
     let dbConfig = this._getConfigFromLS()
     dbConfig[this._DB_MEMORY_KEY] = dbConfig[this._DB_MEMORY_KEY].filter(memItem => item.key !== memItem.key)
@@ -97,7 +97,7 @@ export class CbsModel {
   }
 
   // Returns the key including the namespace
-  public getFullKey (key) {
+  static getFullKey (key) {
     return CbsModel.config.namespace + '.' + key
   }
 
@@ -125,7 +125,7 @@ export class CbsModel {
   // Serialize / deserialize and persist config to browser storage
   // -------------------------------------------------------------
   private _getConfigFromLS () {
-    let configStr = localStorage[this.getFullKey(this._DB_CONFIG_KEY)]
+    let configStr = localStorage[CbsModel.getFullKey(this._DB_CONFIG_KEY)]
     if (typeof configStr === 'undefined') {
       return null
     } else {
@@ -135,7 +135,7 @@ export class CbsModel {
 
   private _setConfigToLS (configObj) {
     let configStr = JSON.stringify(configObj)
-    window.localStorage[this.getFullKey(this._DB_CONFIG_KEY)] = configStr
+    window.localStorage[CbsModel.getFullKey(this._DB_CONFIG_KEY)] = configStr
   }
 
   // Initialize component upon load
@@ -160,13 +160,13 @@ export class CbsModel {
   // Validate each existing item from storage against the memory object
   private _initExisting (namespace, dbConfig) {
     let actualMemory = dbConfig[this._DB_MEMORY_KEY].map((memoryItem) => {
-      var storageItem = window[memoryItem.storageType][this.getFullKey(memoryItem.key)]
+      var storageItem = window[memoryItem.storageType][CbsModel.getFullKey(memoryItem.key)]
       if (typeof storageItem === 'undefined') {
         // the item doesn't exist at all, set it
-        window[memoryItem.storageType][this.getFullKey(memoryItem.key)] = memoryItem.value
+        window[memoryItem.storageType][CbsModel.getFullKey(memoryItem.key)] = memoryItem.value
         return memoryItem
       } else {
-        let actualValue = window[memoryItem.storageType][this.getFullKey(memoryItem.key)]
+        let actualValue = window[memoryItem.storageType][CbsModel.getFullKey(memoryItem.key)]
         if (actualValue === memoryItem.value) {
           // the value has not been touched outside of this GUI
           return memoryItem
@@ -191,7 +191,7 @@ export class CbsModel {
   private _initFromScratch (options) {
     let stateForMemory = options.initialState.map((schemaItem) => {
       // transform the schema to the memory type
-      window[schemaItem.storageType][this.getFullKey(schemaItem.key)] = schemaItem.default
+      window[schemaItem.storageType][CbsModel.getFullKey(schemaItem.key)] = schemaItem.default
       return {
         key: schemaItem.key,
         value: schemaItem.default, // from scratch, the default is the value
