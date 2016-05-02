@@ -8,7 +8,7 @@ import {ArraySortPipe} from '../services/array-sort-pipe'
   template: `
     <div>
       <storage-list-item-cmp
-        *ngFor='#storageItem of cbsReducer | arraySort:"key"'
+        *ngFor='let storageItem of cbsReducer | arraySort:"key"'
         [storageItem]='storageItem'
         [autosave]='autosave'
         (updateItem)='updateItem.emit($event)'

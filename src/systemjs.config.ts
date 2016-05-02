@@ -6,19 +6,19 @@ System.config({
   map: {
     'angular2': 'node_modules/angular2',
     'rxjs': 'node_modules/rxjs',
-    '@ngrx/store': 'node_modules/@ngrx/store/dist'
+    '@ngrx/store': 'node_modules/@ngrx/store'
   },
   packages: {
     'angular2': {
       defaultExtension: 'js'
     },
     '@ngrx/store': {
-      main: 'index.js',
-      defaultExtension: 'js'
+      defaultExtension: 'js',
+      main: 'index.js'
     },
     'rxjs': {
-      main: 'index.js',
-      defaultExtension: 'js'
+      defaultExtension: 'js',
+      main: 'index.js'
     },
     'src': {
       defaultExtension: 'js'

@@ -36,7 +36,7 @@ var StorageListCmp = (function () {
         core_1.Component({
             selector: 'storage-list-cmp',
             pipes: [array_sort_pipe_1.ArraySortPipe],
-            template: "\n    <div>\n      <storage-list-item-cmp\n        *ngFor='#storageItem of cbsReducer | arraySort:\"key\"'\n        [storageItem]='storageItem'\n        [autosave]='autosave'\n        (updateItem)='updateItem.emit($event)'\n        (resetItem)='resetItem.emit($event)'>\n      </storage-list-item-cmp>\n      <br>\n    </div>\n  ",
+            template: "\n    <div>\n      <storage-list-item-cmp\n        *ngFor='let storageItem of cbsReducer | arraySort:\"key\"'\n        [storageItem]='storageItem'\n        [autosave]='autosave'\n        (updateItem)='updateItem.emit($event)'\n        (resetItem)='resetItem.emit($event)'>\n      </storage-list-item-cmp>\n      <br>\n    </div>\n  ",
             directives: [storage_list_item_cmp_1.StorageListItemCmp]
         }), 
         __metadata('design:paramtypes', [])
@@ -44,4 +44,4 @@ var StorageListCmp = (function () {
     return StorageListCmp;
 }());
 exports.StorageListCmp = StorageListCmp;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RvcmFnZS1saXN0LWNtcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN0b3JhZ2UtbGlzdC1jbXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUFxRCxlQUNyRCxDQUFDLENBRG1FO0FBQ3BFLHNDQUFpQyx5QkFDakMsQ0FBQyxDQUR5RDtBQUMxRCxnQ0FBNEIsNkJBRTVCLENBQUMsQ0FGd0Q7QUFtQnpEO0lBQUE7UUFHWSxlQUFVLEdBQUcsSUFBSSxtQkFBWSxFQUFFLENBQUM7UUFDaEMsY0FBUyxHQUFHLElBQUksbUJBQVksRUFBRSxDQUFDO0lBQzNDLENBQUM7SUFKQztRQUFDLFlBQUssRUFBRTs7c0RBQUE7SUFDUjtRQUFDLFlBQUssRUFBRTs7b0RBQUE7SUFDUjtRQUFDLGFBQU0sRUFBRTs7c0RBQUE7SUFDVDtRQUFDLGFBQU0sRUFBRTs7cURBQUE7SUFyQlg7UUFBQyxnQkFBUyxDQUFDO1lBQ1QsUUFBUSxFQUFFLGtCQUFrQjtZQUM1QixLQUFLLEVBQUUsQ0FBQywrQkFBYSxDQUFDO1lBQ3RCLFFBQVEsRUFBRSwyVUFXVDtZQUNELFVBQVUsRUFBRSxDQUFDLDBDQUFrQixDQUFDO1NBQ2pDLENBQUM7O3NCQUFBO0lBTUYscUJBQUM7QUFBRCxDQUFDLEFBTEQsSUFLQztBQUxZLHNCQUFjLGlCQUsxQixDQUFBIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RvcmFnZS1saXN0LWNtcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN0b3JhZ2UtbGlzdC1jbXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUFxRCxlQUNyRCxDQUFDLENBRG1FO0FBQ3BFLHNDQUFpQyx5QkFDakMsQ0FBQyxDQUR5RDtBQUMxRCxnQ0FBNEIsNkJBRTVCLENBQUMsQ0FGd0Q7QUFtQnpEO0lBQUE7UUFHWSxlQUFVLEdBQUcsSUFBSSxtQkFBWSxFQUFFLENBQUM7UUFDaEMsY0FBUyxHQUFHLElBQUksbUJBQVksRUFBRSxDQUFDO0lBQzNDLENBQUM7SUFKQztRQUFDLFlBQUssRUFBRTs7c0RBQUE7SUFDUjtRQUFDLFlBQUssRUFBRTs7b0RBQUE7SUFDUjtRQUFDLGFBQU0sRUFBRTs7c0RBQUE7SUFDVDtRQUFDLGFBQU0sRUFBRTs7cURBQUE7SUFyQlg7UUFBQyxnQkFBUyxDQUFDO1lBQ1QsUUFBUSxFQUFFLGtCQUFrQjtZQUM1QixLQUFLLEVBQUUsQ0FBQywrQkFBYSxDQUFDO1lBQ3RCLFFBQVEsRUFBRSw4VUFXVDtZQUNELFVBQVUsRUFBRSxDQUFDLDBDQUFrQixDQUFDO1NBQ2pDLENBQUM7O3NCQUFBO0lBTUYscUJBQUM7QUFBRCxDQUFDLEFBTEQsSUFLQztBQUxZLHNCQUFjLGlCQUsxQixDQUFBIn0=
