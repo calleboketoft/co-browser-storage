@@ -1,27 +1,26 @@
 declare var System
-
 System.config({
   baseURL: '/',
   warnings: true,
   map: {
-    'angular2': 'node_modules/angular2',
-    'rxjs': 'node_modules/rxjs',
-    '@ngrx/store': 'node_modules/@ngrx/store'
+    'src': 'src',
+    '@angular': '/node_modules/@angular',
+    '@ngrx/store': '/node_modules/@ngrx/store',
+    'rxjs': 'node_modules/rxjs'
   },
   packages: {
-    'angular2': {
-      defaultExtension: 'js'
-    },
-    '@ngrx/store': {
-      defaultExtension: 'js',
-      main: 'index.js'
-    },
-    'rxjs': {
-      defaultExtension: 'js',
-      main: 'index.js'
-    },
-    'src': {
-      defaultExtension: 'js'
-    }
+    'src': {defaultExtension: 'js'},
+    'rxjs': {defaultExtension: 'js'},
+    '@ngrx/store': {defaultExtension: 'js', main: 'index.js'},
+    '@angular/common': {defaultExtension: 'js', main: 'index.js'},
+    '@angular/compiler': {defaultExtension: 'js', main: 'index.js'},
+    '@angular/core': {defaultExtension: 'js', main: 'index.js'},
+    '@angular/http': {defaultExtension: 'js', main: 'index.js'},
+    '@angular/platform-browser': {defaultExtension: 'js', main: 'index.js'},
+    '@angular/platform-browser-dynamic': {defaultExtension: 'js', main: 'index.js'},
+    '@angular/router': {defaultExtension: 'js', main: 'index.js'},
+    '@angular/router-deprecated': {defaultExtension: 'js', main: 'index.js'},
+    '@angular/testing': {defaultExtension: 'js', main: 'index.js'},
+    '@angular/upgrade': {defaultExtension: 'js', main: 'index.js'}
   }
 })

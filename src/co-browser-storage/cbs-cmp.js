@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 require('../polyfills');
-var core_1 = require('angular2/core');
+var core_1 = require('@angular/core');
 var store_1 = require('@ngrx/store');
 var cbs_model_1 = require('./services/cbs-model');
 var storage_list_cmp_1 = require('./components/storage-list-cmp');

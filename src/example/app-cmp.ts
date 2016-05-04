@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core'
+import {Component} from '@angular/core'
 import {CbsCmp} from '../co-browser-storage/cbs-cmp'
 import {exampleDbConfig} from './example-db-config'
 import {CbsModel} from '../co-browser-storage/services/cbs-model'

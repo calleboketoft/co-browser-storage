@@ -1,6 +1,6 @@
 import '../polyfills'
 
-import {Component, Input, ChangeDetectionStrategy} from 'angular2/core'
+import {Component, Input, ChangeDetectionStrategy} from '@angular/core'
 import {Store} from '@ngrx/store'
 import {CbsModel} from './services/cbs-model'
 import {StorageListCmp} from './components/storage-list-cmp'

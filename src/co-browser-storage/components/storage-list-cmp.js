@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('angular2/core');
+var core_1 = require('@angular/core');
 var storage_list_item_cmp_1 = require('./storage-list-item-cmp');
 var array_sort_pipe_1 = require('../services/array-sort-pipe');
 var StorageListCmp = (function () {

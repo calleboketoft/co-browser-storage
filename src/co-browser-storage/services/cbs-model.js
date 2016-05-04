@@ -14,7 +14,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 //   MEMORY_STATE: [], // current state from app
 //   INITIAL_SCHEMA: [] // initial state from when initializing app
 // }
-var core_1 = require('angular2/core');
+var core_1 = require('@angular/core');
 var store_1 = require('@ngrx/store');
 var cbs_reducer_1 = require('./cbs-reducer');
 var CbsModel = (function () {
