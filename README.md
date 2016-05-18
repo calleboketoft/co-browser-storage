@@ -9,13 +9,13 @@ When bootstrapping app, provide the store for the storage items
 ```javascript
 import {provideStore} from '@ngrx/store'
 import {cbsReducer} from 'co-browser-storage/co-browser-storage'
-import {setCbsConfig, CoBrowserModel} from 'co-browser-storage/co-browser-storage'
+import {setCbsConfig, CbsModel} from 'co-browser-storage/co-browser-storage'
 import {browserStorageConfig} from './browser-storage-config'
 
 setCbsConfig(browserStorageConfig)
 
 bootstrap(AppCmp, [
-  CoBrowserModel,
+  CbsModel,
   // initial state is handled when store is initialized
   provideStore({cbsReducer}, {cbsReducer: []})
 ])
