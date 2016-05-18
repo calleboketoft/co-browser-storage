@@ -1,14 +1,15 @@
 import '../polyfills'
 
-import {Component, Input, ChangeDetectionStrategy} from '@angular/core'
+import {Component, Input} from '@angular/core'
 import {Store} from '@ngrx/store'
 import {CbsModel} from './services/cbs-model'
 import {StorageListCmp} from './components/storage-list-cmp'
 
 @Component({
   selector: 'cbs-cmp',
+  directives: [StorageListCmp],
   template: `
-    <div *ngIf='!noRender'>
+    <div>
       <storage-list-cmp
         [cbsReducer]='cbsReducer | async'
         [autosave]='autosave'
@@ -27,14 +28,11 @@ import {StorageListCmp} from './components/storage-list-cmp'
         </div>
       </div>
     </div>
-  `,
-  directives: [StorageListCmp],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  `
 })
 export class CbsCmp {
-  @Input() noRender;
   @Input() autosave = false;
-  cbsReducer;
+  public cbsReducer;
 
   constructor (
     private store: Store<any>,
@@ -43,7 +41,7 @@ export class CbsCmp {
     this.cbsReducer = this.store.select('cbsReducer')
   }
 
-  resetAll () {
+  public resetAll () {
     if (confirm('are you sure you want to reset all values to default?')) {
       this.cbsModel.resetAll()
     }

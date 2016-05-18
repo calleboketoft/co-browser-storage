@@ -10,22 +10,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var cbs_cmp_1 = require('../co-browser-storage/cbs-cmp');
-var example_db_config_1 = require('./example-db-config');
-var cbs_model_1 = require('../co-browser-storage/services/cbs-model');
 var AppCmp = (function () {
     function AppCmp() {
-        this.exampleDbConfig = example_db_config_1.exampleDbConfig;
     }
     AppCmp = __decorate([
         core_1.Component({
             selector: 'app-cmp',
             directives: [cbs_cmp_1.CbsCmp],
-            template: "\n    <h2>co-browser-storage example app</h2>\n    <br>\n\n    <div class='row'>\n      <div class='col-xs-12 col-xl-6'>\n        <h3>Manual save</h3>\n        <br>\n        <cbs-cmp></cbs-cmp>\n      </div>\n      <div class='col-xs-12 col-xl-6' style='border-left: 1px solid #E0E0E0;'>\n        <h3>Auto save</h3>\n        <br>\n        <cbs-cmp [autosave]='true'></cbs-cmp>\n      </div>\n    </div>\n    <br><br>\n  ",
-            providers: [cbs_model_1.CbsModel]
+            template: "\n    <h2>co-browser-storage example app</h2>\n    <br>\n\n    <div class='row'>\n      <div class='col-xs-12'>\n        <cbs-cmp></cbs-cmp>\n      </div>\n    </div>\n    <br><br>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], AppCmp);
     return AppCmp;
 }());
 exports.AppCmp = AppCmp;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLWNtcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImFwcC1jbXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUF3QixlQUN4QixDQUFDLENBRHNDO0FBQ3ZDLHdCQUFxQiwrQkFDckIsQ0FBQyxDQURtRDtBQUNwRCxrQ0FBOEIscUJBQzlCLENBQUMsQ0FEa0Q7QUFDbkQsMEJBQXVCLDBDQUV2QixDQUFDLENBRmdFO0FBeUJqRTtJQUFBO1FBQ1Usb0JBQWUsR0FBRyxtQ0FBZSxDQUFDO0lBQzVDLENBQUM7SUF6QkQ7UUFBQyxnQkFBUyxDQUFDO1lBQ1QsUUFBUSxFQUFFLFNBQVM7WUFDbkIsVUFBVSxFQUFFLENBQUMsZ0JBQU0sQ0FBQztZQUNwQixRQUFRLEVBQUUsc2FBaUJUO1lBQ0QsU0FBUyxFQUFFLENBQUMsb0JBQVEsQ0FBQztTQUN0QixDQUFDOztjQUFBO0lBR0YsYUFBQztBQUFELENBQUMsQUFGRCxJQUVDO0FBRlksY0FBTSxTQUVsQixDQUFBIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLWNtcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImFwcC1jbXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUF3QixlQUN4QixDQUFDLENBRHNDO0FBQ3ZDLHdCQUFxQiwrQkFFckIsQ0FBQyxDQUZtRDtBQWlCcEQ7SUFBQTtJQUFxQixDQUFDO0lBZnRCO1FBQUMsZ0JBQVMsQ0FBQztZQUNULFFBQVEsRUFBRSxTQUFTO1lBQ25CLFVBQVUsRUFBRSxDQUFDLGdCQUFNLENBQUM7WUFDcEIsUUFBUSxFQUFFLDBMQVVUO1NBQ0YsQ0FBQzs7Y0FBQTtJQUNtQixhQUFDO0FBQUQsQ0FBQyxBQUF0QixJQUFzQjtBQUFULGNBQU0sU0FBRyxDQUFBIn0=

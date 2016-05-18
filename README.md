@@ -9,12 +9,13 @@ When bootstrapping app, provide the store for the storage items
 ```javascript
 import {provideStore} from '@ngrx/store'
 import {cbsReducer} from 'co-browser-storage/co-browser-storage'
-import {setCbsConfig} from 'co-browser-storage/co-browser-storage'
+import {setCbsConfig, CoBrowserModel} from 'co-browser-storage/co-browser-storage'
 import {browserStorageConfig} from './browser-storage-config'
 
 setCbsConfig(browserStorageConfig)
 
 bootstrap(AppCmp, [
+  CoBrowserModel,
   // initial state is handled when store is initialized
   provideStore({cbsReducer}, {cbsReducer: []})
 ])
@@ -23,18 +24,14 @@ bootstrap(AppCmp, [
 Import the component, provide model, and send in initial configuration
 
 ```javascript
-import {CbsCmp, CbsModel} from 'co-browser-storage/co-browser-storage'
+import {CbsCmp} from 'co-browser-storage/co-browser-storage'
 
 // Component providers need to provide the model
 @Component({
-  providers: [CbsModel],
   directives: [CbsCmp],
   template: `
-    <cbs-cmp
-      [noRender]='false'
-      [autosave]='false'>
-    </cbs-cmp>
-  ` // Set [noRender]='true' to just initialise the component (sure, it's a hack)
+    <cbs-cmp></cbs-cmp>
+  `
 })
 export class AppComponent {
   exampleDbConfig = {
