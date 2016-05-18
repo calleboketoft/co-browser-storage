@@ -32,20 +32,15 @@ import {StorageListCmp} from './components/storage-list-cmp'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CbsCmp {
-  @Input() cbsConfig;
   @Input() noRender;
   @Input() autosave = false;
   cbsReducer;
 
   constructor (
     private store: Store<any>,
-    private cbsModel:CbsModel
+    private cbsModel: CbsModel
   ) {
     this.cbsReducer = this.store.select('cbsReducer')
-  }
-
-  ngOnInit () {
-    this.cbsModel.initialize()
   }
 
   resetAll () {

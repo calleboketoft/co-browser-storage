@@ -5,6 +5,7 @@ import {CbsModel} from '../co-browser-storage/services/cbs-model'
 
 @Component({
   selector: 'app-cmp',
+  directives: [CbsCmp],
   template: `
     <h2>co-browser-storage example app</h2>
     <br>
@@ -13,22 +14,16 @@ import {CbsModel} from '../co-browser-storage/services/cbs-model'
       <div class='col-xs-12 col-xl-6'>
         <h3>Manual save</h3>
         <br>
-        <cbs-cmp
-          [cbsConfig]='exampleDbConfig'>
-        </cbs-cmp>
+        <cbs-cmp></cbs-cmp>
       </div>
       <div class='col-xs-12 col-xl-6' style='border-left: 1px solid #E0E0E0;'>
         <h3>Auto save</h3>
         <br>
-        <cbs-cmp
-          [cbsConfig]='exampleDbConfig'
-          [autosave]='true'>
-        </cbs-cmp>
+        <cbs-cmp [autosave]='true'></cbs-cmp>
       </div>
     </div>
     <br><br>
   `,
-  directives: [CbsCmp],
   providers: [CbsModel]
 })
 export class AppCmp {
