@@ -1,11 +1,11 @@
-import {cbsConfig} from './cbs-config'
+import {cbsConfig, setCbsConfig} from './cbs-config'
 
 export {
   getConfigFromLS,
   setConfigToLS,
-  initExisting,
-  initFromScratch,
-  getFullCbsKey
+  initializeCbs,
+  getFullCbsKey,
+  getInitialCbsState
 }
 
 // Serialize / deserialize and persist config to browser storage
@@ -22,6 +22,23 @@ function getConfigFromLS () {
 function setConfigToLS (configObj) {
   let configStr = JSON.stringify(configObj)
   window.localStorage[getFullCbsKey(cbsConfig.DB_CONFIG_KEY)] = configStr
+}
+
+function getInitialCbsState () {
+  return getConfigFromLS()[cbsConfig.DB_MEMORY_KEY]
+}
+
+function initializeCbs (cbsConfig) {
+  setCbsConfig(cbsConfig)
+  var dbConfig = getConfigFromLS()
+  let updatedConfig
+  if (!dbConfig) {
+    // there is no current state stored, initialize from scratch
+    updatedConfig = initFromScratch(cbsConfig)
+  } else {
+    // a current state is existing, validate against schema
+    updatedConfig = initExisting(cbsConfig.namespace, dbConfig)
+  }
 }
 
 // Validate each existing item from storage against the memory object

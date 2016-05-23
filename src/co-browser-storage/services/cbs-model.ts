@@ -31,26 +31,6 @@ export class CbsModel {
 
   constructor (private store: Store<any>) {
     this.cbsReducer = this.store.select('cbsReducer')
-    this.initialize()
-  }
-
-  // Initialize component upon load
-  // ------------------------------
-  public initialize () {
-    var dbConfig = cbsUtil.getConfigFromLS()
-    let updatedConfig
-    if (!dbConfig) {
-      // there is no current state stored, initialize from scratch
-      updatedConfig = cbsUtil.initFromScratch(cbsConfig)
-    } else {
-      // a current state is existing, validate against schema
-      updatedConfig = cbsUtil.initExisting(cbsConfig.namespace, dbConfig)
-    }
-    this.store.dispatch({
-      type: ADDED_CBS_ITEMS,
-      payload: updatedConfig[cbsConfig.DB_MEMORY_KEY]
-    })
-    return
   }
 
   private saveItem (item: IStorageItem) {
