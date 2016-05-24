@@ -1,6 +1,6 @@
 /**
  * let array = [{name: 'Calle', age: 31}, {name: 'Lasse', age: 26}]
- * <li *ngFor="#item of array | arraySort:'-name'">{{item.name}}</li>
+ * <li *ngFor="let item of array | arraySort:'-name'">{{item.name}}</li>
  */
 
 import {Pipe} from '@angular/core'

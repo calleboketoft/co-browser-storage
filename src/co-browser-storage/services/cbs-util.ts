@@ -31,13 +31,12 @@ function getInitialCbsState () {
 function initializeCbs (cbsConfig) {
   setCbsConfig(cbsConfig)
   var dbConfig = getConfigFromLS()
-  let updatedConfig
   if (!dbConfig) {
     // there is no current state stored, initialize from scratch
-    updatedConfig = initFromScratch(cbsConfig)
+    initFromScratch(cbsConfig)
   } else {
     // a current state is existing, validate against schema
-    updatedConfig = initExisting(cbsConfig.namespace, dbConfig)
+    initExisting(cbsConfig.namespace, dbConfig)
   }
 }
 
@@ -90,6 +89,7 @@ function initFromScratch (options) {
   return dbConfig
 }
 
+// Convenience function to prefix with namespace and dot
 function getFullCbsKey (key) {
   return cbsConfig.namespace + '.' + key
 }

@@ -1,6 +1,6 @@
 /**
  * let array = [{name: 'Calle', age: 31}, {name: 'Lasse', age: 26}]
- * <li *ngFor="#item of array | arraySort:'-name'">{{item.name}}</li>
+ * <li *ngFor="let item of array | arraySort:'-name'">{{item.name}}</li>
  */
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
