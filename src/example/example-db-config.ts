@@ -1,4 +1,4 @@
-export const NAMESPACE = 'debugDb'
+export const NAMESPACE = 'cbsExample'
 export const DEBUG_MODE = 'debugMode'
 export const DEBUG_XHR = 'debugXhr'
 export const MY_PASS = 'myPass'

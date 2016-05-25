@@ -7,14 +7,17 @@ Manage browser storage variables in a convenient way using ngrx/store. Perfect f
 - base URL configs
 - other "hidden" data
 
+## Try the example
+
+
 ## Usage
 
 - `npm install --save co-browser-storage`
 
-Create browser storage config file `my-browser-storage-config.ts` where you specify all your browser storage variables.dme
+Create browser storage config file `my-browser-storage-config.ts` where you specify all your browser storage variables.
 
 ```javascript
-export const NAMESPACE = 'debugDb'
+export const NAMESPACE = 'myBrowserStore'
 export const DEBUG_MODE = 'debugMode'
 
 export const myBrowserStorageConfig = {

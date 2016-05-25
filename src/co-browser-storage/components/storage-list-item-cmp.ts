@@ -1,6 +1,5 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core'
 import {Control} from '@angular/common'
-import 'rxjs/add/operator/debounceTime'
 
 @Component({
   selector: 'storage-list-item-cmp',
