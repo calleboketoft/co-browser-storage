@@ -5,6 +5,7 @@ System.config({
   map: {
     'src': 'src',
     '@angular': '/node_modules/@angular',
+    '@ngrx/core': '/node_modules/@ngrx/core',
     '@ngrx/store': '/node_modules/@ngrx/store',
     'rxjs': 'node_modules/rxjs'
   },
@@ -12,6 +13,7 @@ System.config({
     '../': {defaultExtension: 'js'},
     'src': {defaultExtension: 'js'},
     'rxjs': {defaultExtension: 'js'},
+    '@ngrx/core': {defaultExtension: 'js', main: 'indexjs'},
     '@ngrx/store': {defaultExtension: 'js', main: 'index.js'},
     '@angular/common': {defaultExtension: 'js', main: 'index.js'},
     '@angular/compiler': {defaultExtension: 'js', main: 'index.js'},
