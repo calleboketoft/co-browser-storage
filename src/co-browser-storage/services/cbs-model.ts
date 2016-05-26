@@ -9,6 +9,8 @@
 import {Injectable} from '@angular/core'
 import {Store} from '@ngrx/store'
 import {Observable} from 'rxjs/Rx'
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/find'
 
 import {cbsConfig} from './cbs-config'
 import * as cbsUtil from './cbs-util'
@@ -27,20 +29,10 @@ export interface IStorageItem {
 
 @Injectable()
 export class CbsModel {
-  private cbsReducer;
+  private cbsReducer$;
 
   constructor (private store: Store<any>) {
-    this.cbsReducer = this.store.select('cbsReducer')
-  }
-
-  private saveItem (item: IStorageItem) {
-    // Save item to browser storage
-    window[item.storageType].setItem(cbsUtil.getFullCbsKey(item.key), item.value)
-    // Remove any existing item with the same key from memory object and add the new one
-    let dbConfig = cbsUtil.getConfigFromLS()
-    dbConfig[cbsConfig.DB_MEMORY_KEY] = dbConfig[cbsConfig.DB_MEMORY_KEY].filter(memItem => item.key !== memItem.key)
-    dbConfig[cbsConfig.DB_MEMORY_KEY].push(item)
-    cbsUtil.setConfigToLS(dbConfig)
+    this.cbsReducer$ = this.store.select('cbsReducer')
   }
 
   // Update
@@ -58,6 +50,16 @@ export class CbsModel {
       type: UPDATE_CBS_ITEM,
       payload: updatedItem
     })
+  }
+
+  private saveItem (item: IStorageItem) {
+    // Save item to browser storage
+    window[item.storageType].setItem(cbsUtil.getFullCbsKey(item.key), item.value)
+    // Remove any existing item with the same key from memory object and add the new one
+    let dbConfig = cbsUtil.getConfigFromLS()
+    dbConfig[cbsConfig.DB_MEMORY_KEY] = dbConfig[cbsConfig.DB_MEMORY_KEY].filter(memItem => item.key !== memItem.key)
+    dbConfig[cbsConfig.DB_MEMORY_KEY].push(item)
+    cbsUtil.setConfigToLS(dbConfig)
   }
 
   // Convenience functions
@@ -100,7 +102,7 @@ export class CbsModel {
 
   // Get observable for one specific item
   public getItemByKey (key) {
-    return this.cbsReducer
+    return this.cbsReducer$
       .map((browserStorageItems) => {
         return browserStorageItems.find(item => item.key === key)
       })
@@ -110,7 +112,7 @@ export class CbsModel {
   // Useful for debug flags.
   // Ex: allTrue(['DEBUG', 'DEBUG_XHR'])
   public allTrue (keys: [string]) {
-    return this.cbsReducer
+    return this.cbsReducer$
       .map(items => {
         if (items.length === 0) return false
         return items.every(item => {

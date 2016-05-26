@@ -26,7 +26,7 @@ export const myBrowserStorageConfig = {
     // List storage variables here
     {
       key: DEBUG_MODE,
-      default: 'true',
+      default: 'on',
       storageType: 'localStorage',
       valueType: 'text'
     }
@@ -75,20 +75,28 @@ import {CbsCmp} from 'co-browser-storage/co-browser-storage'
 export class AppComponent {}
 ```
 
-## Get, set, and delete values
+## Get value
 
-Use functions on cbs model to make use of @ngrx/store
+```javascript
+import {Store} from '@ngrx/store'
+...
+let cbsReducer$ = store.select('cbsReducer')
+cbsReducer$
+  .map(cbsItems => cbsItems.filter(i => i.key === 'debugMode'))
+  .subscribe(debugMode => {
+    console.log(debugMode)
+  })
+```
+
+## Update value
 
 ```javascript
 import {CbsModel} from 'co-browser-storage/co-browser-storage'
-
 ...
-cbsModel.getItemByKey()
-cbsModel.createItem()
-cbsModel.removeItem()
-cbsModel.updateItem()
-
-cbsModel.allTrue(['key1', 'key2']) // find out if all are truthy
+cbsModel.updateItem({
+  key: 'debugMode',
+  value: 'off'
+})
 ```
 
 ## Developing
