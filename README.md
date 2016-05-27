@@ -81,11 +81,7 @@ export class AppComponent {}
 import {Store} from '@ngrx/store'
 ...
 let cbsReducer$ = store.select('cbsReducer')
-cbsReducer$
-  .map(cbsItems => cbsItems.filter(i => i.key === 'debugMode'))
-  .subscribe(debugMode => {
-    console.log(debugMode)
-  })
+let debugMode$ = cbsReducer$.map(cbs => cbs.find(i => i.key === 'debugMode'))
 ```
 
 ## Update value
