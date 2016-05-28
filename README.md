@@ -52,7 +52,6 @@ initializeCbs(myBrowserStorageConfig)
 
 bootstrap(AppCmp, [
   CbsModel,
-  // initial state is handled when store is initialized
   provideStore({
     cbsReducer
   }, {
