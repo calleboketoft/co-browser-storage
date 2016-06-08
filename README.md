@@ -46,13 +46,10 @@ import {
 } from 'co-browser-storage/co-browser-storage'
 import {myBrowserStorageConfig} from './my-browser-storage-config'
 
-// initializing puts the config in browser storage immediately
-// so the variables can be used by other services right away
 initializeCbs(myBrowserStorageConfig)
 
 bootstrap(AppCmp, [
   CbsModel,
-  // initial state is handled when store is initialized
   provideStore({
     cbsReducer
   }, {
@@ -75,7 +72,14 @@ import {CbsCmp} from 'co-browser-storage/co-browser-storage'
 export class AppComponent {}
 ```
 
-## Get value
+## Get value using CbsModel
+```javascript
+import {CbsModel} from 'co-browser-storage/co-browser-storage'
+...
+let debugMode$ = cbsModel.getItemByKey('debugMode')
+```
+
+## Get value using store directly
 
 ```javascript
 import {Store} from '@ngrx/store'
