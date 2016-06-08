@@ -8,9 +8,8 @@ import {ArraySortPipe} from '../services/array-sort-pipe'
   template: `
     <div>
       <storage-list-item-cmp
-        *ngFor='let storageItem of cbsReducer | arraySort:"key"'
+        *ngFor='let storageItem of cbsItems | arraySort:"key"'
         [storageItem]='storageItem'
-        [autosave]='autosave'
         (updateItem)='updateItem.emit($event)'
         (resetItem)='resetItem.emit($event)'>
       </storage-list-item-cmp>
@@ -21,7 +20,17 @@ import {ArraySortPipe} from '../services/array-sort-pipe'
 })
 export class StorageListCmp {
   @Input() cbsReducer;
-  @Input() autosave;
   @Output() updateItem = new EventEmitter();
   @Output() resetItem = new EventEmitter();
+
+  private initialized = false;
+  public cbsItems = [];
+
+  ngOnChanges (changes) {
+    // Only render the list once. The list itself is not going to change.
+    if (!this.initialized && changes.cbsReducer) {
+      this.initialized = true;
+      this.cbsItems = changes.cbsReducer.currentValue
+    }
+  }
 }

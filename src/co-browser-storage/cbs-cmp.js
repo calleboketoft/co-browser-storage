@@ -17,27 +17,22 @@ var CbsCmp = (function () {
     function CbsCmp(store, cbsModel) {
         this.store = store;
         this.cbsModel = cbsModel;
-        this.autosave = false;
-        this.cbsReducer = this.store.select('cbsReducer');
+        this.cbsReducer$ = this.store.select('cbsReducer');
     }
     CbsCmp.prototype.resetAll = function () {
         if (confirm('are you sure you want to reset all values to default?')) {
             this.cbsModel.resetAll();
         }
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], CbsCmp.prototype, "autosave", void 0);
     CbsCmp = __decorate([
         core_1.Component({
             selector: 'cbs-cmp',
             directives: [storage_list_cmp_1.StorageListCmp],
-            template: "\n    <div>\n      <storage-list-cmp\n        [cbsReducer]='cbsReducer | async'\n        [autosave]='autosave'\n        (updateItem)='cbsModel.updateItem($event)'\n        (resetItem)='cbsModel.resetItem($event)'>\n      </storage-list-cmp>\n\n      <div class='row'>\n        <!-- match button position -->\n        <div class='col-lg-9 col-xs-8'>\n        </div>\n        <div class='col-lg-3 col-xs-4'>\n          <button class='btn btn-warning' (click)='resetAll()'>\n            Reset all\n          </button>\n        </div>\n      </div>\n    </div>\n  "
+            template: "\n    <div>\n      <storage-list-cmp\n        [cbsReducer]='cbsReducer$ | async'\n        (updateItem)='cbsModel.updateItem($event)'\n        (resetItem)='cbsModel.resetItem($event)'>\n      </storage-list-cmp>\n\n      <div class='row'>\n        <!-- match button position -->\n        <div class='col-lg-9 col-xs-8'>\n        </div>\n        <div class='col-lg-3 col-xs-4'>\n          <button class='btn btn-warning' (click)='resetAll()'>\n            Reset all\n          </button>\n        </div>\n      </div>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [store_1.Store, cbs_model_1.CbsModel])
     ], CbsCmp);
     return CbsCmp;
 }());
 exports.CbsCmp = CbsCmp;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2JzLWNtcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNicy1jbXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLFFBQU8sY0FFUCxDQUFDLENBRm9CO0FBRXJCLHFCQUErQixlQUMvQixDQUFDLENBRDZDO0FBQzlDLHNCQUFvQixhQUNwQixDQUFDLENBRGdDO0FBQ2pDLDBCQUF1QixzQkFDdkIsQ0FBQyxDQUQ0QztBQUM3QyxpQ0FBNkIsK0JBRTdCLENBQUMsQ0FGMkQ7QUEyQjVEO0lBSUUsZ0JBQ1UsS0FBaUIsRUFDakIsUUFBa0I7UUFEbEIsVUFBSyxHQUFMLEtBQUssQ0FBWTtRQUNqQixhQUFRLEdBQVIsUUFBUSxDQUFVO1FBTG5CLGFBQVEsR0FBRyxLQUFLLENBQUM7UUFPeEIsSUFBSSxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLE1BQU0sQ0FBQyxZQUFZLENBQUMsQ0FBQTtJQUNuRCxDQUFDO0lBRU0seUJBQVEsR0FBZjtRQUNFLEVBQUUsQ0FBQyxDQUFDLE9BQU8sQ0FBQyx1REFBdUQsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUNyRSxJQUFJLENBQUMsUUFBUSxDQUFDLFFBQVEsRUFBRSxDQUFBO1FBQzFCLENBQUM7SUFDSCxDQUFDO0lBZEQ7UUFBQyxZQUFLLEVBQUU7OzRDQUFBO0lBMUJWO1FBQUMsZ0JBQVMsQ0FBQztZQUNULFFBQVEsRUFBRSxTQUFTO1lBQ25CLFVBQVUsRUFBRSxDQUFDLGlDQUFjLENBQUM7WUFDNUIsUUFBUSxFQUFFLGtqQkFvQlQ7U0FDRixDQUFDOztjQUFBO0lBaUJGLGFBQUM7QUFBRCxDQUFDLEFBaEJELElBZ0JDO0FBaEJZLGNBQU0sU0FnQmxCLENBQUEifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2JzLWNtcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNicy1jbXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLFFBQU8sY0FFUCxDQUFDLENBRm9CO0FBRXJCLHFCQUErQixlQUMvQixDQUFDLENBRDZDO0FBQzlDLHNCQUFvQixhQUNwQixDQUFDLENBRGdDO0FBQ2pDLDBCQUF1QixzQkFDdkIsQ0FBQyxDQUQ0QztBQUM3QyxpQ0FBNkIsK0JBRTdCLENBQUMsQ0FGMkQ7QUEwQjVEO0lBR0UsZ0JBQ1UsS0FBaUIsRUFDakIsUUFBa0I7UUFEbEIsVUFBSyxHQUFMLEtBQUssQ0FBWTtRQUNqQixhQUFRLEdBQVIsUUFBUSxDQUFVO1FBSnJCLGdCQUFXLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUMsWUFBWSxDQUFDLENBQUM7SUFLbEQsQ0FBQztJQUVHLHlCQUFRLEdBQWY7UUFDRSxFQUFFLENBQUMsQ0FBQyxPQUFPLENBQUMsdURBQXVELENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDckUsSUFBSSxDQUFDLFFBQVEsQ0FBQyxRQUFRLEVBQUUsQ0FBQTtRQUMxQixDQUFDO0lBQ0gsQ0FBQztJQXBDSDtRQUFDLGdCQUFTLENBQUM7WUFDVCxRQUFRLEVBQUUsU0FBUztZQUNuQixVQUFVLEVBQUUsQ0FBQyxpQ0FBYyxDQUFDO1lBQzVCLFFBQVEsRUFBRSxvaEJBbUJUO1NBQ0YsQ0FBQzs7Y0FBQTtJQWNGLGFBQUM7QUFBRCxDQUFDLEFBYkQsSUFhQztBQWJZLGNBQU0sU0FhbEIsQ0FBQSJ9

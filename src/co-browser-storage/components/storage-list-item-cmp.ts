@@ -1,5 +1,7 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core'
+import {Store} from '@ngrx/store'
 import {Control} from '@angular/common'
+import 'rxjs/add/operator/debounceTime'
 
 @Component({
   selector: 'storage-list-item-cmp',
@@ -23,7 +25,6 @@ import {Control} from '@angular/common'
       </div>
       <div class='col-lg-3 col-xs-4'>
         <button class='btn btn-success'
-          *ngIf='!autosave'
           (click)='updateWrap(storageItemInput.value)'>
           Save
         </button>
@@ -37,22 +38,26 @@ import {Control} from '@angular/common'
 })
 export class StorageListItemCmp {
   @Input() storageItem;
-  @Input() autosave;
   @Output() updateItem = new EventEmitter();
   @Output() resetItem = new EventEmitter();
 
-  storageItemInput = new Control();
+  private cbsReducer$ = this.store.select('cbsReducer');
+  public storageItemInput = new Control();
+
+  constructor (private store: Store<any>) {}
 
   ngOnInit () {
     this.storageItemInput.updateValue(this.storageItem.value)
 
-    if (this.autosave) {
-      this.storageItemInput.valueChanges
-        .debounceTime(300)
-        .subscribe((val) => {
-          this.updateWrap(val)
-        })
-    }
+    this.cbsReducer$.map(cbs => cbs['find'](i => i.key === this.storageItem.key))
+      .subscribe((item) => {
+        console.log('Received from cbsReducer$: ', item.value)
+      })
+
+    this.storageItemInput.valueChanges
+      .subscribe((val) => {
+        this.updateWrap(val)
+      })
   }
 
   updateWrap (newValue) {

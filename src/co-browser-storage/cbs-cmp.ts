@@ -11,8 +11,7 @@ import {StorageListCmp} from './components/storage-list-cmp'
   template: `
     <div>
       <storage-list-cmp
-        [cbsReducer]='cbsReducer | async'
-        [autosave]='autosave'
+        [cbsReducer]='cbsReducer$ | async'
         (updateItem)='cbsModel.updateItem($event)'
         (resetItem)='cbsModel.resetItem($event)'>
       </storage-list-cmp>
@@ -31,15 +30,12 @@ import {StorageListCmp} from './components/storage-list-cmp'
   `
 })
 export class CbsCmp {
-  @Input() autosave = false;
-  public cbsReducer;
+  public cbsReducer$ = this.store.select('cbsReducer');
 
   constructor (
     private store: Store<any>,
     private cbsModel: CbsModel
-  ) {
-    this.cbsReducer = this.store.select('cbsReducer')
-  }
+  ) {}
 
   public resetAll () {
     if (confirm('are you sure you want to reset all values to default?')) {
