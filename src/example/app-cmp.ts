@@ -25,7 +25,7 @@ export class AppCmp {
     this.cbsReducer$
       .map(cbsItems => cbsItems['find'](i => i.key === 'debugMode'))
       .subscribe(debugMode => {
-        console.log(debugMode.value)
+        console.log('DEBUG: ',  debugMode.value === 'true')
       })
 
   }

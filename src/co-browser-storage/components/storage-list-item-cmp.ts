@@ -24,10 +24,6 @@ import 'rxjs/add/operator/debounceTime'
           [ngFormControl]='storageItemInput'>
       </div>
       <div class='col-lg-3 col-xs-4'>
-        <button class='btn btn-success'
-          (click)='updateWrap(storageItemInput.value)'>
-          Save
-        </button>
         <button class='btn btn-info'
           (click)='resetItem.emit(storageItem)'>
           Reset
@@ -51,7 +47,12 @@ export class StorageListItemCmp {
 
     this.cbsReducer$.map(cbs => cbs['find'](i => i.key === this.storageItem.key))
       .subscribe((item) => {
-        console.log('Received from cbsReducer$: ', item.value)
+        let currentValue = this.storageItemInput.value
+        let incomingValue = item.value
+        // This happens if the value is changed from outside of this component
+        if (currentValue !== incomingValue) {
+          this.storageItemInput.updateValue(incomingValue)
+        }
       })
 
     this.storageItemInput.valueChanges
