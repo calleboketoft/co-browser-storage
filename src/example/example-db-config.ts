@@ -1,6 +1,6 @@
 export const NAMESPACE = 'cbsExample'
 export const DEBUG_MODE = 'debugMode'
-export const DEBUG_XHR = 'debugXhr'
+export const OFFLINE_MODE = 'offlineMode'
 export const MY_PASS = 'myPass'
 
 export const exampleDbConfig = {
@@ -13,7 +13,7 @@ export const exampleDbConfig = {
       valueType: 'text'
     },
     {
-      key: DEBUG_XHR,
+      key: OFFLINE_MODE,
       default: 'true',
       storageType: 'localStorage',
       valueType: 'text'

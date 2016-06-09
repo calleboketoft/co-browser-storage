@@ -101,7 +101,7 @@ export class CbsModel {
   }
 
   // Get observable for one specific item
-  public getItemByKey (key) {
+  public getItemByKey (key): Observable<any> {
     return this.cbsReducer$
       .map((browserStorageItems) => {
         return browserStorageItems.find(item => item.key === key)
@@ -110,13 +110,20 @@ export class CbsModel {
 
   // Assess if provided keys' values === 'true'
   // Useful for debug flags.
-  // Ex: allTrue(['DEBUG', 'DEBUG_XHR'])
-  public allTrue (keys: [string]) {
+  // Ex: truthy ('debugMode')
+  // Ex: truthy(['debugMode', 'offlineMode'])
+  public truthy (keys: [string] | string): Observable<any> {
+    let keysArr
+    if (Array.isArray(keys)) {
+      keysArr = keys
+    } else if (typeof keys === 'string') {
+      keysArr = [keys]
+    }
     return this.cbsReducer$
       .map(items => {
         if (items.length === 0) return false
         return items.every(item => {
-          return keys.indexOf(item.key) === -1 || item.value === 'true'
+          return keysArr.indexOf(item.key) === -1 || item.value === 'true'
         })
       })
   }

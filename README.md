@@ -26,7 +26,7 @@ export const myBrowserStorageConfig = {
     // List storage variables here
     {
       key: DEBUG_MODE,
-      default: 'on',
+      default: 'true',
       storageType: 'localStorage',
       valueType: 'text'
     }
@@ -95,8 +95,17 @@ import {CbsModel} from 'co-browser-storage/co-browser-storage'
 ...
 cbsModel.updateItem({
   key: 'debugMode',
-  value: 'off'
+  value: 'false'
 })
+```
+
+## Get boolean true if value is 'true'
+
+```javascript
+import {CbsModel} from 'co-browser-storage/co-browser-storage'
+...
+// cbsModel.truthy takes a string or an array of strings
+let isDebugMode$ = cbsModel.truthy('debugMode')
 ```
 
 ## Developing

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core'
 import {CbsCmp} from '../co-browser-storage/cbs-cmp'
-import {Store} from '@ngrx/store'
+import {CbsModel} from '../co-browser-storage/services/cbs-model'
 import 'rxjs/add/operator/find'
 import 'rxjs/add/operator/map'
 
@@ -16,17 +16,20 @@ import 'rxjs/add/operator/map'
         <cbs-cmp></cbs-cmp>
       </div>
     </div>
-    <br><br>
+    <strong>debugMode value:</strong>
+    {{(debugMode$ | async).value}}
+    <br>
+    <strong>debugMode && offlineMode truthy:</strong>
+    {{debugAndOffline$ | async}}
+    <br>
+    <strong>debugMode truthy</strong>
+    {{debugModeTrue$ | async}}
   `
 })
 export class AppCmp {
-  private cbsReducer$ = this.store.select('cbsReducer')
-  constructor (private store: Store<any>) {
-    this.cbsReducer$
-      .map(cbsItems => cbsItems['find'](i => i.key === 'debugMode'))
-      .subscribe(debugMode => {
-        console.log('DEBUG: ',  debugMode.value === 'true')
-      })
+  public debugMode$ = this.cbsModel.getItemByKey('debugMode');
+  public debugModeTrue$ = this.cbsModel.truthy('debugMode');
+  public debugAndOffline$ = this.cbsModel.truthy(['debugMode', 'offlineMode']);
 
-  }
+  constructor (private cbsModel: CbsModel) {}
 }
