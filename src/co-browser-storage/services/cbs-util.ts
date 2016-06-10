@@ -42,7 +42,7 @@ function initializeCbs (cbsConfigFromFile) {
     resultCbsConfig = initFromScratch(cbsConfigFromFile)
   } else {
     // a current state is existing, validate against schema
-    resultCbsConfig = initExisting(cbsConfigFromFile.namespace, cbsConfigFromLS)
+    resultCbsConfig = initExisting(cbsConfigFromFile, cbsConfigFromLS)
   }
   setConfigToLS(resultCbsConfig)
 }
@@ -56,34 +56,83 @@ function initFromScratch (cbsConfigFromFile) {
   }
 }
 
-// Validate each existing item from storage against the memory object
 function initExisting (cbsConfigFromFile, cbsConfigFromLS) {
-  let actualMemory = cbsConfigFromLS[cbsConfig.DB_MEMORY_KEY].map((memoryItem) => {
-    var storageItem = window[memoryItem.storageType][getFullCbsKey(memoryItem.key)]
-    if (typeof storageItem === 'undefined') {
-      // the item doesn't exist at all, set it
-      window[memoryItem.storageType][getFullCbsKey(memoryItem.key)] = memoryItem.value
-      return memoryItem
+  let fixedMemoryObject = patchMemoryObjectAndStorageValues(cbsConfigFromLS)
+  let fixedCbsConfig = applyCbsConfigFileUpdates({
+    fileInitialState: cbsConfigFromFile.initialState,
+    memoryInitialState: cbsConfigFromLS[cbsConfig.DB_INITIAL_KEY],
+    memoryObject: fixedMemoryObject
+  })
+  setConfigToLS(fixedCbsConfig)
+  return cbsConfigFromLS
+}
+
+// Validate each existing item from storage against the memory object
+function patchMemoryObjectAndStorageValues (cbsConfigFromLS) {
+  let fixedMemoryObject = cbsConfigFromLS[cbsConfig.DB_MEMORY_KEY].map((memoryItem) => {
+    var storageItemValue = getItemValueFromBrowserStorage(memoryItem)
+    let fixedMemoryItem
+    if (typeof storageItemValue === 'undefined') {
+      // the storage item has been removed, put back from memory object
+      saveItemToBrowserStorage(memoryItem)
+      fixedMemoryItem = memoryItem
+    } else if (storageItemValue === memoryItem.value) {
+      // the value in the memory object is the same as in browser storage
+      fixedMemoryItem = memoryItem
     } else {
-      let actualValue = window[memoryItem.storageType][getFullCbsKey(memoryItem.key)]
-      if (actualValue === memoryItem.value) {
-        // the value has not been touched outside of this GUI
-        return memoryItem
-      } else {
-        // the value has been manually modified by a user
-        let updatedMemoryItem = {
-          key: memoryItem.key,
-          value: actualValue,
-          storageType: memoryItem.storageType,
-          valueType: memoryItem.valueType
-        }
-        return updatedMemoryItem
-      }
+      // the storage value has been manually modified by a user, update the memory object
+      fixedMemoryItem = Object.assign({}, memoryItem, {value: storageItemValue})
+    }
+    return fixedMemoryItem
+  })
+  return fixedMemoryObject
+}
+
+// Add, update, or remove items in memoryObject and browserStorage based on file
+function applyCbsConfigFileUpdates ({fileInitialState, memoryInitialState, memoryObject}) {
+  // find removed items (exist in memory object but not file)
+  let removedItems = memoryInitialState.filter(bsItem => {
+    let removedItem = !fileInitialState.find(fileItem => bsItem.key === fileItem.key)
+    return removedItem
+  })
+  // find added items (exist in file but not memory object)
+  let addedItems = fileInitialState.filter(fileItem => {
+    let addedItem = !memoryInitialState.find(bsItem => fileItem.key === bsItem.key)
+    return addedItem
+  })
+  // find updated items (exist in both but value is different)
+  let updatedItems = fileInitialState.filter(fileItem => {
+    let foundBsItem = memoryInitialState.find(bsItem => fileItem.key === bsItem.key)
+    if (!foundBsItem) {
+      return false
+    } else {
+      return fileItem.value !== foundBsItem.value
     }
   })
-  cbsConfigFromLS[cbsConfig.DB_MEMORY_KEY] = actualMemory
-  setConfigToLS(cbsConfigFromLS)
-  return cbsConfigFromLS
+
+  let patchedMemoryObject = []
+
+  console.log('REMOVED: ', removedItems)
+  removedItems.forEach(removedItem => {
+    removeItemFromBrowserStorage(removedItem)
+    patchedMemoryObject = memoryObject.filter(memItem => memItem.key !== removedItem.key)
+  })
+  console.log('ADDED: ', addedItems)
+  addedItems.forEach(addedItem => {
+    saveItemToBrowserStorage(addedItem)
+    patchedMemoryObject.push(addedItem)
+  })
+  console.log('UPDATED: ', updatedItems)
+  updatedItems.forEach(updatedItem => {
+    saveItemToBrowserStorage(updatedItem)
+    patchedMemoryObject = memoryObject.filter(memItem => memItem.key !== updatedItem.key)
+    patchedMemoryObject.push(updatedItem)
+  })
+
+  return {
+    [cbsConfig.DB_MEMORY_KEY]: patchedMemoryObject,
+    [cbsConfig.DB_INITIAL_KEY]: fileInitialState
+  }
 }
 
 // Convenience function to prefix with namespace and dot
@@ -91,6 +140,14 @@ function getFullCbsKey (key) {
   return cbsConfig.namespace + '.' + key
 }
 
+function getItemValueFromBrowserStorage (item) {
+  return window[item.storageType][getFullCbsKey(item.key)]
+}
+
 function saveItemToBrowserStorage (item) {
   window[item.storageType]['setItem'](getFullCbsKey(item.key), item.value)
+}
+
+function removeItemFromBrowserStorage (item) {
+  window[item.storageType]['removeItem'](getFullCbsKey(item.key))
 }
