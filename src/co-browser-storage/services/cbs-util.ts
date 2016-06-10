@@ -63,8 +63,7 @@ function initExisting (cbsConfigFromFile, cbsConfigFromLS) {
     memoryInitialState: cbsConfigFromLS[cbsConfig.DB_INITIAL_KEY],
     memoryObject: fixedMemoryObject
   })
-  setConfigToLS(fixedCbsConfig)
-  return cbsConfigFromLS
+  return fixedCbsConfig
 }
 
 // Validate each existing item from storage against the memory object
@@ -90,6 +89,13 @@ function patchMemoryObjectAndStorageValues (cbsConfigFromLS) {
 
 // Add, update, or remove items in memoryObject and browserStorage based on file
 function applyCbsConfigFileUpdates ({fileInitialState, memoryInitialState, memoryObject}) {
+  // find untouched items, adde them to the patchedMemoryObject
+  let patchedMemoryObject = memoryInitialState.filter(bsItem => {
+    return fileInitialState.find(fileItem => {
+      return bsItem.key === fileItem.key && bsItem.value === fileItem.value
+    })
+  })
+
   // find removed items (exist in memory object but not file)
   let removedItems = memoryInitialState.filter(bsItem => {
     let removedItem = !fileInitialState.find(fileItem => bsItem.key === fileItem.key)
@@ -110,19 +116,23 @@ function applyCbsConfigFileUpdates ({fileInitialState, memoryInitialState, memor
     }
   })
 
-  let patchedMemoryObject = []
-
-  console.log('REMOVED: ', removedItems)
+  if (removedItems.length > 0) {
+    console.log('REMOVED CONFIG: ', removedItems)
+  }
   removedItems.forEach(removedItem => {
     removeItemFromBrowserStorage(removedItem)
     patchedMemoryObject = memoryObject.filter(memItem => memItem.key !== removedItem.key)
   })
-  console.log('ADDED: ', addedItems)
+  if (addedItems.length > 0) {
+    console.log('ADDED CONFIG: ', addedItems)
+  }
   addedItems.forEach(addedItem => {
     saveItemToBrowserStorage(addedItem)
     patchedMemoryObject.push(addedItem)
   })
-  console.log('UPDATED: ', updatedItems)
+  if (updatedItems.length > 0) {
+    console.log('UPDATED CONFIG: ', updatedItems)
+  }
   updatedItems.forEach(updatedItem => {
     saveItemToBrowserStorage(updatedItem)
     patchedMemoryObject = memoryObject.filter(memItem => memItem.key !== updatedItem.key)
