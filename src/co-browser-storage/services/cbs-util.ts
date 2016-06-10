@@ -90,7 +90,7 @@ function patchMemoryObjectAndStorageValues (cbsConfigFromLS) {
 // Add, update, or remove items in memoryObject and browserStorage based on file
 function applyCbsConfigFileUpdates ({fileInitialState, memoryInitialState, memoryObject}) {
   // find untouched items, adde them to the patchedMemoryObject
-  let patchedMemoryObject = memoryInitialState.filter(bsItem => {
+  let patchedMemoryObject = memoryObject.filter(bsItem => {
     return fileInitialState.find(fileItem => {
       return bsItem.key === fileItem.key && bsItem.value === fileItem.value
     })
