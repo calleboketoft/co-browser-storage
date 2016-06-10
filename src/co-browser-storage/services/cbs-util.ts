@@ -8,7 +8,8 @@ export {
   setConfigToLS,
   initializeCbs,
   getFullCbsKey,
-  getInitialCbsState
+  getInitialCbsState,
+  saveItemToBrowserStorage
 }
 
 // Serialize / deserialize and persist config to browser storage
@@ -48,21 +49,10 @@ function initializeCbs (cbsConfigFromFile) {
 
 // Initialize the storage items from scratch
 function initFromScratch (cbsConfigFromFile) {
-  let stateForMemory = cbsConfigFromFile.initialState.map((schemaItem) => {
-    // save each item to browserStorage
-    window[schemaItem.storageType][getFullCbsKey(schemaItem.key)] = schemaItem.default
-
-    // transform the schema to the memory type
-    return {
-      key: schemaItem.key,
-      value: schemaItem.default, // from scratch, the default is the value
-      storageType: schemaItem.storageType,
-      valueType: schemaItem.valueType
-    }
-  })
+  cbsConfigFromFile.initialState.forEach((item) => saveItemToBrowserStorage(item))
   return {
     [cbsConfig.DB_INITIAL_KEY]: cbsConfigFromFile.initialState,
-    [cbsConfig.DB_MEMORY_KEY]: stateForMemory
+    [cbsConfig.DB_MEMORY_KEY]: cbsConfigFromFile.initialState
   }
 }
 
@@ -99,4 +89,8 @@ function initExisting (cbsConfigFromFile, cbsConfigFromLS) {
 // Convenience function to prefix with namespace and dot
 function getFullCbsKey (key) {
   return cbsConfig.namespace + '.' + key
+}
+
+function saveItemToBrowserStorage (item) {
+  window[item.storageType]['setItem'](getFullCbsKey(item.key), item.value)
 }

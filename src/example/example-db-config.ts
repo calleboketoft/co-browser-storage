@@ -8,19 +8,19 @@ export const exampleDbConfig = {
   initialState: [
     {
       key: DEBUG_MODE,
-      default: 'true',
+      value: 'true',
       storageType: 'localStorage',
       valueType: 'text'
     },
     {
       key: OFFLINE_MODE,
-      default: 'true',
+      value: 'true',
       storageType: 'localStorage',
       valueType: 'text'
     },
     {
       key: MY_PASS,
-      default: 'secret',
+      value: 'secret',
       storageType: 'localStorage',
       valueType: 'password'
     }

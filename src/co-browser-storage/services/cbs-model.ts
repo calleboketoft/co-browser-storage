@@ -29,36 +29,34 @@ export interface IStorageItem {
 
 @Injectable()
 export class CbsModel {
-  private cbsReducer$;
+  private cbsReducer$ = this.store.select('cbsReducer');
 
-  constructor (private store: Store<any>) {
-    this.cbsReducer$ = this.store.select('cbsReducer')
-  }
+  constructor (private store: Store<any>) {}
 
   // Update
   // ------
-  public updateItem (item: IStorageItem) {
+  public updateItem (updatedItem: IStorageItem) {
     // Get current item from LS to complete missing properties.
     let dbConfig = cbsUtil.getConfigFromLS()
-    let existingItem = dbConfig[cbsConfig.DB_MEMORY_KEY].filter(memItem => item.key === memItem.key)[0]
+    let existingItem = dbConfig[cbsConfig.DB_MEMORY_KEY].find(memItem => updatedItem.key === memItem.key)
     if (!existingItem) {
-      console.error('item does not exist')
+      console.error('item does not exist in browser storage')
     }
-    let updatedItem = Object.assign({}, existingItem, item)
-    this.saveItem(updatedItem)
+    let updatedItemPatched = Object.assign({}, existingItem, updatedItem)
+    cbsUtil.saveItemToBrowserStorage(updatedItemPatched)
+    this.updateItemInMemoryObj(updatedItemPatched)
     this.store.dispatch({
       type: UPDATE_CBS_ITEM,
-      payload: updatedItem
+      payload: updatedItemPatched
     })
   }
 
-  private saveItem (item: IStorageItem) {
-    // Save item to browser storage
-    window[item.storageType].setItem(cbsUtil.getFullCbsKey(item.key), item.value)
+
+  private updateItemInMemoryObj (updatedItem) {
     // Remove any existing item with the same key from memory object and add the new one
     let dbConfig = cbsUtil.getConfigFromLS()
-    dbConfig[cbsConfig.DB_MEMORY_KEY] = dbConfig[cbsConfig.DB_MEMORY_KEY].filter(memItem => item.key !== memItem.key)
-    dbConfig[cbsConfig.DB_MEMORY_KEY].push(item)
+    dbConfig[cbsConfig.DB_MEMORY_KEY] = dbConfig[cbsConfig.DB_MEMORY_KEY].filter(memItem => updatedItem.key !== memItem.key)
+    dbConfig[cbsConfig.DB_MEMORY_KEY].push(updatedItem)
     cbsUtil.setConfigToLS(dbConfig)
   }
 
@@ -69,42 +67,25 @@ export class CbsModel {
     items.forEach(i => this.updateItem(i))
   }
 
-  public resetItem (item: IStorageItem) {
-    let resetdItem
-    let schemaItem = cbsConfig.initialState.filter((schemaItem) => {
-      return item.key === schemaItem.key
-    })[0]
-    if (schemaItem) {
-      resetdItem = {
-        key: item.key,
-        value: schemaItem.default,
-        storageType: schemaItem.storageType,
-        valueType: schemaItem.valueType
-      }
-    }
+  public resetItem (itemToReset: IStorageItem) {
+    let initialItem = cbsConfig.initialState.find((schemaItem) => {
+      return itemToReset.key === schemaItem.key
+    })
 
-    if (resetdItem) {
-      this.updateItem(resetdItem)
+    if (initialItem) {
+      this.updateItem(initialItem)
     }
   }
 
   public resetAll () {
-    let initialItems = cbsConfig.initialState.map((i) => {
-      return {
-        storageType: i.storageType,
-        value: i.default,
-        key: i.key,
-        valueType: i.valueType
-      }
-    })
-    this.updateItems(initialItems)
+    this.updateItems(cbsConfig.initialState)
   }
 
   // Get observable for one specific item
   public getItemByKey (key): Observable<any> {
     return this.cbsReducer$
       .map((browserStorageItems) => {
-        return browserStorageItems.find(item => item.key === key)
+        return browserStorageItems['find'](item => item.key === key)
       })
   }
 
@@ -121,8 +102,10 @@ export class CbsModel {
     }
     return this.cbsReducer$
       .map(items => {
-        if (items.length === 0) return false
-        return items.every(item => {
+        if (items['length'] === 0) {
+          return false
+        }
+        return items['every'](item => {
           return keysArr.indexOf(item.key) === -1 || item.value === 'true'
         })
       })
