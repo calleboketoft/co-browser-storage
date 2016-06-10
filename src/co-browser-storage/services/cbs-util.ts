@@ -1,4 +1,7 @@
-import {cbsConfig, setCbsConfig} from './cbs-config'
+import {
+  cbsConfig,
+  setCbsConfig
+} from './cbs-config'
 
 export {
   getConfigFromLS,
@@ -28,21 +31,44 @@ function getInitialCbsState () {
   return getConfigFromLS()[cbsConfig.DB_MEMORY_KEY]
 }
 
-function initializeCbs (cbsConfig) {
-  setCbsConfig(cbsConfig)
-  var dbConfig = getConfigFromLS()
-  if (!dbConfig) {
-    // there is no current state stored, initialize from scratch
-    initFromScratch(cbsConfig)
+function initializeCbs (cbsConfigFromFile) {
+  // The "ruling" config is the one from the file, set it first
+  setCbsConfig(cbsConfigFromFile)
+  var cbsConfigFromLS = getConfigFromLS()
+  var resultCbsConfig
+  if (!cbsConfigFromLS) {
+    // first run, no existing state in localStorage
+    resultCbsConfig = initFromScratch(cbsConfigFromFile)
   } else {
     // a current state is existing, validate against schema
-    initExisting(cbsConfig.namespace, dbConfig)
+    resultCbsConfig = initExisting(cbsConfigFromFile.namespace, cbsConfigFromLS)
+  }
+  setConfigToLS(resultCbsConfig)
+}
+
+// Initialize the storage items from scratch
+function initFromScratch (cbsConfigFromFile) {
+  let stateForMemory = cbsConfigFromFile.initialState.map((schemaItem) => {
+    // save each item to browserStorage
+    window[schemaItem.storageType][getFullCbsKey(schemaItem.key)] = schemaItem.default
+
+    // transform the schema to the memory type
+    return {
+      key: schemaItem.key,
+      value: schemaItem.default, // from scratch, the default is the value
+      storageType: schemaItem.storageType,
+      valueType: schemaItem.valueType
+    }
+  })
+  return {
+    [cbsConfig.DB_INITIAL_KEY]: cbsConfigFromFile.initialState,
+    [cbsConfig.DB_MEMORY_KEY]: stateForMemory
   }
 }
 
 // Validate each existing item from storage against the memory object
-function initExisting (namespace, dbConfig) {
-  let actualMemory = dbConfig[cbsConfig.DB_MEMORY_KEY].map((memoryItem) => {
+function initExisting (cbsConfigFromFile, cbsConfigFromLS) {
+  let actualMemory = cbsConfigFromLS[cbsConfig.DB_MEMORY_KEY].map((memoryItem) => {
     var storageItem = window[memoryItem.storageType][getFullCbsKey(memoryItem.key)]
     if (typeof storageItem === 'undefined') {
       // the item doesn't exist at all, set it
@@ -65,28 +91,9 @@ function initExisting (namespace, dbConfig) {
       }
     }
   })
-  dbConfig[cbsConfig.DB_MEMORY_KEY] = actualMemory
-  setConfigToLS(dbConfig)
-  return dbConfig
-}
-
-// Initialize the storage items from scratch
-function initFromScratch (options) {
-  let stateForMemory = options.initialState.map((schemaItem) => {
-    // transform the schema to the memory type
-    window[schemaItem.storageType][getFullCbsKey(schemaItem.key)] = schemaItem.default
-    return {
-      key: schemaItem.key,
-      value: schemaItem.default, // from scratch, the default is the value
-      storageType: schemaItem.storageType,
-      valueType: schemaItem.valueType
-    }
-  })
-  let dbConfig = {}
-  dbConfig[cbsConfig.DB_INITIAL_KEY] = options.initialState
-  dbConfig[cbsConfig.DB_MEMORY_KEY] = stateForMemory
-  setConfigToLS(dbConfig)
-  return dbConfig
+  cbsConfigFromLS[cbsConfig.DB_MEMORY_KEY] = actualMemory
+  setConfigToLS(cbsConfigFromLS)
+  return cbsConfigFromLS
 }
 
 // Convenience function to prefix with namespace and dot
