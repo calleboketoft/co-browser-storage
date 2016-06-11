@@ -51,7 +51,6 @@ export class CbsModel {
     })
   }
 
-
   private updateItemInMemoryObj (updatedItem) {
     // Remove any existing item with the same key from memory object and add the new one
     let dbConfig = cbsUtil.getConfigFromLS()
