@@ -66,7 +66,7 @@ function initExisting (cbsConfigFromFile, cbsConfigFromLS) {
   return fixedCbsConfig
 }
 
-// Validate each existing item from storage against the memory object
+// Validate each existing item from browser storage against the memory object
 function patchMemoryObjectAndStorageValues (cbsConfigFromLS) {
   let fixedMemoryObject = cbsConfigFromLS[cbsConfig.DB_MEMORY_KEY].map((memoryItem) => {
     var storageItemValue = getItemValueFromBrowserStorage(memoryItem)
@@ -89,12 +89,8 @@ function patchMemoryObjectAndStorageValues (cbsConfigFromLS) {
 
 // Add, update, or remove items in memoryObject and browserStorage based on file
 function applyCbsConfigFileUpdates ({fileInitialState, memoryInitialState, memoryObject}) {
-  // find untouched items, adde them to the patchedMemoryObject
-  let patchedMemoryObject = memoryObject.filter(bsItem => {
-    return fileInitialState.find(fileItem => {
-      return bsItem.key === fileItem.key && bsItem.value === fileItem.value
-    })
-  })
+  // use the current memory object as base
+  let patchedMemoryObject = [...memoryObject]
 
   // find removed items (exist in memory object but not file)
   let removedItems = memoryInitialState.filter(bsItem => {
