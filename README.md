@@ -26,7 +26,7 @@ export const myBrowserStorageConfig = {
     // List storage variables here
     {
       key: DEBUG_MODE,
-      default: 'true',
+      value: 'true',
       storageType: 'localStorage',
       valueType: 'text'
     }
