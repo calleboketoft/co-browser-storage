@@ -31,7 +31,7 @@ import {Control} from '@angular/common'
     </div>
   `
 })
-export class StorageListItemCmp {
+export class StorageListItemComponent {
   @Input() storageItem;
   @Output() updateItem = new EventEmitter();
   @Output() resetItem = new EventEmitter();

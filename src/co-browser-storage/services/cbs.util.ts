@@ -1,7 +1,7 @@
 import {
   cbsConfig,
   setCbsConfig
-} from './cbs-config'
+} from './cbs.config'
 
 export {
   getConfigFromLS,

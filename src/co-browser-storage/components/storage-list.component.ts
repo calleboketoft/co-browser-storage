@@ -1,6 +1,6 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core'
-import {StorageListItemCmp} from './storage-list-item-cmp'
-import {ArraySortPipe} from '../services/array-sort-pipe'
+import {StorageListItemComponent} from './storage-list-item.component'
+import {ArraySortPipe} from '../services/array-sort.pipe'
 
 @Component({
   selector: 'storage-list-cmp',
@@ -16,9 +16,9 @@ import {ArraySortPipe} from '../services/array-sort-pipe'
       <br>
     </div>
   `,
-  directives: [StorageListItemCmp]
+  directives: [StorageListItemComponent]
 })
-export class StorageListCmp {
+export class StorageListComponent {
   @Input() cbsReducer;
   @Output() updateItem = new EventEmitter();
   @Output() resetItem = new EventEmitter();

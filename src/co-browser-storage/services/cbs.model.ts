@@ -12,13 +12,13 @@ import {Observable} from 'rxjs/Rx'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/find'
 
-import {cbsConfig} from './cbs-config'
-import * as cbsUtil from './cbs-util'
+import {cbsConfig} from './cbs.config'
+import * as cbsUtil from './cbs.util'
 
 import {
   UPDATE_CBS_ITEM,
   ADDED_CBS_ITEMS
-} from './cbs-reducer'
+} from './cbs.reducer'
 
 export interface IStorageItem {
   key: string,

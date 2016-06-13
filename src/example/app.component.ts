@@ -1,11 +1,11 @@
 import {Component} from '@angular/core'
-import {CbsCmp} from '../co-browser-storage/cbs-cmp'
-import {CbsModel} from '../co-browser-storage/services/cbs-model'
+import {CbsCmp} from '../co-browser-storage/cbs.component'
+import {CbsModel} from '../co-browser-storage/services/cbs.model'
 import {
   DEBUG_MODE,
   OFFLINE_MODE,
   MY_PASS
-} from './example-db-config'
+} from './example-db.config'
 
 @Component({
   selector: 'app-cmp',
@@ -20,19 +20,17 @@ import {
       <strong>debugMode value:</strong>
       {{(debugMode$ | async).value}}
     </p>
-
     <p>
       <strong>debugMode && offlineMode truthy:</strong>
       {{debugAndOffline$ | async}}
     </p>
-
     <p>
       <strong>debugMode truthy</strong>
       {{debugModeTrue$ | async}}
     </p>
   `
 })
-export class AppCmp {
+export class AppComponent {
   public debugMode$ = this.cbsModel.getItemByKey(DEBUG_MODE);
   public debugModeTrue$ = this.cbsModel.truthy(DEBUG_MODE);
   public debugAndOffline$ = this.cbsModel.truthy([DEBUG_MODE, OFFLINE_MODE]);

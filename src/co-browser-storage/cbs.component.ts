@@ -2,12 +2,12 @@ import '../polyfills'
 
 import {Component, Input} from '@angular/core'
 import {Store} from '@ngrx/store'
-import {CbsModel} from './services/cbs-model'
-import {StorageListCmp} from './components/storage-list-cmp'
+import {CbsModel} from './services/cbs.model'
+import {StorageListComponent} from './components/storage-list.component'
 
 @Component({
   selector: 'cbs-cmp',
-  directives: [StorageListCmp],
+  directives: [StorageListComponent],
   template: `
     <div>
       <storage-list-cmp
