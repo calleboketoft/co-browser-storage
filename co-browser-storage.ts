@@ -6,4 +6,4 @@ export {
   getInitialCbsState
 } from './src/co-browser-storage/services/cbs.util'
 export {cbsReducer} from './src/co-browser-storage/services/cbs.reducer'
-export {CbsCmp} from './src/co-browser-storage/cbs.component'
+export {CbsComponent} from './src/co-browser-storage/cbs.component'

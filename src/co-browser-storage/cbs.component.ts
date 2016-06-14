@@ -29,7 +29,7 @@ import {StorageListComponent} from './components/storage-list.component'
     </div>
   `
 })
-export class CbsCmp {
+export class CbsComponent {
   public cbsReducer$ = this.store.select('cbsReducer');
 
   constructor (
