@@ -83,8 +83,8 @@ export class CbsModel {
   // Get observable for one specific item
   public getItemByKey (key): Observable<any> {
     return this.cbsReducer$
-      .map((browserStorageItems) => {
-        return browserStorageItems['find'](item => item.key === key)
+      .map((browserStorageItems:[any]) => {
+        return browserStorageItems.find(item => item.key === key)
       })
   }
 
@@ -100,11 +100,11 @@ export class CbsModel {
       keysArr = [keys]
     }
     return this.cbsReducer$
-      .map(items => {
-        if (items['length'] === 0) {
+      .map((items:[any]) => {
+        if (items.length === 0) {
           return false
         }
-        return items['every'](item => {
+        return items.every(item => {
           return keysArr.indexOf(item.key) === -1 || item.value === 'true'
         })
       })

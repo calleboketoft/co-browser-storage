@@ -20,7 +20,7 @@ var CbsComponent = (function () {
         this.cbsReducer$ = this.store.select('cbsReducer');
     }
     CbsComponent.prototype.resetAll = function () {
-        if (confirm('are you sure you want to reset all values to default?')) {
+        if (confirm('Are you sure you want to reset all values to default?')) {
             this.cbsModel.resetAll();
         }
     };

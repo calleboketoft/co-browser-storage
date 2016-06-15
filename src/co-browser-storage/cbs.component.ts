@@ -38,7 +38,7 @@ export class CbsComponent {
   ) {}
 
   public resetAll () {
-    if (confirm('are you sure you want to reset all values to default?')) {
+    if (confirm('Are you sure you want to reset all values to default?')) {
       this.cbsModel.resetAll()
     }
   }

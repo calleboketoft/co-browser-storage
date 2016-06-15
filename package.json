@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node server",
     "build": "typings install && npm run typescript && npm run sass",
-    "watch": "tsc -p . -w",
-    "typescript": "tsc -p .",
+    "watch": "tsc -w",
+    "typescript": "tsc",
     "sass": "gulp sass",
     "typings": "typings"
   },
