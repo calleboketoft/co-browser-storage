@@ -34,24 +34,25 @@
     "@ngrx/store": "2.0.0"
   },
   "devDependencies": {
-    "@angular/core": "2.0.0-rc.2",
-    "@ngrx/store": "2.0.0",
     "@angular/common": "2.0.0-rc.2",
     "@angular/compiler": "2.0.0-rc.2",
+    "@angular/core": "2.0.0-rc.2",
+    "@angular/forms": "^0.1.0",
     "@angular/platform-browser": "2.0.0-rc.2",
     "@angular/platform-browser-dynamic": "2.0.0-rc.2",
     "@ngrx/core": "1.0.0",
-    "es6-shim": "0.35.0",
-    "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.6",
-    "systemjs": "0.19.27",
-    "zone.js": "0.6.12",
+    "@ngrx/store": "2.0.0",
     "bootstrap": "git+https://git@github.com/twbs/bootstrap.git#v4-dev",
+    "es6-shim": "0.35.0",
     "express": "4.13.4",
     "ghooks": "1.0.3",
     "gulp": "3.9.1",
     "gulp-sass": "2.2.0",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.6",
+    "systemjs": "0.19.27",
     "typescript": "1.8.10",
-    "typings": "1.1.0"
+    "typings": "1.1.0",
+    "zone.js": "0.6.12"
   }
 }

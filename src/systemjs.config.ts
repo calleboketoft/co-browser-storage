@@ -18,6 +18,7 @@ System.config({
     '@angular/common': {defaultExtension: 'js', main: 'index.js'},
     '@angular/compiler': {defaultExtension: 'js', main: 'index.js'},
     '@angular/core': {defaultExtension: 'js', main: 'index.js'},
+    '@angular/forms': {defaultExtension: 'js', main: 'index.js'},
     '@angular/http': {defaultExtension: 'js', main: 'index.js'},
     '@angular/platform-browser': {defaultExtension: 'js', main: 'index.js'},
     '@angular/platform-browser-dynamic': {defaultExtension: 'js', main: 'index.js'},

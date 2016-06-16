@@ -1,9 +1,10 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core'
 import {Store} from '@ngrx/store'
-import {Control} from '@angular/common'
+import {REACTIVE_FORM_DIRECTIVES, FormControl} from '@angular/forms'
 
 @Component({
   selector: 'storage-list-item-cmp',
+  directives: [REACTIVE_FORM_DIRECTIVES],
   styles: [`
     .row {
       margin-bottom: 10px;
@@ -20,7 +21,7 @@ import {Control} from '@angular/common'
       </div>
       <div class='col-lg-6 col-xs-4'>
         <input [type]='storageItem.valueType' class='form-control'
-          [ngFormControl]='storageItemInput'>
+          [formControl]='storageItemInput'>
       </div>
       <div class='col-lg-3 col-xs-4'>
         <button class='btn btn-info'
@@ -37,7 +38,7 @@ export class StorageListItemComponent {
   @Output() resetItem = new EventEmitter();
 
   private cbsReducer$ = this.store.select('cbsReducer');
-  public storageItemInput = new Control();
+  public storageItemInput = new FormControl();
 
   constructor (private store: Store<any>) {}
 
