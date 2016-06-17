@@ -1,14 +1,12 @@
 # co-browser-storage
 
-Manage browser storage variables in a convenient way using ngrx/store. Perfect for:
-
-- debug flags
-- feature flags
-- base URL configs
-- other "hidden" data
+Manage browser storage variables in a convenient way using Angular 2 and @ngrx/store.
 
 ## Try the example
-
+- `npm install`
+- `npm run build`
+- `npm start`
+- navigate to http://localhost:3010
 
 ## Usage
 
@@ -78,14 +76,15 @@ Only show selected items in GUI
 <cbs-cmp [itemsToShow]="['debugMode', 'otherItem']"></cbs-cmp>
 ```
 
-## Get value using CbsModel
+## Get value
+
 ```javascript
 import {CbsModel} from 'co-browser-storage/co-browser-storage'
 ...
 let debugMode$ = cbsModel.getItemByKey('debugMode')
 ```
 
-## Get value using store directly
+Or using store directly
 
 ```javascript
 import {Store} from '@ngrx/store'
@@ -103,6 +102,19 @@ cbsModel.updateItem({
   key: 'debugMode',
   value: 'false'
 })
+
+// Multiple at once
+cbsModel.updateItems([
+  {
+    key: 'debugMode',
+    value: 'false'
+  },
+  {
+    key: 'otherItem',
+    value: 'otherValue'
+  }
+])
+
 ```
 
 ## Get boolean true if value is 'true'
