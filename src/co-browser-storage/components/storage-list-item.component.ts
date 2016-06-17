@@ -14,7 +14,7 @@ import {REACTIVE_FORM_DIRECTIVES, FormControl} from '@angular/forms'
     }
   `],
   template: `
-    <div class='row'>
+    <div class='row' [hidden]='itemToHide(storageItem)'>
       <div class='col-lg-3 col-xs-4'>
         <strong>{{storageItem.key}}</strong><br>
         <span class='tiny'>{{storageItem.storageType}}</span>
@@ -34,6 +34,7 @@ import {REACTIVE_FORM_DIRECTIVES, FormControl} from '@angular/forms'
 })
 export class StorageListItemComponent {
   @Input() storageItem;
+  @Input() itemsToShow: [string];
   @Output() updateItem = new EventEmitter();
   @Output() resetItem = new EventEmitter();
 
@@ -59,6 +60,14 @@ export class StorageListItemComponent {
       .subscribe((val) => {
         this.updateWrap(val)
       })
+  }
+
+  public itemToHide (storageItem) {
+    let hideItem = false
+    if (this.itemsToShow) {
+      hideItem = this.itemsToShow.indexOf(storageItem.key) === -1
+    }
+    return hideItem
   }
 
   updateWrap (newValue) {

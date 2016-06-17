@@ -30,6 +30,10 @@ var StorageListComponent = (function () {
         __metadata('design:type', Object)
     ], StorageListComponent.prototype, "cbsReducer", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], StorageListComponent.prototype, "itemsToShow", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
     ], StorageListComponent.prototype, "updateItem", void 0);
@@ -41,7 +45,7 @@ var StorageListComponent = (function () {
         core_1.Component({
             selector: 'storage-list-cmp',
             pipes: [array_sort_pipe_1.ArraySortPipe],
-            template: "\n    <div>\n      <storage-list-item-cmp\n        *ngFor='let storageItem of cbsItems | arraySort:\"key\"'\n        [storageItem]='storageItem'\n        (updateItem)='updateItem.emit($event)'\n        (resetItem)='resetItem.emit($event)'>\n      </storage-list-item-cmp>\n      <br>\n    </div>\n  ",
+            template: "\n    <div>\n      <storage-list-item-cmp\n        *ngFor='let storageItem of cbsItems | arraySort:\"key\"'\n        [itemsToShow]='itemsToShow'\n        [storageItem]='storageItem'\n        (updateItem)='updateItem.emit($event)'\n        (resetItem)='resetItem.emit($event)'>\n      </storage-list-item-cmp>\n      <br>\n    </div>\n  ",
             directives: [storage_list_item_component_1.StorageListItemComponent]
         }), 
         __metadata('design:paramtypes', [])
@@ -49,4 +53,4 @@ var StorageListComponent = (function () {
     return StorageListComponent;
 }());
 exports.StorageListComponent = StorageListComponent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RvcmFnZS1saXN0LmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN0b3JhZ2UtbGlzdC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUFxRCxlQUNyRCxDQUFDLENBRG1FO0FBQ3BFLDRDQUF1QywrQkFDdkMsQ0FBQyxDQURxRTtBQUN0RSxnQ0FBNEIsNkJBRTVCLENBQUMsQ0FGd0Q7QUFrQnpEO0lBQUE7UUFFWSxlQUFVLEdBQUcsSUFBSSxtQkFBWSxFQUFFLENBQUM7UUFDaEMsY0FBUyxHQUFHLElBQUksbUJBQVksRUFBRSxDQUFDO1FBRWpDLGdCQUFXLEdBQUcsS0FBSyxDQUFDO1FBQ3JCLGFBQVEsR0FBRyxFQUFFLENBQUM7SUFTdkIsQ0FBQztJQVBDLDBDQUFXLEdBQVgsVUFBYSxPQUFPO1FBQ2xCLHFFQUFxRTtRQUNyRSxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxXQUFXLElBQUksT0FBTyxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUM7WUFDNUMsSUFBSSxDQUFDLFdBQVcsR0FBRyxJQUFJLENBQUM7WUFDeEIsSUFBSSxDQUFDLFFBQVEsR0FBRyxPQUFPLENBQUMsVUFBVSxDQUFDLFlBQVksQ0FBQTtRQUNqRCxDQUFDO0lBQ0gsQ0FBQztJQWJEO1FBQUMsWUFBSyxFQUFFOzs0REFBQTtJQUNSO1FBQUMsYUFBTSxFQUFFOzs0REFBQTtJQUNUO1FBQUMsYUFBTSxFQUFFOzsyREFBQTtJQW5CWDtRQUFDLGdCQUFTLENBQUM7WUFDVCxRQUFRLEVBQUUsa0JBQWtCO1lBQzVCLEtBQUssRUFBRSxDQUFDLCtCQUFhLENBQUM7WUFDdEIsUUFBUSxFQUFFLDZTQVVUO1lBQ0QsVUFBVSxFQUFFLENBQUMsc0RBQXdCLENBQUM7U0FDdkMsQ0FBQzs7NEJBQUE7SUFnQkYsMkJBQUM7QUFBRCxDQUFDLEFBZkQsSUFlQztBQWZZLDRCQUFvQix1QkFlaEMsQ0FBQSJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RvcmFnZS1saXN0LmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN0b3JhZ2UtbGlzdC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUFxRCxlQUNyRCxDQUFDLENBRG1FO0FBQ3BFLDRDQUF1QywrQkFDdkMsQ0FBQyxDQURxRTtBQUN0RSxnQ0FBNEIsNkJBRTVCLENBQUMsQ0FGd0Q7QUFtQnpEO0lBQUE7UUFHWSxlQUFVLEdBQUcsSUFBSSxtQkFBWSxFQUFFLENBQUM7UUFDaEMsY0FBUyxHQUFHLElBQUksbUJBQVksRUFBRSxDQUFDO1FBRWpDLGdCQUFXLEdBQUcsS0FBSyxDQUFDO1FBQ3JCLGFBQVEsR0FBRyxFQUFFLENBQUM7SUFTdkIsQ0FBQztJQVBDLDBDQUFXLEdBQVgsVUFBYSxPQUFPO1FBQ2xCLHFFQUFxRTtRQUNyRSxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxXQUFXLElBQUksT0FBTyxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUM7WUFDNUMsSUFBSSxDQUFDLFdBQVcsR0FBRyxJQUFJLENBQUM7WUFDeEIsSUFBSSxDQUFDLFFBQVEsR0FBRyxPQUFPLENBQUMsVUFBVSxDQUFDLFlBQVksQ0FBQTtRQUNqRCxDQUFDO0lBQ0gsQ0FBQztJQWREO1FBQUMsWUFBSyxFQUFFOzs0REFBQTtJQUNSO1FBQUMsWUFBSyxFQUFFOzs2REFBQTtJQUNSO1FBQUMsYUFBTSxFQUFFOzs0REFBQTtJQUNUO1FBQUMsYUFBTSxFQUFFOzsyREFBQTtJQXJCWDtRQUFDLGdCQUFTLENBQUM7WUFDVCxRQUFRLEVBQUUsa0JBQWtCO1lBQzVCLEtBQUssRUFBRSxDQUFDLCtCQUFhLENBQUM7WUFDdEIsUUFBUSxFQUFFLGtWQVdUO1lBQ0QsVUFBVSxFQUFFLENBQUMsc0RBQXdCLENBQUM7U0FDdkMsQ0FBQzs7NEJBQUE7SUFpQkYsMkJBQUM7QUFBRCxDQUFDLEFBaEJELElBZ0JDO0FBaEJZLDRCQUFvQix1QkFnQmhDLENBQUEifQ==

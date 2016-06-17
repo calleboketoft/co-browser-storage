@@ -72,6 +72,12 @@ import {CbsCmp} from 'co-browser-storage/co-browser-storage'
 export class AppComponent {}
 ```
 
+Only show selected items in GUI
+
+```html
+<cbs-cmp [itemsToShow]="['debugMode', 'otherItem']"></cbs-cmp>
+```
+
 ## Get value using CbsModel
 ```javascript
 import {CbsModel} from 'co-browser-storage/co-browser-storage'

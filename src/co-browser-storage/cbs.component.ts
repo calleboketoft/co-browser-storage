@@ -12,6 +12,7 @@ import {StorageListComponent} from './components/storage-list.component'
     <div>
       <storage-list-cmp
         [cbsReducer]='cbsReducer$ | async'
+        [itemsToShow]='itemsToShow'
         (updateItem)='cbsModel.updateItem($event)'
         (resetItem)='cbsModel.resetItem($event)'>
       </storage-list-cmp>
@@ -30,6 +31,7 @@ import {StorageListComponent} from './components/storage-list.component'
   `
 })
 export class CbsComponent {
+  @Input() itemsToShow:[string];
   public cbsReducer$ = this.store.select('cbsReducer');
 
   constructor (

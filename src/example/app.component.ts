@@ -14,7 +14,9 @@ import {
     <h2>co-browser-storage example app</h2>
     <br>
 
-    <cbs-cmp></cbs-cmp>
+    <cbs-cmp
+      [itemsToShow]='itemsToShow'>
+    </cbs-cmp>
 
     <p>
       <strong>debugMode value:</strong>
@@ -34,6 +36,11 @@ export class AppComponent {
   public debugMode$ = this.cbsModel.getItemByKey(DEBUG_MODE);
   public debugModeTrue$ = this.cbsModel.truthy(DEBUG_MODE);
   public debugAndOffline$ = this.cbsModel.truthy([DEBUG_MODE, OFFLINE_MODE]);
+  public itemsToShow = [
+    DEBUG_MODE,
+    OFFLINE_MODE,
+    MY_PASS
+  ]
 
   constructor (private cbsModel: CbsModel) {}
 }

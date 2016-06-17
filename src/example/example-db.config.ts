@@ -1,7 +1,9 @@
 export const NAMESPACE = 'cbsExample'
+
 export const DEBUG_MODE = 'debugMode'
 export const OFFLINE_MODE = 'offlineMode'
 export const MY_PASS = 'myPass'
+export const HIDDEN_ITEM = 'hiddenItem'
 
 export const exampleDbConfig = {
   namespace: NAMESPACE,
@@ -23,6 +25,12 @@ export const exampleDbConfig = {
       value: 'secret',
       storageType: 'localStorage',
       valueType: 'password'
+    },
+    {
+      key: HIDDEN_ITEM,
+      value: 'notInUi',
+      storageType: 'localStorage',
+      valueType: 'text'
     }
   ]
 }
