@@ -4,10 +4,11 @@ import {Component, Input} from '@angular/core'
 import {Store} from '@ngrx/store'
 import {CbsModel} from './services/cbs.model'
 import {StorageListComponent} from './components/storage-list.component'
+import {BatchUpdateComponent} from './components/batch-update.component'
 
 @Component({
   selector: 'cbs-cmp',
-  directives: [StorageListComponent],
+  directives: [StorageListComponent, BatchUpdateComponent],
   template: `
     <div>
       <storage-list-cmp
@@ -27,11 +28,17 @@ import {StorageListComponent} from './components/storage-list.component'
           </button>
         </div>
       </div>
+      <br>
+
+      <batch-update-component
+        (batchUpdate)='batchUpdate($event)'>
+      </batch-update-component>
     </div>
   `
 })
 export class CbsComponent {
   @Input() itemsToShow:[string];
+  @Input() showBatchUpdate: boolean;
   public cbsReducer$ = this.store.select('cbsReducer');
 
   constructor (
@@ -43,5 +50,9 @@ export class CbsComponent {
     if (confirm('Are you sure you want to reset all values to default?')) {
       this.cbsModel.resetAll()
     }
+  }
+
+  public batchUpdate (items) {
+    this.cbsModel.updateItems(items)
   }
 }
