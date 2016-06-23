@@ -31,6 +31,7 @@ import {BatchUpdateComponent} from './components/batch-update.component'
       <br>
 
       <batch-update-component
+        *ngIf='showBatchUpdate'
         (batchUpdate)='batchUpdate($event)'>
       </batch-update-component>
     </div>
