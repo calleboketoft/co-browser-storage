@@ -31,6 +31,14 @@ import {
       <strong>debugMode truthy</strong>
       {{debugModeTrue$ | async}}
     </p>
+
+    <br>
+
+    <h4>Basic version</h4>
+    <br>
+
+    <cbs-cmp>
+    </cbs-cmp>
   `
 })
 export class AppComponent {
