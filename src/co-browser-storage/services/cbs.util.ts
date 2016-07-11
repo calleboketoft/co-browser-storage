@@ -37,11 +37,13 @@ function initializeCbs (cbsConfigFromFile) {
   setCbsConfig(cbsConfigFromFile)
   var cbsConfigFromLS = getConfigFromLS()
   var resultCbsConfig
+
+  // first run, no existing state in localStorage
   if (!cbsConfigFromLS) {
-    // first run, no existing state in localStorage
     resultCbsConfig = initFromScratch(cbsConfigFromFile)
+
+  // a current state is existing, validate against schema
   } else {
-    // a current state is existing, validate against schema
     resultCbsConfig = initExisting(cbsConfigFromFile, cbsConfigFromLS)
   }
   setConfigToLS(resultCbsConfig)
@@ -71,15 +73,18 @@ function patchMemoryObjectAndStorageValues (cbsConfigFromLS) {
   let fixedMemoryObject = cbsConfigFromLS[cbsConfig.DB_MEMORY_KEY].map((memoryItem) => {
     var storageItemValue = getItemValueFromBrowserStorage(memoryItem)
     let fixedMemoryItem
+
+    // the storage item has been removed, put back from memory object
     if (typeof storageItemValue === 'undefined') {
-      // the storage item has been removed, put back from memory object
       saveItemToBrowserStorage(memoryItem)
       fixedMemoryItem = memoryItem
+
+    // the value in the memory object is the same as in browser storage
     } else if (storageItemValue === memoryItem.value) {
-      // the value in the memory object is the same as in browser storage
       fixedMemoryItem = memoryItem
+
+    // the storage value has been manually modified by a user, update the memory object
     } else {
-      // the storage value has been manually modified by a user, update the memory object
       fixedMemoryItem = Object.assign({}, memoryItem, {value: storageItemValue})
     }
     return fixedMemoryItem
@@ -97,11 +102,13 @@ function applyCbsConfigFileUpdates ({fileInitialState, memoryInitialState, memor
     let removedItem = !fileInitialState.find(fileItem => bsItem.key === fileItem.key)
     return removedItem
   })
+
   // find added items (exist in file but not memory object)
   let addedItems = fileInitialState.filter(fileItem => {
     let addedItem = !memoryInitialState.find(bsItem => fileItem.key === bsItem.key)
     return addedItem
   })
+  
   // find updated items (exist in both but value is different)
   let updatedItems = fileInitialState.filter(fileItem => {
     let foundBsItem = memoryInitialState.find(bsItem => fileItem.key === bsItem.key)
