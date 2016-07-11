@@ -4,7 +4,8 @@ import {CbsModel} from '../co-browser-storage/services/cbs.model'
 import {
   DEBUG_MODE,
   OFFLINE_MODE,
-  MY_PASS
+  MY_PASS,
+  SESSION_ITEM
 } from './example-db.config'
 
 @Component({
@@ -32,10 +33,10 @@ import {
       {{debugModeTrue$ | async}}
     </p>
 
-    <br>
+    <br >
 
     <h4>Basic version</h4>
-    <br>
+    <br >
 
     <cbs-cmp>
     </cbs-cmp>
@@ -48,7 +49,8 @@ export class AppComponent {
   public itemsToShow = [
     DEBUG_MODE,
     OFFLINE_MODE,
-    MY_PASS
+    MY_PASS,
+    SESSION_ITEM
   ]
 
   constructor (private cbsModel: CbsModel) {}
