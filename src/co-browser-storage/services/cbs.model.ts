@@ -38,25 +38,15 @@ export class CbsModel {
   public updateItem (updatedItem: IStorageItem) {
     // Get current item from LS to complete missing properties.
     let dbConfig = cbsUtil.getConfigFromLS()
-    let existingItem = dbConfig[cbsConfig.DB_MEMORY_KEY].find(memItem => updatedItem.key === memItem.key)
-    if (!existingItem) {
-      console.error('item does not exist in browser storage')
-    }
+    let existingItem = dbConfig[cbsConfig.DB_INITIAL_KEY].find(initialItem => {
+      return updatedItem.key === initialItem.key
+    })
     let updatedItemPatched = Object.assign({}, existingItem, updatedItem)
     cbsUtil.saveItemToBrowserStorage(updatedItemPatched)
-    this.updateItemInMemoryObj(updatedItemPatched)
     this.store.dispatch({
       type: UPDATE_CBS_ITEM,
       payload: updatedItemPatched
     })
-  }
-
-  private updateItemInMemoryObj (updatedItem) {
-    // Remove any existing item with the same key from memory object and add the new one
-    let dbConfig = cbsUtil.getConfigFromLS()
-    dbConfig[cbsConfig.DB_MEMORY_KEY] = dbConfig[cbsConfig.DB_MEMORY_KEY].filter(memItem => updatedItem.key !== memItem.key)
-    dbConfig[cbsConfig.DB_MEMORY_KEY].push(updatedItem)
-    cbsUtil.setConfigToLS(dbConfig)
   }
 
   // Convenience functions
