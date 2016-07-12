@@ -85,6 +85,7 @@ function initExisting (cbsConfigFromFile, cbsConfigFromLS) {
   handleUpdatedConfigItems (configFileDifferOptions)
 }
 
+// if an item has been manually removed from browser storage, restore it
 function restoreManuallyRemovedItems (cbsConfigFromLS) {
   cbsConfigFromLS[cbsConfig.DB_INITIAL_KEY].map((memoryItem) => {
     var storageItemValue = getItemValueFromBrowserStorage(memoryItem)

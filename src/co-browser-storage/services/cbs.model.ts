@@ -1,11 +1,3 @@
-// Handles all actions towards localStorage and sessionStorage
-
-// The config is saved like this in localStorage
-// CO_BROWSER_DB = {
-//   MEMORY_STATE: [], // current state from app
-//   INITIAL_SCHEMA: [] // initial state from when initializing app
-// }
-
 import {Injectable} from '@angular/core'
 import {Store} from '@ngrx/store'
 import {Observable} from 'rxjs/Rx'
@@ -15,10 +7,7 @@ import 'rxjs/add/operator/find'
 import {cbsConfig} from './cbs.config'
 import * as cbsUtil from './cbs.util'
 
-import {
-  UPDATE_CBS_ITEM,
-  ADDED_CBS_ITEMS
-} from './cbs.reducer'
+import {UPDATE_CBS_ITEM} from './cbs.reducer'
 
 export interface IStorageItem {
   key: string,
@@ -33,8 +22,7 @@ export class CbsModel {
 
   constructor (private store: Store<any>) {}
 
-  // Update
-  // ------
+  // Update in @ngrx/store and in browser storage
   public updateItem (updatedItem: IStorageItem) {
     // Get current item from LS to complete missing properties.
     let dbConfig = cbsUtil.getConfigFromLS()
@@ -49,13 +37,12 @@ export class CbsModel {
     })
   }
 
-  // Convenience functions
-  // ---------------------
-
+  // Update a list of items
   public updateItems (items: Array<IStorageItem>) {
     items.forEach(i => this.updateItem(i))
   }
 
+  // Reset item to original value
   public resetItem (itemToReset: IStorageItem) {
     let initialItem = cbsConfig.initialState.find((schemaItem) => {
       return itemToReset.key === schemaItem.key
@@ -66,6 +53,7 @@ export class CbsModel {
     }
   }
 
+  // Reset all items to original value
   public resetAll () {
     this.updateItems(cbsConfig.initialState)
   }
