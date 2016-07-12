@@ -9,7 +9,9 @@
     "watch": "tsc -w",
     "typescript": "tsc",
     "sass": "gulp sass",
-    "typings": "typings"
+    "typings": "typings",
+    "test-unit": "karma start",
+    "test": "npm run test-unit"
   },
   "config": {
     "ghooks": {
@@ -37,7 +39,7 @@
     "@angular/common": "2.0.0-rc.4",
     "@angular/compiler": "2.0.0-rc.4",
     "@angular/core": "2.0.0-rc.4",
-    "@angular/forms": "0.1.1",
+    "@angular/forms": "0.2.0",
     "@angular/platform-browser": "2.0.0-rc.4",
     "@angular/platform-browser-dynamic": "2.0.0-rc.4",
     "@ngrx/core": "1.0.1",
@@ -48,6 +50,11 @@
     "ghooks": "1.0.3",
     "gulp": "3.9.1",
     "gulp-sass": "2.2.0",
+    "jasmine-core": "2.4.1",
+    "karma": "0.13.22",
+    "karma-chrome-launcher": "1.0.1",
+    "karma-jasmine": "1.0.2",
+    "karma-systemjs": "0.14.0",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.6",
     "systemjs": "0.19.27",
