@@ -1,6 +1,6 @@
 {
   "name": "co-browser-storage",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Browser storage mangement for Angular 2 using ngrx/store",
   "main": "index.js",
   "scripts": {
