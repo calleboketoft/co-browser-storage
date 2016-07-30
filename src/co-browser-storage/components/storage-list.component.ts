@@ -8,11 +8,11 @@ import {ArraySortPipe} from '../services/array-sort.pipe'
   template: `
     <div>
       <storage-list-item-cmp
-        *ngFor='let storageItem of cbsItems | arraySort:"key"'
-        [itemsToShow]='itemsToShow'
-        [storageItem]='storageItem'
-        (updateItem)='updateItem.emit($event)'
-        (resetItem)='resetItem.emit($event)'>
+        *ngFor="let storageItem of cbsItems | arraySort:'key'"
+        [itemsToShow]="itemsToShow"
+        [storageItem]="storageItem"
+        (updateItem)="updateItem.emit($event)"
+        (resetItem)="resetItem.emit($event)">
       </storage-list-item-cmp>
       <br>
     </div>

@@ -12,18 +12,18 @@ import {BatchUpdateComponent} from './components/batch-update.component'
   template: `
     <div>
       <storage-list-cmp
-        [cbsReducer]='cbsReducer$ | async'
-        [itemsToShow]='itemsToShow'
-        (updateItem)='cbsModel.updateItem($event)'
-        (resetItem)='cbsModel.resetItem($event)'>
+        [cbsReducer]="cbsReducer$ | async"
+        [itemsToShow]="itemsToShow"
+        (updateItem)="cbsModel.updateItem($event)"
+        (resetItem)="cbsModel.resetItem($event)">
       </storage-list-cmp>
 
-      <div class='row'>
+      <div class="row" *ngIf="showResetAll">
         <!-- match button position -->
-        <div class='col-lg-9 col-xs-8'>
+        <div class="col-lg-9 col-xs-8">
         </div>
-        <div class='col-lg-3 col-xs-4'>
-          <button class='btn btn-warning' (click)='resetAll()'>
+        <div class="col-lg-3 col-xs-4">
+          <button class="btn btn-outline-warning" (click)="resetAll()">
             Reset all
           </button>
         </div>
@@ -31,8 +31,8 @@ import {BatchUpdateComponent} from './components/batch-update.component'
       <br>
 
       <batch-update-component
-        *ngIf='showBatchUpdate'
-        (batchUpdate)='batchUpdate($event)'>
+        *ngIf="showBatchUpdate"
+        (batchUpdate)="batchUpdate($event)">
       </batch-update-component>
     </div>
   `
@@ -40,6 +40,7 @@ import {BatchUpdateComponent} from './components/batch-update.component'
 export class CbsComponent {
   @Input() itemsToShow:[string];
   @Input() showBatchUpdate: boolean;
+  @Input() showResetAll: boolean;
   public cbsReducer$ = this.store.select('cbsReducer');
 
   constructor (

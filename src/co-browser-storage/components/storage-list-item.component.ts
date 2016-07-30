@@ -14,18 +14,18 @@ import {REACTIVE_FORM_DIRECTIVES, FormControl} from '@angular/forms'
     }
   `],
   template: `
-    <div class='row' [hidden]='itemToHide(storageItem)'>
-      <div class='col-lg-3 col-xs-4'>
+    <div class="row" [hidden]="itemToHide(storageItem)">
+      <div class="col-lg-3 col-xs-4">
         <strong>{{storageItem.key}}</strong><br>
-        <span class='tiny'>{{storageItem.storageType}}</span>
+        <span class="tiny">{{storageItem.storageType}}</span>
       </div>
-      <div class='col-lg-6 col-xs-4'>
-        <input [type]='storageItem.valueType' class='form-control'
-          [formControl]='storageItemInput'>
+      <div class="col-lg-6 col-xs-4">
+        <input [type]="storageItem.valueType" class="form-control"
+          [formControl]="storageItemInput">
       </div>
-      <div class='col-lg-3 col-xs-4'>
-        <button class='btn btn-info'
-          (click)='resetItem.emit(storageItem)'>
+      <div class="col-lg-3 col-xs-4">
+        <button class="btn btn-outline-warning"
+          (click)="resetItem.emit(storageItem)">
           Reset
         </button>
       </div>

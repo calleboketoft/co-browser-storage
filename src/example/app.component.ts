@@ -17,7 +17,8 @@ import {
 
     <cbs-cmp
       [itemsToShow]='itemsToShow'
-      [showBatchUpdate]='true'>
+      [showBatchUpdate]='true'
+      [showResetAll]='true'>
     </cbs-cmp>
 
     <p>
