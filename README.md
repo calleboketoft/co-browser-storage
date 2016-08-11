@@ -40,7 +40,7 @@ import {
   initializeBrowserStorage,
   getInitialBrowserStorageState,
   BrowserStorageModule
-} from '@calle/ng2-browser-storage/browser-storage'
+} from '@calle/ng2-browser-storage'
 
 // Populate localStorage and sessionStorage before Angular 2 starts up
 initializeBrowserStorage(myBrowserStorageConfig)
@@ -75,7 +75,7 @@ Only show selected items in GUI and show reset-all button
 ## Get value
 
 ```javascript
-import {BrowserStorageModel} from '@calle/ng2-browser-storage/browser-storage'
+import {BrowserStorageModel} from '@calle/ng2-browser-storage'
 ...
 let debugMode$ = browserStorageModel.getItemByKey('debugMode')
 ```
@@ -93,7 +93,7 @@ let debugMode$ = browserStorageReducer$
 ## Update value
 
 ```javascript
-import {BrowserStorageModel} from '@calle/ng2-browser-storage/browser-storage'
+import {BrowserStorageModel} from '@calle/ng2-browser-storage'
 ...
 browserStorageModel.updateItem({
   key: 'debugMode',
