@@ -3,7 +3,7 @@
  * <li *ngFor="let item of array | arraySort:'-name'">{{item.name}}</li>
  */
 
-import {Pipe} from '@angular/core'
+import { Pipe } from '@angular/core'
 
 @Pipe({
   name: 'arraySort'

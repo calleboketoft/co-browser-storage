@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core'
-import {Store} from '@ngrx/store'
-import {Observable} from 'rxjs/Rx'
+import { Injectable } from '@angular/core'
+import { Store } from '@ngrx/store'
+import { Observable } from 'rxjs/Rx'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/find'
 
-import {cbsConfig} from './cbs.config'
+import { cbsConfig } from './cbs.config'
 import * as cbsUtil from './cbs.util'
 
-import {UPDATE_CBS_ITEM} from './cbs.reducer'
+import { UPDATE_CBS_ITEM } from './cbs.reducer'
 
 export interface IStorageItem {
   key: string,

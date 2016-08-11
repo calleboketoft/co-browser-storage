@@ -1,6 +1,5 @@
-import {Component} from '@angular/core'
-import {CbsComponent} from '../co-browser-storage/cbs.component'
-import {CbsModel} from '../co-browser-storage/services/cbs.model'
+import { Component } from '@angular/core'
+import { CbsModel } from '../co-browser-storage/services/cbs.model'
 import {
   DEBUG_MODE,
   OFFLINE_MODE,
@@ -10,7 +9,6 @@ import {
 
 @Component({
   selector: 'app-cmp',
-  directives: [CbsComponent],
   template: `
     <h2>co-browser-storage example app</h2>
     <br>

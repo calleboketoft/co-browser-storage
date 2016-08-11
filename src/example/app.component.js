@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var cbs_component_1 = require('../co-browser-storage/cbs.component');
 var cbs_model_1 = require('../co-browser-storage/services/cbs.model');
 var example_db_config_1 = require('./example-db.config');
 var AppComponent = (function () {
@@ -28,7 +27,6 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app-cmp',
-            directives: [cbs_component_1.CbsComponent],
             template: "\n    <h2>co-browser-storage example app</h2>\n    <br>\n\n    <cbs-cmp\n      [itemsToShow]='itemsToShow'\n      [showBatchUpdate]='true'\n      [showResetAll]='true'>\n    </cbs-cmp>\n\n    <p>\n      <strong>debugMode value:</strong>\n      {{(debugMode$ | async).value}}\n    </p>\n    <p>\n      <strong>debugMode && offlineMode truthy:</strong>\n      {{debugAndOffline$ | async}}\n    </p>\n    <p>\n      <strong>debugMode truthy</strong>\n      {{debugModeTrue$ | async}}\n    </p>\n\n    <br >\n\n    <h4>Basic version</h4>\n    <br >\n\n    <cbs-cmp>\n    </cbs-cmp>\n  "
         }), 
         __metadata('design:paramtypes', [cbs_model_1.CbsModel])
@@ -36,4 +34,4 @@ var AppComponent = (function () {
     return AppComponent;
 }());
 exports.AppComponent = AppComponent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUF3QixlQUN4QixDQUFDLENBRHNDO0FBQ3ZDLDhCQUEyQixxQ0FDM0IsQ0FBQyxDQUQrRDtBQUNoRSwwQkFBdUIsMENBQ3ZCLENBQUMsQ0FEZ0U7QUFDakUsa0NBS08scUJBRVAsQ0FBQyxDQUYyQjtBQXFDNUI7SUFXRSxzQkFBcUIsUUFBa0I7UUFBbEIsYUFBUSxHQUFSLFFBQVEsQ0FBVTtRQVZoQyxlQUFVLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQyxZQUFZLENBQUMsOEJBQVUsQ0FBQyxDQUFDO1FBQ3BELG1CQUFjLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQyxNQUFNLENBQUMsOEJBQVUsQ0FBQyxDQUFDO1FBQ2xELHFCQUFnQixHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsTUFBTSxDQUFDLENBQUMsOEJBQVUsRUFBRSxnQ0FBWSxDQUFDLENBQUMsQ0FBQztRQUNwRSxnQkFBVyxHQUFHO1lBQ25CLDhCQUFVO1lBQ1YsZ0NBQVk7WUFDWiwyQkFBTztZQUNQLGdDQUFZO1NBQ2IsQ0FBQTtJQUV5QyxDQUFDO0lBOUM3QztRQUFDLGdCQUFTLENBQUM7WUFDVCxRQUFRLEVBQUUsU0FBUztZQUNuQixVQUFVLEVBQUUsQ0FBQyw0QkFBWSxDQUFDO1lBQzFCLFFBQVEsRUFBRSx1a0JBOEJUO1NBQ0YsQ0FBQzs7b0JBQUE7SUFhRixtQkFBQztBQUFELENBQUMsQUFaRCxJQVlDO0FBWlksb0JBQVksZUFZeEIsQ0FBQSJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUEwQixlQUMxQixDQUFDLENBRHdDO0FBQ3pDLDBCQUF5QiwwQ0FDekIsQ0FBQyxDQURrRTtBQUNuRSxrQ0FLTyxxQkFFUCxDQUFDLENBRjJCO0FBb0M1QjtJQVdFLHNCQUFxQixRQUFrQjtRQUFsQixhQUFRLEdBQVIsUUFBUSxDQUFVO1FBVmhDLGVBQVUsR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLFlBQVksQ0FBQyw4QkFBVSxDQUFDLENBQUM7UUFDcEQsbUJBQWMsR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyw4QkFBVSxDQUFDLENBQUM7UUFDbEQscUJBQWdCLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQyxNQUFNLENBQUMsQ0FBQyw4QkFBVSxFQUFFLGdDQUFZLENBQUMsQ0FBQyxDQUFDO1FBQ3BFLGdCQUFXLEdBQUc7WUFDbkIsOEJBQVU7WUFDVixnQ0FBWTtZQUNaLDJCQUFPO1lBQ1AsZ0NBQVk7U0FDYixDQUFBO0lBRXlDLENBQUM7SUE3QzdDO1FBQUMsZ0JBQVMsQ0FBQztZQUNULFFBQVEsRUFBRSxTQUFTO1lBQ25CLFFBQVEsRUFBRSx1a0JBOEJUO1NBQ0YsQ0FBQzs7b0JBQUE7SUFhRixtQkFBQztBQUFELENBQUMsQUFaRCxJQVlDO0FBWlksb0JBQVksZUFZeEIsQ0FBQSJ9

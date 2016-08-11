@@ -1,10 +1,9 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core'
-import {Store} from '@ngrx/store'
-import {REACTIVE_FORM_DIRECTIVES, FormControl} from '@angular/forms'
+import { Component, Input, Output, EventEmitter } from '@angular/core'
+import { Store} from '@ngrx/store'
+import { FormControl } from '@angular/forms'
 
 @Component({
   selector: 'storage-list-item-cmp',
-  directives: [REACTIVE_FORM_DIRECTIVES],
   styles: [`
     .row {
       margin-bottom: 10px;

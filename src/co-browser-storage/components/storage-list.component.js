@@ -9,8 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var storage_list_item_component_1 = require('./storage-list-item.component');
-var array_sort_pipe_1 = require('../services/array-sort.pipe');
 var StorageListComponent = (function () {
     function StorageListComponent() {
         this.updateItem = new core_1.EventEmitter();
@@ -44,13 +42,11 @@ var StorageListComponent = (function () {
     StorageListComponent = __decorate([
         core_1.Component({
             selector: 'storage-list-cmp',
-            pipes: [array_sort_pipe_1.ArraySortPipe],
-            template: "\n    <div>\n      <storage-list-item-cmp\n        *ngFor=\"let storageItem of cbsItems | arraySort:'key'\"\n        [itemsToShow]=\"itemsToShow\"\n        [storageItem]=\"storageItem\"\n        (updateItem)=\"updateItem.emit($event)\"\n        (resetItem)=\"resetItem.emit($event)\">\n      </storage-list-item-cmp>\n      <br>\n    </div>\n  ",
-            directives: [storage_list_item_component_1.StorageListItemComponent]
+            template: "\n    <div>\n      <storage-list-item-cmp\n        *ngFor=\"let storageItem of cbsItems | arraySort:'key'\"\n        [itemsToShow]=\"itemsToShow\"\n        [storageItem]=\"storageItem\"\n        (updateItem)=\"updateItem.emit($event)\"\n        (resetItem)=\"resetItem.emit($event)\">\n      </storage-list-item-cmp>\n      <br>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], StorageListComponent);
     return StorageListComponent;
 }());
 exports.StorageListComponent = StorageListComponent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RvcmFnZS1saXN0LmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN0b3JhZ2UtbGlzdC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUFxRCxlQUNyRCxDQUFDLENBRG1FO0FBQ3BFLDRDQUF1QywrQkFDdkMsQ0FBQyxDQURxRTtBQUN0RSxnQ0FBNEIsNkJBRTVCLENBQUMsQ0FGd0Q7QUFtQnpEO0lBQUE7UUFHWSxlQUFVLEdBQUcsSUFBSSxtQkFBWSxFQUFFLENBQUM7UUFDaEMsY0FBUyxHQUFHLElBQUksbUJBQVksRUFBRSxDQUFDO1FBRWpDLGdCQUFXLEdBQUcsS0FBSyxDQUFDO1FBQ3JCLGFBQVEsR0FBRyxFQUFFLENBQUM7SUFTdkIsQ0FBQztJQVBDLDBDQUFXLEdBQVgsVUFBYSxPQUFPO1FBQ2xCLHFFQUFxRTtRQUNyRSxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxXQUFXLElBQUksT0FBTyxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUM7WUFDNUMsSUFBSSxDQUFDLFdBQVcsR0FBRyxJQUFJLENBQUM7WUFDeEIsSUFBSSxDQUFDLFFBQVEsR0FBRyxPQUFPLENBQUMsVUFBVSxDQUFDLFlBQVksQ0FBQTtRQUNqRCxDQUFDO0lBQ0gsQ0FBQztJQWREO1FBQUMsWUFBSyxFQUFFOzs0REFBQTtJQUNSO1FBQUMsWUFBSyxFQUFFOzs2REFBQTtJQUNSO1FBQUMsYUFBTSxFQUFFOzs0REFBQTtJQUNUO1FBQUMsYUFBTSxFQUFFOzsyREFBQTtJQXJCWDtRQUFDLGdCQUFTLENBQUM7WUFDVCxRQUFRLEVBQUUsa0JBQWtCO1lBQzVCLEtBQUssRUFBRSxDQUFDLCtCQUFhLENBQUM7WUFDdEIsUUFBUSxFQUFFLDBWQVdUO1lBQ0QsVUFBVSxFQUFFLENBQUMsc0RBQXdCLENBQUM7U0FDdkMsQ0FBQzs7NEJBQUE7SUFpQkYsMkJBQUM7QUFBRCxDQUFDLEFBaEJELElBZ0JDO0FBaEJZLDRCQUFvQix1QkFnQmhDLENBQUEifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RvcmFnZS1saXN0LmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN0b3JhZ2UtbGlzdC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUF1RCxlQUV2RCxDQUFDLENBRnFFO0FBaUJ0RTtJQUFBO1FBR1ksZUFBVSxHQUFHLElBQUksbUJBQVksRUFBRSxDQUFDO1FBQ2hDLGNBQVMsR0FBRyxJQUFJLG1CQUFZLEVBQUUsQ0FBQztRQUVqQyxnQkFBVyxHQUFHLEtBQUssQ0FBQztRQUNyQixhQUFRLEdBQUcsRUFBRSxDQUFDO0lBU3ZCLENBQUM7SUFQQywwQ0FBVyxHQUFYLFVBQWEsT0FBTztRQUNsQixxRUFBcUU7UUFDckUsRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsV0FBVyxJQUFJLE9BQU8sQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDO1lBQzVDLElBQUksQ0FBQyxXQUFXLEdBQUcsSUFBSSxDQUFDO1lBQ3hCLElBQUksQ0FBQyxRQUFRLEdBQUcsT0FBTyxDQUFDLFVBQVUsQ0FBQyxZQUFZLENBQUE7UUFDakQsQ0FBQztJQUNILENBQUM7SUFkRDtRQUFDLFlBQUssRUFBRTs7NERBQUE7SUFDUjtRQUFDLFlBQUssRUFBRTs7NkRBQUE7SUFDUjtRQUFDLGFBQU0sRUFBRTs7NERBQUE7SUFDVDtRQUFDLGFBQU0sRUFBRTs7MkRBQUE7SUFuQlg7UUFBQyxnQkFBUyxDQUFDO1lBQ1QsUUFBUSxFQUFFLGtCQUFrQjtZQUM1QixRQUFRLEVBQUUsMFZBV1Q7U0FDRixDQUFDOzs0QkFBQTtJQWlCRiwyQkFBQztBQUFELENBQUMsQUFoQkQsSUFnQkM7QUFoQlksNEJBQW9CLHVCQWdCaEMsQ0FBQSJ9

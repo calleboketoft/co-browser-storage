@@ -1,10 +1,7 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core'
-import {StorageListItemComponent} from './storage-list-item.component'
-import {ArraySortPipe} from '../services/array-sort.pipe'
+import { Component, Input, Output, EventEmitter } from '@angular/core'
 
 @Component({
   selector: 'storage-list-cmp',
-  pipes: [ArraySortPipe],
   template: `
     <div>
       <storage-list-item-cmp
@@ -16,8 +13,7 @@ import {ArraySortPipe} from '../services/array-sort.pipe'
       </storage-list-item-cmp>
       <br>
     </div>
-  `,
-  directives: [StorageListItemComponent]
+  `
 })
 export class StorageListComponent {
   @Input() cbsReducer;

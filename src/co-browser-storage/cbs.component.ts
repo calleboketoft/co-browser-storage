@@ -1,14 +1,11 @@
 import '../polyfills'
 
-import {Component, Input} from '@angular/core'
-import {Store} from '@ngrx/store'
-import {CbsModel} from './services/cbs.model'
-import {StorageListComponent} from './components/storage-list.component'
-import {BatchUpdateComponent} from './components/batch-update.component'
+import { Component, Input } from '@angular/core'
+import { Store } from '@ngrx/store'
+import { CbsModel } from './services/cbs.model'
 
 @Component({
   selector: 'cbs-cmp',
-  directives: [StorageListComponent, BatchUpdateComponent],
   template: `
     <div>
       <storage-list-cmp

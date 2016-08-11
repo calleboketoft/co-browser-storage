@@ -10,7 +10,7 @@ System.config({
     'rxjs': 'node_modules/rxjs'
   },
   packages: {
-    '../': {defaultExtension: 'js'},
+    '': {defaultExtension: 'js'},
     'src': {defaultExtension: 'js'},
     'rxjs': {defaultExtension: 'js'},
     '@ngrx/core': {defaultExtension: 'js', main: 'indexjs'},

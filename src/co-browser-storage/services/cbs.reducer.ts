@@ -1,4 +1,4 @@
-import {Reducer, Action} from '@ngrx/store'
+import { Reducer, Action } from '@ngrx/store'
 
 export const ADDED_CBS_ITEMS = 'ADDED_CBS_ITEMS'
 export const UPDATE_CBS_ITEM = 'UPDATE_CBS_ITEM'
