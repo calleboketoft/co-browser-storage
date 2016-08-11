@@ -1,4 +1,4 @@
-# co-browser-storage
+# ng2-browser-storage
 
 Manage browser storage variables in a convenient way using Angular 2 and @ngrx/store.
 
@@ -10,9 +10,9 @@ Manage browser storage variables in a convenient way using Angular 2 and @ngrx/s
 
 ## Usage
 
-- `npm install --save co-browser-storage`
+- `npm install --save @calle/ng2-browser-storage`
 
-Create browser storage config file `my-browser-storage-config.ts` where you specify all your browser storage variables.
+Create browser storage config file `my-browser-storage.config.ts` where you specify all your browser storage variables.
 
 ```javascript
 export const NAMESPACE = 'myBrowserStore'
@@ -35,53 +35,49 @@ export const myBrowserStorageConfig = {
 Initialize the store and provide the model
 
 ```javascript
-import {provideStore} from '@ngrx/store'
-import {cbsReducer} from 'co-browser-storage/co-browser-storage'
 import {
-  initialzeCbs,
-  getInitialCbsState,
-  CbsModel
-} from 'co-browser-storage/co-browser-storage'
-import {myBrowserStorageConfig} from './my-browser-storage-config'
+  browserStorageReducer,
+  initializeBrowserStorage,
+  getInitialBrowserStorageState,
+  BrowserStorageModule
+} from '@calle/ng2-browser-storage/browser-storage'
 
-initializeCbs(myBrowserStorageConfig)
+// Populate localStorage and sessionStorage before Angular 2 starts up
+initializeBrowserStorage(myBrowserStorageConfig)
 
-bootstrap(AppCmp, [
-  CbsModel,
-  provideStore({
-    cbsReducer
-  }, {
-    cbsReducer: getInitialCbsState()
-  })
-])
+@NgModule({
+  imports: [BrowserStorageModule],
+  providers: [
+    provideStore({
+      browserStorageReducer
+    }, {
+      browserStorageReducer: getInitialBrowserStorageState()
+    })
+  ]
+})
 ```
 
 Using the GUI component for managing browser storage variables
 
-```javascript
-import {CbsCmp} from 'co-browser-storage/co-browser-storage'
-
-@Component({
-  directives: [CbsCmp],
-  template: `
-    <cbs-cmp></cbs-cmp>
-  `
-})
-export class AppComponent {}
+```html
+  <browser-storage-manager></browser-storage-manager>
 ```
 
-Only show selected items in GUI
+Only show selected items in GUI and show reset-all button
 
 ```html
-<cbs-cmp [itemsToShow]="['debugMode', 'otherItem']"></cbs-cmp>
+<browser-storage-manager
+  [itemsToShow]="['debugMode', 'otherItem']"
+  [showResetAll="true">
+</browser-storage-manager>
 ```
 
 ## Get value
 
 ```javascript
-import {CbsModel} from 'co-browser-storage/co-browser-storage'
+import {BrowserStorageModel} from '@calle/ng2-browser-storage/browser-storage'
 ...
-let debugMode$ = cbsModel.getItemByKey('debugMode')
+let debugMode$ = browserStorageModel.getItemByKey('debugMode')
 ```
 
 Or using store directly
@@ -89,22 +85,23 @@ Or using store directly
 ```javascript
 import {Store} from '@ngrx/store'
 ...
-let cbsReducer$ = store.select('cbsReducer')
-let debugMode$ = cbsReducer$.map(cbs => cbs.find(i => i.key === 'debugMode'))
+let browserStorageReducer$ = store.select('browserStorageReducer')
+let debugMode$ = browserStorageReducer$
+  .map(cbs => cbs.find(i => i.key === 'debugMode'))
 ```
 
 ## Update value
 
 ```javascript
-import {CbsModel} from 'co-browser-storage/co-browser-storage'
+import {BrowserStorageModel} from '@calle/ng2-browser-storage/browser-storage'
 ...
-cbsModel.updateItem({
+browserStorageModel.updateItem({
   key: 'debugMode',
   value: 'false'
 })
 
 // Multiple at once
-cbsModel.updateItems([
+browserStorageModel.updateItems([
   {
     key: 'debugMode',
     value: 'false'
@@ -120,10 +117,8 @@ cbsModel.updateItems([
 ## Get boolean true if value is 'true'
 
 ```javascript
-import {CbsModel} from 'co-browser-storage/co-browser-storage'
-...
 // cbsModel.truthy takes a string or an array of strings
-let isDebugMode$ = cbsModel.truthy('debugMode')
+let isDebugMode$ = browserStorageModel.truthy('debugMode')
 ```
 
 ## Developing

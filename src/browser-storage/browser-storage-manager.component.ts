@@ -30,7 +30,6 @@ import { BrowserStorageModel } from './services/browser-storage.model'
 })
 export class BrowserStorageManagerComponent {
   @Input() itemsToShow: [string];
-  @Input() showBatchUpdate: boolean;
   @Input() showResetAll: boolean;
   public browserStorageReducer$ = this.store.select('browserStorageReducer');
 

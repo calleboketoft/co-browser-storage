@@ -15,7 +15,6 @@ import {
 
     <browser-storage-manager
       [itemsToShow]='itemsToShow'
-      [showBatchUpdate]='true'
       [showResetAll]='true'>
     </browser-storage-manager>
 
