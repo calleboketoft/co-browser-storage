@@ -6,22 +6,25 @@ import { provideStore } from '@ngrx/store'
 import { exampleDbConfig } from './example-db.config'
 import {
   browserStorageReducer,
-  initializeCbs,
-  getInitialCbsState,
+  initializeBrowserStorage,
+  getInitialBrowserStorageState,
   BrowserStorageModule
 } from '../../browser-storage'
 
-initializeCbs(exampleDbConfig)
+initializeBrowserStorage(exampleDbConfig)
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    BrowserStorageModule
+  ],
   declarations: [AppComponent],
-  imports: [BrowserModule, BrowserStorageModule],
   bootstrap: [AppComponent],
   providers: [
     provideStore({
       browserStorageReducer
     }, {
-      browserStorageReducer: getInitialCbsState()
+      browserStorageReducer: getInitialBrowserStorageState()
     })
   ]
 })

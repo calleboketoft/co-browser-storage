@@ -6,9 +6,9 @@ import {
 export {
   getConfigFromLS,
   setConfigToLS,
-  initializeCbs,
+  initializeBrowserStorage,
   getFullBSKey,
-  getInitialCbsState,
+  getInitialBrowserStorageState,
   saveItemToBrowserStorage
 }
 
@@ -30,7 +30,7 @@ function setConfigToLS (configObj) {
 
 // go through memorized file config and get all separate browser storage values
 // from keys
-function getInitialCbsState () {
+function getInitialBrowserStorageState () {
   let memorizedFile = getConfigFromLS()[browserStorageConfig.DB_INITIAL_KEY]
   return memorizedFile.map(memItem => {
     let browserStorageValue = window[memItem.storageType]['getItem'](getFullBSKey(memItem.key))
@@ -42,7 +42,7 @@ function getInitialCbsState () {
   })
 }
 
-function initializeCbs (cbsConfigFromFile) {
+function initializeBrowserStorage (cbsConfigFromFile) {
   // The "ruling" config is the one from the file, set it first. If, for
   // example, namespace has changed, it will be an initFromScratch
   setBrowserStorageConfig(cbsConfigFromFile)
