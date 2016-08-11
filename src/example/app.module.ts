@@ -9,7 +9,7 @@ import {
   initializeBrowserStorage,
   getInitialBrowserStorageState,
   BrowserStorageModule
-} from '../../browser-storage'
+} from '../../'
 
 initializeBrowserStorage(exampleDbConfig)
 

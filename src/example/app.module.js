@@ -13,8 +13,8 @@ var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('./app.component');
 var store_1 = require('@ngrx/store');
 var example_db_config_1 = require('./example-db.config');
-var browser_storage_1 = require('../../browser-storage');
-browser_storage_1.initializeBrowserStorage(example_db_config_1.exampleDbConfig);
+var _1 = require('../../');
+_1.initializeBrowserStorage(example_db_config_1.exampleDbConfig);
 var AppModule = (function () {
     function AppModule() {
     }
@@ -22,15 +22,15 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [
                 platform_browser_1.BrowserModule,
-                browser_storage_1.BrowserStorageModule
+                _1.BrowserStorageModule
             ],
             declarations: [app_component_1.AppComponent],
             bootstrap: [app_component_1.AppComponent],
             providers: [
                 store_1.provideStore({
-                    browserStorageReducer: browser_storage_1.browserStorageReducer
+                    browserStorageReducer: _1.browserStorageReducer
                 }, {
-                    browserStorageReducer: browser_storage_1.getInitialBrowserStorageState()
+                    browserStorageReducer: _1.getInitialBrowserStorageState()
                 })
             ]
         }), 
@@ -39,4 +39,4 @@ var AppModule = (function () {
     return AppModule;
 }());
 exports.AppModule = AppModule;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLm1vZHVsZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImFwcC5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUF5QixlQUN6QixDQUFDLENBRHVDO0FBQ3hDLGlDQUE4QiwyQkFDOUIsQ0FBQyxDQUR3RDtBQUN6RCw4QkFBNkIsaUJBRTdCLENBQUMsQ0FGNkM7QUFFOUMsc0JBQTZCLGFBQzdCLENBQUMsQ0FEeUM7QUFDMUMsa0NBQWdDLHFCQUNoQyxDQUFDLENBRG9EO0FBQ3JELGdDQUtPLHVCQUVQLENBQUMsQ0FGNkI7QUFFOUIsMENBQXdCLENBQUMsbUNBQWUsQ0FBQyxDQUFBO0FBaUJ6QztJQUFBO0lBQXlCLENBQUM7SUFmMUI7UUFBQyxlQUFRLENBQUM7WUFDUixPQUFPLEVBQUU7Z0JBQ1AsZ0NBQWE7Z0JBQ2Isc0NBQW9CO2FBQ3JCO1lBQ0QsWUFBWSxFQUFFLENBQUMsNEJBQVksQ0FBQztZQUM1QixTQUFTLEVBQUUsQ0FBQyw0QkFBWSxDQUFDO1lBQ3pCLFNBQVMsRUFBRTtnQkFDVCxvQkFBWSxDQUFDO29CQUNYLDhEQUFxQjtpQkFDdEIsRUFBRTtvQkFDRCxxQkFBcUIsRUFBRSwrQ0FBNkIsRUFBRTtpQkFDdkQsQ0FBQzthQUNIO1NBQ0YsQ0FBQzs7aUJBQUE7SUFDdUIsZ0JBQUM7QUFBRCxDQUFDLEFBQTFCLElBQTBCO0FBQWIsaUJBQVMsWUFBSSxDQUFBIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLm1vZHVsZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImFwcC5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUF5QixlQUN6QixDQUFDLENBRHVDO0FBQ3hDLGlDQUE4QiwyQkFDOUIsQ0FBQyxDQUR3RDtBQUN6RCw4QkFBNkIsaUJBRTdCLENBQUMsQ0FGNkM7QUFFOUMsc0JBQTZCLGFBQzdCLENBQUMsQ0FEeUM7QUFDMUMsa0NBQWdDLHFCQUNoQyxDQUFDLENBRG9EO0FBQ3JELGlCQUtPLFFBRVAsQ0FBQyxDQUZjO0FBRWYsMkJBQXdCLENBQUMsbUNBQWUsQ0FBQyxDQUFBO0FBaUJ6QztJQUFBO0lBQXlCLENBQUM7SUFmMUI7UUFBQyxlQUFRLENBQUM7WUFDUixPQUFPLEVBQUU7Z0JBQ1AsZ0NBQWE7Z0JBQ2IsdUJBQW9CO2FBQ3JCO1lBQ0QsWUFBWSxFQUFFLENBQUMsNEJBQVksQ0FBQztZQUM1QixTQUFTLEVBQUUsQ0FBQyw0QkFBWSxDQUFDO1lBQ3pCLFNBQVMsRUFBRTtnQkFDVCxvQkFBWSxDQUFDO29CQUNYLCtDQUFxQjtpQkFDdEIsRUFBRTtvQkFDRCxxQkFBcUIsRUFBRSxnQ0FBNkIsRUFBRTtpQkFDdkQsQ0FBQzthQUNIO1NBQ0YsQ0FBQzs7aUJBQUE7SUFDdUIsZ0JBQUM7QUFBRCxDQUFDLEFBQTFCLElBQTBCO0FBQWIsaUJBQVMsWUFBSSxDQUFBIn0=
