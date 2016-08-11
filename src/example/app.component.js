@@ -9,14 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var cbs_model_1 = require('../co-browser-storage/services/cbs.model');
+var browser_storage_model_1 = require('../browser-storage/services/browser-storage.model');
 var example_db_config_1 = require('./example-db.config');
 var AppComponent = (function () {
-    function AppComponent(cbsModel) {
-        this.cbsModel = cbsModel;
-        this.debugMode$ = this.cbsModel.getItemByKey(example_db_config_1.DEBUG_MODE);
-        this.debugModeTrue$ = this.cbsModel.truthy(example_db_config_1.DEBUG_MODE);
-        this.debugAndOffline$ = this.cbsModel.truthy([example_db_config_1.DEBUG_MODE, example_db_config_1.OFFLINE_MODE]);
+    function AppComponent(browserStorageModel) {
+        this.browserStorageModel = browserStorageModel;
+        this.debugMode$ = this.browserStorageModel.getItemByKey(example_db_config_1.DEBUG_MODE);
+        this.debugModeTrue$ = this.browserStorageModel.truthy(example_db_config_1.DEBUG_MODE);
+        this.debugAndOffline$ = this.browserStorageModel.truthy([example_db_config_1.DEBUG_MODE, example_db_config_1.OFFLINE_MODE]);
         this.itemsToShow = [
             example_db_config_1.DEBUG_MODE,
             example_db_config_1.OFFLINE_MODE,
@@ -26,12 +26,12 @@ var AppComponent = (function () {
     }
     AppComponent = __decorate([
         core_1.Component({
-            selector: 'app-cmp',
-            template: "\n    <h2>co-browser-storage example app</h2>\n    <br>\n\n    <cbs-cmp\n      [itemsToShow]='itemsToShow'\n      [showBatchUpdate]='true'\n      [showResetAll]='true'>\n    </cbs-cmp>\n\n    <p>\n      <strong>debugMode value:</strong>\n      {{(debugMode$ | async).value}}\n    </p>\n    <p>\n      <strong>debugMode && offlineMode truthy:</strong>\n      {{debugAndOffline$ | async}}\n    </p>\n    <p>\n      <strong>debugMode truthy</strong>\n      {{debugModeTrue$ | async}}\n    </p>\n\n    <br >\n\n    <h4>Basic version</h4>\n    <br >\n\n    <cbs-cmp>\n    </cbs-cmp>\n  "
+            selector: 'app',
+            template: "\n    <h2>browser-storage example app</h2>\n    <br>\n\n    <browser-storage-manager\n      [itemsToShow]='itemsToShow'\n      [showBatchUpdate]='true'\n      [showResetAll]='true'>\n    </browser-storage-manager>\n\n    <p>\n      <strong>debugMode value:</strong>\n      {{(debugMode$ | async).value}}\n    </p>\n    <p>\n      <strong>debugMode && offlineMode truthy:</strong>\n      {{debugAndOffline$ | async}}\n    </p>\n    <p>\n      <strong>debugMode truthy</strong>\n      {{debugModeTrue$ | async}}\n    </p>\n  "
         }), 
-        __metadata('design:paramtypes', [cbs_model_1.CbsModel])
+        __metadata('design:paramtypes', [browser_storage_model_1.BrowserStorageModel])
     ], AppComponent);
     return AppComponent;
 }());
 exports.AppComponent = AppComponent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUEwQixlQUMxQixDQUFDLENBRHdDO0FBQ3pDLDBCQUF5QiwwQ0FDekIsQ0FBQyxDQURrRTtBQUNuRSxrQ0FLTyxxQkFFUCxDQUFDLENBRjJCO0FBb0M1QjtJQVdFLHNCQUFxQixRQUFrQjtRQUFsQixhQUFRLEdBQVIsUUFBUSxDQUFVO1FBVmhDLGVBQVUsR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLFlBQVksQ0FBQyw4QkFBVSxDQUFDLENBQUM7UUFDcEQsbUJBQWMsR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyw4QkFBVSxDQUFDLENBQUM7UUFDbEQscUJBQWdCLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQyxNQUFNLENBQUMsQ0FBQyw4QkFBVSxFQUFFLGdDQUFZLENBQUMsQ0FBQyxDQUFDO1FBQ3BFLGdCQUFXLEdBQUc7WUFDbkIsOEJBQVU7WUFDVixnQ0FBWTtZQUNaLDJCQUFPO1lBQ1AsZ0NBQVk7U0FDYixDQUFBO0lBRXlDLENBQUM7SUE3QzdDO1FBQUMsZ0JBQVMsQ0FBQztZQUNULFFBQVEsRUFBRSxTQUFTO1lBQ25CLFFBQVEsRUFBRSx1a0JBOEJUO1NBQ0YsQ0FBQzs7b0JBQUE7SUFhRixtQkFBQztBQUFELENBQUMsQUFaRCxJQVlDO0FBWlksb0JBQVksZUFZeEIsQ0FBQSJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHFCQUEwQixlQUMxQixDQUFDLENBRHdDO0FBQ3pDLHNDQUFvQyxtREFDcEMsQ0FBQyxDQURzRjtBQUN2RixrQ0FLTyxxQkFFUCxDQUFDLENBRjJCO0FBNEI1QjtJQVdFLHNCQUFxQixtQkFBd0M7UUFBeEMsd0JBQW1CLEdBQW5CLG1CQUFtQixDQUFxQjtRQVZ0RCxlQUFVLEdBQUcsSUFBSSxDQUFDLG1CQUFtQixDQUFDLFlBQVksQ0FBQyw4QkFBVSxDQUFDLENBQUM7UUFDL0QsbUJBQWMsR0FBRyxJQUFJLENBQUMsbUJBQW1CLENBQUMsTUFBTSxDQUFDLDhCQUFVLENBQUMsQ0FBQztRQUM3RCxxQkFBZ0IsR0FBRyxJQUFJLENBQUMsbUJBQW1CLENBQUMsTUFBTSxDQUFDLENBQUMsOEJBQVUsRUFBRSxnQ0FBWSxDQUFDLENBQUMsQ0FBQztRQUMvRSxnQkFBVyxHQUFHO1lBQ25CLDhCQUFVO1lBQ1YsZ0NBQVk7WUFDWiwyQkFBTztZQUNQLGdDQUFZO1NBQ2IsQ0FBQTtJQUUrRCxDQUFDO0lBckNuRTtRQUFDLGdCQUFTLENBQUM7WUFDVCxRQUFRLEVBQUUsS0FBSztZQUNmLFFBQVEsRUFBRSw2Z0JBc0JUO1NBQ0YsQ0FBQzs7b0JBQUE7SUFhRixtQkFBQztBQUFELENBQUMsQUFaRCxJQVlDO0FBWlksb0JBQVksZUFZeEIsQ0FBQSJ9

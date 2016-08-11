@@ -3,7 +3,7 @@ import { Store} from '@ngrx/store'
 import { FormControl } from '@angular/forms'
 
 @Component({
-  selector: 'storage-list-item-cmp',
+  selector: 'browser-storage-list-item',
   styles: [`
     .row {
       margin-bottom: 10px;
@@ -31,13 +31,13 @@ import { FormControl } from '@angular/forms'
     </div>
   `
 })
-export class StorageListItemComponent {
+export class BrowserStorageListItemComponent {
   @Input() storageItem;
   @Input() itemsToShow: [string];
   @Output() updateItem = new EventEmitter();
   @Output() resetItem = new EventEmitter();
 
-  private cbsReducer$ = this.store.select('cbsReducer');
+  private browserStorageReducer$ = this.store.select('browserStorageReducer');
   public storageItemInput = new FormControl();
 
   constructor (private store: Store<any>) {}
@@ -45,7 +45,7 @@ export class StorageListItemComponent {
   ngOnInit () {
     this.storageItemInput.updateValue(this.storageItem.value)
 
-    this.cbsReducer$.map(cbs => cbs['find'](i => i.key === this.storageItem.key))
+    this.browserStorageReducer$.map((cbs:any) => cbs.find(i => i.key === this.storageItem.key))
       .subscribe((item) => {
         let currentValue = this.storageItemInput.value
         let incomingValue = item.value

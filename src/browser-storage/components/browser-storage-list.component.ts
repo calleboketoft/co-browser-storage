@@ -1,34 +1,34 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
 
 @Component({
-  selector: 'storage-list-cmp',
+  selector: 'browser-storage-list',
   template: `
     <div>
-      <storage-list-item-cmp
-        *ngFor="let storageItem of cbsItems | arraySort:'key'"
+      <browser-storage-list-item
+        *ngFor="let storageItem of browserStorageItems | arraySort:'key'"
         [itemsToShow]="itemsToShow"
         [storageItem]="storageItem"
         (updateItem)="updateItem.emit($event)"
         (resetItem)="resetItem.emit($event)">
-      </storage-list-item-cmp>
+      </browser-storage-list-item>
       <br>
     </div>
   `
 })
-export class StorageListComponent {
-  @Input() cbsReducer;
+export class BrowserStorageListComponent {
+  @Input() browserStorageReducer;
   @Input() itemsToShow: [string];
   @Output() updateItem = new EventEmitter();
   @Output() resetItem = new EventEmitter();
 
   private initialized = false;
-  public cbsItems = [];
+  public browserStorageItems = [];
 
   ngOnChanges (changes) {
     // Only render the list once. The list itself is not going to change.
-    if (!this.initialized && changes.cbsReducer) {
+    if (!this.initialized && changes.browserStorageReducer) {
       this.initialized = true;
-      this.cbsItems = changes.cbsReducer.currentValue
+      this.browserStorageItems = changes.browserStorageReducer.currentValue
     }
   }
 }

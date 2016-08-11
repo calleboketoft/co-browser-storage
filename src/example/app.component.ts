@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { CbsModel } from '../co-browser-storage/services/cbs.model'
+import { BrowserStorageModel } from '../browser-storage/services/browser-storage.model'
 import {
   DEBUG_MODE,
   OFFLINE_MODE,
@@ -8,16 +8,16 @@ import {
 } from './example-db.config'
 
 @Component({
-  selector: 'app-cmp',
+  selector: 'app',
   template: `
-    <h2>co-browser-storage example app</h2>
+    <h2>browser-storage example app</h2>
     <br>
 
-    <cbs-cmp
+    <browser-storage-manager
       [itemsToShow]='itemsToShow'
       [showBatchUpdate]='true'
       [showResetAll]='true'>
-    </cbs-cmp>
+    </browser-storage-manager>
 
     <p>
       <strong>debugMode value:</strong>
@@ -31,20 +31,12 @@ import {
       <strong>debugMode truthy</strong>
       {{debugModeTrue$ | async}}
     </p>
-
-    <br >
-
-    <h4>Basic version</h4>
-    <br >
-
-    <cbs-cmp>
-    </cbs-cmp>
   `
 })
 export class AppComponent {
-  public debugMode$ = this.cbsModel.getItemByKey(DEBUG_MODE);
-  public debugModeTrue$ = this.cbsModel.truthy(DEBUG_MODE);
-  public debugAndOffline$ = this.cbsModel.truthy([DEBUG_MODE, OFFLINE_MODE]);
+  public debugMode$ = this.browserStorageModel.getItemByKey(DEBUG_MODE);
+  public debugModeTrue$ = this.browserStorageModel.truthy(DEBUG_MODE);
+  public debugAndOffline$ = this.browserStorageModel.truthy([DEBUG_MODE, OFFLINE_MODE]);
   public itemsToShow = [
     DEBUG_MODE,
     OFFLINE_MODE,
@@ -52,5 +44,5 @@ export class AppComponent {
     SESSION_ITEM
   ]
 
-  constructor (private cbsModel: CbsModel) {}
+  constructor (private browserStorageModel: BrowserStorageModel) {}
 }

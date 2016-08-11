@@ -1,20 +1,20 @@
 import {
-  cbsConfig,
-  setCbsConfig
-} from './cbs.config'
+  browserStorageConfig,
+  setBrowserStorageConfig
+} from './browser-storage.config'
 
 export {
   getConfigFromLS,
   setConfigToLS,
   initializeCbs,
-  getFullCbsKey,
+  getFullBSKey,
   getInitialCbsState,
   saveItemToBrowserStorage
 }
 
 // get config from browser storage and deserialize to JSON
 function getConfigFromLS () {
-  let configStr = localStorage[getFullCbsKey(cbsConfig.DB_CONFIG_KEY)]
+  let configStr = localStorage[getFullBSKey(browserStorageConfig.DB_CONFIG_KEY)]
   if (typeof configStr === 'undefined') {
     return null
   } else {
@@ -25,15 +25,15 @@ function getConfigFromLS () {
 // serialize config and save to browser storage
 function setConfigToLS (configObj) {
   let configStr = JSON.stringify(configObj)
-  window.localStorage[getFullCbsKey(cbsConfig.DB_CONFIG_KEY)] = configStr
+  window.localStorage[getFullBSKey(browserStorageConfig.DB_CONFIG_KEY)] = configStr
 }
 
 // go through memorized file config and get all separate browser storage values
 // from keys
 function getInitialCbsState () {
-  let memorizedFile = getConfigFromLS()[cbsConfig.DB_INITIAL_KEY]
+  let memorizedFile = getConfigFromLS()[browserStorageConfig.DB_INITIAL_KEY]
   return memorizedFile.map(memItem => {
-    let browserStorageValue = window[memItem.storageType]['getItem'](getFullCbsKey(memItem.key))
+    let browserStorageValue = window[memItem.storageType]['getItem'](getFullBSKey(memItem.key))
     if (browserStorageValue) {
       return Object.assign({}, memItem, {value: browserStorageValue})
     } else {
@@ -45,7 +45,7 @@ function getInitialCbsState () {
 function initializeCbs (cbsConfigFromFile) {
   // The "ruling" config is the one from the file, set it first. If, for
   // example, namespace has changed, it will be an initFromScratch
-  setCbsConfig(cbsConfigFromFile)
+  setBrowserStorageConfig(cbsConfigFromFile)
   var cbsConfigFromLS = getConfigFromLS()
 
   // first run, no existing state in localStorage
@@ -58,14 +58,14 @@ function initializeCbs (cbsConfigFromFile) {
   }
 
   // Init is done, save the config from file to localStorage
-  setConfigToLS({[cbsConfig.DB_INITIAL_KEY]: cbsConfigFromFile.initialState})
+  setConfigToLS({[browserStorageConfig.DB_INITIAL_KEY]: cbsConfigFromFile.initialState})
 }
 
 // Initialize storage items from scratch
 function initFromScratch (cbsConfigFromFile) {
   cbsConfigFromFile.initialState.forEach((item) => saveItemToBrowserStorage(item))
   return {
-    [cbsConfig.DB_INITIAL_KEY]: cbsConfigFromFile.initialState
+    [browserStorageConfig.DB_INITIAL_KEY]: cbsConfigFromFile.initialState
   }
 }
 
@@ -77,7 +77,7 @@ function initExisting (cbsConfigFromFile, cbsConfigFromLS) {
 
   let configFileDifferOptions = {
     fileInitialState: cbsConfigFromFile.initialState,
-    memoryInitialState: cbsConfigFromLS[cbsConfig.DB_INITIAL_KEY]
+    memoryInitialState: cbsConfigFromLS[browserStorageConfig.DB_INITIAL_KEY]
   }
 
   handleRemovedConfigItems (configFileDifferOptions)
@@ -87,7 +87,7 @@ function initExisting (cbsConfigFromFile, cbsConfigFromLS) {
 
 // if an item has been manually removed from browser storage, restore it
 function restoreManuallyRemovedItems (cbsConfigFromLS) {
-  cbsConfigFromLS[cbsConfig.DB_INITIAL_KEY].map((memoryItem) => {
+  cbsConfigFromLS[browserStorageConfig.DB_INITIAL_KEY].map((memoryItem) => {
     var storageItemValue = getItemValueFromBrowserStorage(memoryItem)
     // the storage item has been removed, put back from memory object
     if (typeof storageItemValue === 'undefined') {
@@ -146,18 +146,18 @@ function handleUpdatedConfigItems ({fileInitialState, memoryInitialState}) {
 }
 
 // Convenience function to prefix with namespace and dot
-function getFullCbsKey (key) {
-  return cbsConfig.namespace + '.' + key
+function getFullBSKey (key) {
+  return browserStorageConfig.namespace + '.' + key
 }
 
 function getItemValueFromBrowserStorage (item) {
-  return window[item.storageType][getFullCbsKey(item.key)]
+  return window[item.storageType][getFullBSKey(item.key)]
 }
 
 function saveItemToBrowserStorage (item) {
-  window[item.storageType]['setItem'](getFullCbsKey(item.key), item.value)
+  window[item.storageType]['setItem'](getFullBSKey(item.key), item.value)
 }
 
 function removeItemFromBrowserStorage (item) {
-  window[item.storageType]['removeItem'](getFullCbsKey(item.key))
+  window[item.storageType]['removeItem'](getFullBSKey(item.key))
 }

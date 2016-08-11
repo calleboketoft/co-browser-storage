@@ -4,10 +4,10 @@ import { Observable } from 'rxjs/Rx'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/find'
 
-import { cbsConfig } from './cbs.config'
-import * as cbsUtil from './cbs.util'
+import { browserStorageConfig } from './browser-storage.config'
+import * as browserStorageUtil from './browser-storage.util'
 
-import { UPDATE_CBS_ITEM } from './cbs.reducer'
+import { UPDATE_BROWSER_STORAGE_ITEM } from './browser-storage.reducer'
 
 export interface IStorageItem {
   key: string,
@@ -17,22 +17,22 @@ export interface IStorageItem {
 }
 
 @Injectable()
-export class CbsModel {
-  private cbsReducer$ = this.store.select('cbsReducer');
+export class BrowserStorageModel {
+  private browserStorageReducer$ = this.store.select('browserStorageReducer');
 
   constructor (private store: Store<any>) {}
 
   // Update in @ngrx/store and in browser storage
   public updateItem (updatedItem: IStorageItem) {
     // Get current item from LS to complete missing properties.
-    let dbConfig = cbsUtil.getConfigFromLS()
-    let existingItem = dbConfig[cbsConfig.DB_INITIAL_KEY].find(initialItem => {
+    let dbConfig = browserStorageUtil.getConfigFromLS()
+    let existingItem = dbConfig[browserStorageConfig.DB_INITIAL_KEY].find(initialItem => {
       return updatedItem.key === initialItem.key
     })
     let updatedItemPatched = Object.assign({}, existingItem, updatedItem)
-    cbsUtil.saveItemToBrowserStorage(updatedItemPatched)
+    browserStorageUtil.saveItemToBrowserStorage(updatedItemPatched)
     this.store.dispatch({
-      type: UPDATE_CBS_ITEM,
+      type: UPDATE_BROWSER_STORAGE_ITEM,
       payload: updatedItemPatched
     })
   }
@@ -44,7 +44,7 @@ export class CbsModel {
 
   // Reset item to original value
   public resetItem (itemToReset: IStorageItem) {
-    let initialItem = cbsConfig.initialState.find((schemaItem) => {
+    let initialItem = browserStorageConfig.initialState.find((schemaItem) => {
       return itemToReset.key === schemaItem.key
     })
 
@@ -55,12 +55,12 @@ export class CbsModel {
 
   // Reset all items to original value
   public resetAll () {
-    this.updateItems(cbsConfig.initialState)
+    this.updateItems(browserStorageConfig.initialState)
   }
 
   // Get observable for one specific item
   public getItemByKey (key): Observable<any> {
-    return this.cbsReducer$
+    return this.browserStorageReducer$
       .map((browserStorageItems:[any]) => {
         return browserStorageItems.find(item => item.key === key)
       })
@@ -77,7 +77,7 @@ export class CbsModel {
     } else if (typeof keys === 'string') {
       keysArr = [keys]
     }
-    return this.cbsReducer$
+    return this.browserStorageReducer$
       .map((items:[any]) => {
         if (items.length === 0) {
           return false
