@@ -21,14 +21,14 @@ var BrowserStorageListItemComponent = (function () {
     }
     BrowserStorageListItemComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.storageItemInput.updateValue(this.storageItem.value);
+        this.storageItemInput.setValue(this.storageItem.value);
         this.browserStorageReducer$.map(function (cbs) { return cbs.find(function (i) { return i.key === _this.storageItem.key; }); })
             .subscribe(function (item) {
             var currentValue = _this.storageItemInput.value;
             var incomingValue = item.value;
             // This happens if the value is changed from outside of this component
             if (currentValue !== incomingValue) {
-                _this.storageItemInput.updateValue(incomingValue);
+                _this.storageItemInput.setValue(incomingValue);
             }
         });
         this.storageItemInput.valueChanges

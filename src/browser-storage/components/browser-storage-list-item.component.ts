@@ -43,7 +43,7 @@ export class BrowserStorageListItemComponent {
   constructor (private store: Store<any>) {}
 
   ngOnInit () {
-    this.storageItemInput.updateValue(this.storageItem.value)
+    this.storageItemInput.setValue(this.storageItem.value)
 
     this.browserStorageReducer$.map((cbs:any) => cbs.find(i => i.key === this.storageItem.key))
       .subscribe((item) => {
@@ -51,7 +51,7 @@ export class BrowserStorageListItemComponent {
         let incomingValue = item.value
         // This happens if the value is changed from outside of this component
         if (currentValue !== incomingValue) {
-          this.storageItemInput.updateValue(incomingValue)
+          this.storageItemInput.setValue(incomingValue)
         }
       })
 
