@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-require('../polyfills');
 var core_1 = require('@angular/core');
 var store_1 = require('@ngrx/store');
 var browser_storage_model_1 = require('./services/browser-storage.model');

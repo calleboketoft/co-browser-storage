@@ -15,17 +15,17 @@ System.config({
     'rxjs': 'node_modules/rxjs'
   },
   packages: {
-    '': {defaultExtension: 'js', main: 'index.js'},
-    'src': {defaultExtension: 'js'},
-    'rxjs': {defaultExtension: 'js'},
-    '@ngrx/core': {defaultExtension: 'js'},
-    '@ngrx/store': {defaultExtension: 'js'},
-    '@angular/common': {defaultExtension: 'js'},
-    '@angular/compiler': {defaultExtension: 'js'},
-    '@angular/core': {defaultExtension: 'js'},
-    '@angular/forms': {defaultExtension: 'js'},
-    '@angular/http': {defaultExtension: 'js'},
-    '@angular/platform-browser': {defaultExtension: 'js'},
-    '@angular/platform-browser-dynamic': {defaultExtension: 'js'}
+    '': { defaultExtension: 'js', main: 'index.js' },
+    'src': { defaultExtension: 'js' },
+    'rxjs': { defaultExtension: 'js' },
+    '@ngrx/core': { defaultExtension: 'js' },
+    '@ngrx/store': { defaultExtension: 'js' },
+    '@angular/common': { defaultExtension: 'js' },
+    '@angular/compiler': { defaultExtension: 'js' },
+    '@angular/core': { defaultExtension: 'js' },
+    '@angular/forms': { defaultExtension: 'js' },
+    '@angular/http': { defaultExtension: 'js' },
+    '@angular/platform-browser': { defaultExtension: 'js' },
+    '@angular/platform-browser-dynamic': { defaultExtension: 'js' }
   }
 })

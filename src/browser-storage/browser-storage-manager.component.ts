@@ -1,5 +1,3 @@
-import '../polyfills'
-
 import { Component, Input } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { BrowserStorageModel } from './services/browser-storage.model'
