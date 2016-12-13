@@ -1,5 +1,5 @@
 "use strict";
-var browser_storage_config_1 = require('./browser-storage.config');
+var browser_storage_config_1 = require("./browser-storage.config");
 // get config from browser storage and deserialize to JSON
 function getConfigFromLS() {
     var configStr = localStorage[getFullBSKey(browser_storage_config_1.browserStorageConfig.DB_CONFIG_KEY)];
@@ -52,10 +52,9 @@ exports.initializeBrowserStorage = initializeBrowserStorage;
 // Initialize storage items from scratch
 function initFromScratch(cbsConfigFromFile) {
     cbsConfigFromFile.initialState.forEach(function (item) { return saveItemToBrowserStorage(item); });
-    return (_a = {},
+    return _a = {},
         _a[browser_storage_config_1.browserStorageConfig.DB_INITIAL_KEY] = cbsConfigFromFile.initialState,
-        _a
-    );
+        _a;
     var _a;
 }
 // Initialize storage items for existing config, handle any config file updates

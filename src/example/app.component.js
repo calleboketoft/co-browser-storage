@@ -8,9 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var browser_storage_model_1 = require('../browser-storage/services/browser-storage.model');
-var example_db_config_1 = require('./example-db.config');
+var core_1 = require("@angular/core");
+var browser_storage_model_1 = require("../browser-storage/services/browser-storage.model");
+var example_db_config_1 = require("./example-db.config");
 var AppComponent = (function () {
     function AppComponent(browserStorageModel) {
         this.browserStorageModel = browserStorageModel;
@@ -24,14 +24,14 @@ var AppComponent = (function () {
             example_db_config_1.SESSION_ITEM
         ];
     }
-    AppComponent = __decorate([
-        core_1.Component({
-            selector: 'app',
-            template: "\n    <h2>browser-storage example app</h2>\n    <br>\n\n    <browser-storage-manager\n      [itemsToShow]='itemsToShow'\n      [showResetAll]='true'>\n    </browser-storage-manager>\n\n    <p>\n      <strong>debugMode value:</strong>\n      {{(debugMode$ | async).value}}\n    </p>\n    <p>\n      <strong>debugMode && offlineMode truthy:</strong>\n      {{debugAndOffline$ | async}}\n    </p>\n    <p>\n      <strong>debugMode truthy</strong>\n      {{debugModeTrue$ | async}}\n    </p>\n  "
-        }), 
-        __metadata('design:paramtypes', [browser_storage_model_1.BrowserStorageModel])
-    ], AppComponent);
     return AppComponent;
 }());
+AppComponent = __decorate([
+    core_1.Component({
+        selector: 'app',
+        template: "\n    <h2>browser-storage example app</h2>\n    <br>\n\n    <browser-storage-manager\n      [itemsToShow]='itemsToShow'\n      [showResetAll]='true'>\n    </browser-storage-manager>\n\n    <p>\n      <strong>debugMode value:</strong>\n      {{(debugMode$ | async).value}}\n    </p>\n    <p>\n      <strong>debugMode && offlineMode truthy:</strong>\n      {{debugAndOffline$ | async}}\n    </p>\n    <p>\n      <strong>debugMode truthy</strong>\n      {{debugModeTrue$ | async}}\n    </p>\n  "
+    }),
+    __metadata("design:paramtypes", [browser_storage_model_1.BrowserStorageModel])
+], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

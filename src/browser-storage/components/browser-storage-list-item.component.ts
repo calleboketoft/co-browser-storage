@@ -23,7 +23,7 @@ import { FormControl } from '@angular/forms'
           [formControl]="storageItemInput">
       </div>
       <div class="col-lg-3 col-xs-4">
-        <button class="btn btn-outline-warning"
+        <button class="btn btn-warning"
           (click)="resetItem.emit(storageItem)">
           Reset
         </button>
@@ -32,20 +32,21 @@ import { FormControl } from '@angular/forms'
   `
 })
 export class BrowserStorageListItemComponent {
-  @Input() storageItem;
-  @Input() itemsToShow: [string];
-  @Output() updateItem = new EventEmitter();
-  @Output() resetItem = new EventEmitter();
+  @Input() storageItem
+  @Input() itemsToShow: [string]
+  @Output() updateItem = new EventEmitter()
+  @Output() resetItem = new EventEmitter()
 
-  private browserStorageReducer$ = this.store.select('browserStorageReducer');
-  public storageItemInput = new FormControl();
+  public storageItemInput = new FormControl()
+
+  private browserStorageReducer$ = this.store.select('browserStorageReducer')
 
   constructor (private store: Store<any>) {}
 
   ngOnInit () {
     this.storageItemInput.setValue(this.storageItem.value)
 
-    this.browserStorageReducer$.map((cbs:any) => cbs.find(i => i.key === this.storageItem.key))
+    this.browserStorageReducer$.map((cbs: any) => cbs.find(i => i.key === this.storageItem.key))
       .subscribe((item) => {
         let currentValue = this.storageItemInput.value
         let incomingValue = item.value

@@ -16,13 +16,13 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
   `
 })
 export class BrowserStorageListComponent {
-  @Input() browserStorageReducer;
-  @Input() itemsToShow: [string];
-  @Output() updateItem = new EventEmitter();
-  @Output() resetItem = new EventEmitter();
+  @Input() browserStorageReducer
+  @Input() itemsToShow: [string]
+  @Output() updateItem = new EventEmitter()
+  @Output() resetItem = new EventEmitter()
 
-  private initialized = false;
-  public browserStorageItems = [];
+  public initialized = false
+  public browserStorageItems = []
 
   ngOnChanges (changes) {
     // Only render the list once. The list itself is not going to change.

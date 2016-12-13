@@ -8,9 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var store_1 = require('@ngrx/store');
-var browser_storage_model_1 = require('./services/browser-storage.model');
+var core_1 = require("@angular/core");
+var store_1 = require("@ngrx/store");
+var browser_storage_model_1 = require("./services/browser-storage.model");
 var BrowserStorageManagerComponent = (function () {
     function BrowserStorageManagerComponent(store, browserStorageModel) {
         this.store = store;
@@ -25,22 +25,23 @@ var BrowserStorageManagerComponent = (function () {
     BrowserStorageManagerComponent.prototype.batchUpdate = function (items) {
         this.browserStorageModel.updateItems(items);
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Array)
-    ], BrowserStorageManagerComponent.prototype, "itemsToShow", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], BrowserStorageManagerComponent.prototype, "showResetAll", void 0);
-    BrowserStorageManagerComponent = __decorate([
-        core_1.Component({
-            selector: 'browser-storage-manager',
-            template: "\n    <div>\n      <browser-storage-list\n        [browserStorageReducer]=\"browserStorageReducer$ | async\"\n        [itemsToShow]=\"itemsToShow\"\n        (updateItem)=\"browserStorageModel.updateItem($event)\"\n        (resetItem)=\"browserStorageModel.resetItem($event)\">\n      </browser-storage-list>\n\n      <div class=\"row\" *ngIf=\"showResetAll\">\n        <!-- match button position -->\n        <div class=\"col-lg-9 col-xs-8\">\n        </div>\n        <div class=\"col-lg-3 col-xs-4\">\n          <button class=\"btn btn-outline-warning\" (click)=\"resetAll()\">\n            Reset all\n          </button>\n        </div>\n      </div>\n    </div>\n  "
-        }), 
-        __metadata('design:paramtypes', [store_1.Store, browser_storage_model_1.BrowserStorageModel])
-    ], BrowserStorageManagerComponent);
     return BrowserStorageManagerComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Array)
+], BrowserStorageManagerComponent.prototype, "itemsToShow", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], BrowserStorageManagerComponent.prototype, "showResetAll", void 0);
+BrowserStorageManagerComponent = __decorate([
+    core_1.Component({
+        selector: 'browser-storage-manager',
+        template: "\n    <div>\n      <browser-storage-list\n        [browserStorageReducer]=\"browserStorageReducer$ | async\"\n        [itemsToShow]=\"itemsToShow\"\n        (updateItem)=\"browserStorageModel.updateItem($event)\"\n        (resetItem)=\"browserStorageModel.resetItem($event)\">\n      </browser-storage-list>\n\n      <div class=\"row\" *ngIf=\"showResetAll\">\n        <!-- match button position -->\n        <div class=\"col-lg-9 col-xs-8\">\n        </div>\n        <div class=\"col-lg-3 col-xs-4\">\n          <button class=\"btn btn-warning\" (click)=\"resetAll()\">\n            Reset all\n          </button>\n        </div>\n      </div>\n    </div>\n  "
+    }),
+    __metadata("design:paramtypes", [store_1.Store,
+        browser_storage_model_1.BrowserStorageModel])
+], BrowserStorageManagerComponent);
 exports.BrowserStorageManagerComponent = BrowserStorageManagerComponent;
 //# sourceMappingURL=browser-storage-manager.component.js.map

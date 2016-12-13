@@ -12,7 +12,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 var ArraySortPipe = (function () {
     function ArraySortPipe() {
     }
@@ -40,13 +40,13 @@ var ArraySortPipe = (function () {
         });
         return array;
     };
-    ArraySortPipe = __decorate([
-        core_1.Pipe({
-            name: 'arraySort'
-        }), 
-        __metadata('design:paramtypes', [])
-    ], ArraySortPipe);
     return ArraySortPipe;
 }());
+ArraySortPipe = __decorate([
+    core_1.Pipe({
+        name: 'arraySort'
+    }),
+    __metadata("design:paramtypes", [])
+], ArraySortPipe);
 exports.ArraySortPipe = ArraySortPipe;
 //# sourceMappingURL=array-sort.pipe.js.map

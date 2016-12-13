@@ -18,7 +18,7 @@ import { BrowserStorageModel } from './services/browser-storage.model'
         <div class="col-lg-9 col-xs-8">
         </div>
         <div class="col-lg-3 col-xs-4">
-          <button class="btn btn-outline-warning" (click)="resetAll()">
+          <button class="btn btn-warning" (click)="resetAll()">
             Reset all
           </button>
         </div>
@@ -27,9 +27,9 @@ import { BrowserStorageModel } from './services/browser-storage.model'
   `
 })
 export class BrowserStorageManagerComponent {
-  @Input() itemsToShow: [string];
-  @Input() showResetAll: boolean;
-  public browserStorageReducer$ = this.store.select('browserStorageReducer');
+  @Input() itemsToShow: [string]
+  @Input() showResetAll: boolean
+  public browserStorageReducer$ = this.store.select('browserStorageReducer')
 
   constructor (
     private store: Store<any>,

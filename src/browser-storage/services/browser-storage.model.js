@@ -8,13 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var store_1 = require('@ngrx/store');
-require('rxjs/add/operator/map');
-require('rxjs/add/operator/find');
-var browser_storage_config_1 = require('./browser-storage.config');
-var browserStorageUtil = require('./browser-storage.util');
-var browser_storage_reducer_1 = require('./browser-storage.reducer');
+var core_1 = require("@angular/core");
+var store_1 = require("@ngrx/store");
+require("rxjs/add/operator/map");
+require("rxjs/add/operator/find");
+var browser_storage_config_1 = require("./browser-storage.config");
+var browserStorageUtil = require("./browser-storage.util");
+var browser_storage_reducer_1 = require("./browser-storage.reducer");
 var BrowserStorageModel = (function () {
     function BrowserStorageModel(store) {
         this.store = store;
@@ -81,11 +81,11 @@ var BrowserStorageModel = (function () {
             });
         });
     };
-    BrowserStorageModel = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [store_1.Store])
-    ], BrowserStorageModel);
     return BrowserStorageModel;
 }());
+BrowserStorageModel = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [store_1.Store])
+], BrowserStorageModel);
 exports.BrowserStorageModel = BrowserStorageModel;
 //# sourceMappingURL=browser-storage.model.js.map
