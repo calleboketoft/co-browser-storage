@@ -33,9 +33,9 @@ import {
   `
 })
 export class AppComponent {
-  public debugMode$ = this.browserStorageModel.getItemByKey(DEBUG_MODE);
-  public debugModeTrue$ = this.browserStorageModel.truthy(DEBUG_MODE);
-  public debugAndOffline$ = this.browserStorageModel.truthy([DEBUG_MODE, OFFLINE_MODE]);
+  public debugMode$ = this.browserStorageModel.getItemByKey(DEBUG_MODE)
+  public debugModeTrue$ = this.browserStorageModel.truthy(DEBUG_MODE)
+  public debugAndOffline$ = this.browserStorageModel.truthy([DEBUG_MODE, OFFLINE_MODE])
   public itemsToShow = [
     DEBUG_MODE,
     OFFLINE_MODE,

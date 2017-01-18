@@ -33,7 +33,7 @@ export class BrowserStorageManagerComponent {
 
   constructor (
     private store: Store<any>,
-    private browserStorageModel: BrowserStorageModel
+    public browserStorageModel: BrowserStorageModel
   ) {}
 
   public resetAll () {

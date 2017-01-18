@@ -18,7 +18,7 @@ export interface IStorageItem {
 
 @Injectable()
 export class BrowserStorageModel {
-  private browserStorageReducer$ = this.store.select('browserStorageReducer');
+  private browserStorageReducer$ = this.store.select('browserStorageReducer')
 
   constructor (private store: Store<any>) {}
 
@@ -61,7 +61,7 @@ export class BrowserStorageModel {
   // Get observable for one specific item
   public getItemByKey (key): Observable<any> {
     return this.browserStorageReducer$
-      .map((browserStorageItems:[any]) => {
+      .map((browserStorageItems: [any]) => {
         return browserStorageItems.find(item => item.key === key)
       })
   }
@@ -78,7 +78,7 @@ export class BrowserStorageModel {
       keysArr = [keys]
     }
     return this.browserStorageReducer$
-      .map((items:[any]) => {
+      .map((items: [any]) => {
         if (items.length === 0) {
           return false
         }

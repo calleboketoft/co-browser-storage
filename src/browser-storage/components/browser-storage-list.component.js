@@ -45,8 +45,7 @@ BrowserStorageListComponent = __decorate([
     core_1.Component({
         selector: 'browser-storage-list',
         template: "\n    <div>\n      <browser-storage-list-item\n        *ngFor=\"let storageItem of browserStorageItems | arraySort:'key'\"\n        [itemsToShow]=\"itemsToShow\"\n        [storageItem]=\"storageItem\"\n        (updateItem)=\"updateItem.emit($event)\"\n        (resetItem)=\"resetItem.emit($event)\">\n      </browser-storage-list-item>\n      <br>\n    </div>\n  "
-    }),
-    __metadata("design:paramtypes", [])
+    })
 ], BrowserStorageListComponent);
 exports.BrowserStorageListComponent = BrowserStorageListComponent;
 //# sourceMappingURL=browser-storage-list.component.js.map

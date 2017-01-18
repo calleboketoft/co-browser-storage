@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core'
 
 @Component({
   selector: 'browser-storage-list',
@@ -15,7 +15,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
     </div>
   `
 })
-export class BrowserStorageListComponent {
+export class BrowserStorageListComponent implements OnChanges {
   @Input() browserStorageReducer
   @Input() itemsToShow: [string]
   @Output() updateItem = new EventEmitter()
@@ -24,7 +24,7 @@ export class BrowserStorageListComponent {
   public initialized = false
   public browserStorageItems = []
 
-  ngOnChanges (changes) {
+  public ngOnChanges (changes) {
     // Only render the list once. The list itself is not going to change.
     if (!this.initialized && changes.browserStorageReducer) {
       this.initialized = true;

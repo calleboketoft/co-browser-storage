@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core'
 import { Store} from '@ngrx/store'
 import { FormControl } from '@angular/forms'
 
@@ -43,7 +43,7 @@ export class BrowserStorageListItemComponent {
 
   constructor (private store: Store<any>) {}
 
-  ngOnInit () {
+  public ngOnInit () {
     this.storageItemInput.setValue(this.storageItem.value)
 
     this.browserStorageReducer$.map((cbs: any) => cbs.find(i => i.key === this.storageItem.key))

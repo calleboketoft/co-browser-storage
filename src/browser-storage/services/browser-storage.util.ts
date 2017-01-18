@@ -46,7 +46,7 @@ function initializeBrowserStorage (cbsConfigFromFile) {
   // The "ruling" config is the one from the file, set it first. If, for
   // example, namespace has changed, it will be an initFromScratch
   setBrowserStorageConfig(cbsConfigFromFile)
-  var cbsConfigFromLS = getConfigFromLS()
+  let cbsConfigFromLS = getConfigFromLS()
 
   // first run, no existing state in localStorage
   if (!cbsConfigFromLS) {
@@ -88,7 +88,7 @@ function initExisting (cbsConfigFromFile, cbsConfigFromLS) {
 // if an item has been manually removed from browser storage, restore it
 function restoreManuallyRemovedItems (cbsConfigFromLS) {
   cbsConfigFromLS[browserStorageConfig.DB_INITIAL_KEY].map((memoryItem) => {
-    var storageItemValue = getItemValueFromBrowserStorage(memoryItem)
+    let storageItemValue = getItemValueFromBrowserStorage(memoryItem)
     // the storage item has been removed, put back from memory object
     if (typeof storageItemValue === 'undefined') {
       saveItemToBrowserStorage(memoryItem)
