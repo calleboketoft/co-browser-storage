@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.NAMESPACE = 'cbsExample';
 exports.DEBUG_MODE = 'debugMode';
 exports.OFFLINE_MODE = 'offlineMode';

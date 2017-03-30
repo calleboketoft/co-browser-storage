@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var browser_storage_model_1 = require("./src/browser-storage/services/browser-storage.model");
 exports.BrowserStorageModel = browser_storage_model_1.BrowserStorageModel;
 var browser_storage_config_1 = require("./src/browser-storage/services/browser-storage.config");

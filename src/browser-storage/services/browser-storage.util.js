@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var browser_storage_config_1 = require("./browser-storage.config");
 // get config from browser storage and deserialize to JSON
 function getConfigFromLS() {
@@ -40,6 +41,7 @@ function initializeBrowserStorage(cbsConfigFromFile) {
     // first run, no existing state in localStorage
     if (!cbsConfigFromLS) {
         initFromScratch(cbsConfigFromFile);
+        // a current state is existing, validate against schema
     }
     else {
         initExisting(cbsConfigFromFile, cbsConfigFromLS);

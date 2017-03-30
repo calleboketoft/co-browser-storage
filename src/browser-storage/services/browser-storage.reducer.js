@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.ADDED_BROWSER_STORAGE_ITEMS = 'ADDED_BROWSER_STORAGE_ITEMS';
 exports.UPDATE_BROWSER_STORAGE_ITEM = 'UPDATE_BROWSER_STORAGE_ITEM';
 exports.browserStorageReducer = function (state, _a) {
