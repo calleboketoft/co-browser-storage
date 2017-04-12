@@ -1,5 +1,3 @@
-import { Reducer, Action } from '@ngrx/store'
-
 export const ADDED_BROWSER_STORAGE_ITEMS = 'ADDED_BROWSER_STORAGE_ITEMS'
 export const UPDATE_BROWSER_STORAGE_ITEM = 'UPDATE_BROWSER_STORAGE_ITEM'
 
